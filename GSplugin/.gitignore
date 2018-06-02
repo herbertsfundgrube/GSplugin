@@ -53,4 +53,8 @@ nb-configuration.xml
 *.swp
 release.properties
 pom.xml.releaseBackup
+<<<<<<< HEAD
 pom.xml.tag
+=======
+pom.xml.tag
+>>>>>>> refs/remotes/origin/initial
