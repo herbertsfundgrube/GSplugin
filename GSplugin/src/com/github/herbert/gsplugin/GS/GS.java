@@ -10,5 +10,7 @@ package com.github.herbert.gsplugin.GS;
  * @author john
  */
 public class GS {
-    
+    public GS() {
+        
+    }
 }
