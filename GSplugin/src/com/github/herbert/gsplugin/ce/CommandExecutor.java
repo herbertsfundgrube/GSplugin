@@ -9,10 +9,11 @@ public class CommandExecutor extends JavaPlugin {
 	//onCommand - Ausgabe "false", wenn ein Fehler beim Ausführen des Befehls aufgetreten ist.
 	//
 	//
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(args[0].equalsIgnoreCase("hallo")) {
-			sender.sendMessage("Hallo auch!");
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if(cmd.getName().equals("gs")) {
+			sender.sendMessage("Hallo!");
+			return true;
 		}
-		return true;
+		return false;
 	}
 }
