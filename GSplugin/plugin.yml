@@ -1,0 +1,4 @@
+name: GSplugin
+author: Projektteam Herbert
+version: 0.1
+main: com.github.herbert.gsplugin.GSplugin
