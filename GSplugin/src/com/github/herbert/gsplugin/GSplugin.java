@@ -18,15 +18,19 @@ public class GSplugin extends JavaPlugin {
 	}
 	
 	
-	//TODO:
-	//Folgende Configeinträge müssen hinzugefügt werden:
-	//gs.lowestYBlock (int)
-	//
+	//TODO
 	public String getConfigString(String key) {
 		return null;
 	}
 	//TODO
 	public int getConfigInt(String key) {
+		
+		//Bis die Config eingebunden ist werden die Werte hardcoded.
+		if(key.equals("gs.lowestBlockInt"))
+			return 10;
+		
+		
+		//Ende Hardcode
 		return 0;
 	}
 }
