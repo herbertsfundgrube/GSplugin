@@ -28,7 +28,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			sender.sendMessage("Du hast den Befehl /gs test2 eingegeben.");
 			return true;
 		}
-		sender.sendMessage("Da ist etwas schiefgelaufen.");
+		sender.sendMessage("Da ist etwas schiefgelaufen.\nBitte Teil uns mit, was Du gerade getan hast.");
 		return false;
 	}
 }
