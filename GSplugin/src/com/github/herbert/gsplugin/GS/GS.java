@@ -17,7 +17,7 @@ public class GS {
         
     }
     
-    public CCoords getCoords() {
+    public GSCoords getCoords() {
     	
     	return null;
     	//TODO

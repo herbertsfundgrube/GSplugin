@@ -26,7 +26,7 @@ public class Gslist {
             l.add(u);
         }
     }
-    public GS getGS(CCoords c){
+    public GS getGS(GSCoords c){
         if(g.getCoords().equals(c)){
             return g;
         }
@@ -37,7 +37,7 @@ public class Gslist {
             return l.getGS(c);
         }
     }
-    public void del(CCoords c){
+    public void del(GSCoords c){
         if(g.getCoords().equals(c)){
             g=l.g;
             l=l.l;
