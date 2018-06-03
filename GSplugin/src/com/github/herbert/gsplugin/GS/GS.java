@@ -26,12 +26,16 @@ public class GS {
     	//TODO
     }
     
-    public boolean hasPermission(Player p, GSpermissions perm) {
+    public boolean hasPermission(Player p, byte perm) {
     	
     	//TODO: Spieler mit GSpermissions listen
         for(Member i:owner.getMembers()){
-            if(i.getUUID().equals(p.getUniqueId()))
-                return true;
+            if(i.getUUID().equals(p.getUniqueId())){
+                if((i.permlvl&perm)==perm){
+                    return true;
+                }
+            }
+                
         }
     	
     	//if(coownerslist.hasEntry(p)) ...
