@@ -7,6 +7,8 @@ package com.github.herbert.gsplugin.GS;
 
 import org.bukkit.Location;
 
+import com.github.herbert.gsplugin.GSplugin;
+
 /**
  *
  * @author Leen
@@ -18,9 +20,10 @@ public class GSCoords {
     int z1;
     int x2;
     int z2;
+    int lowestY;
     
     //Konstruktor für Location
-    public GSCoords(Location loc1, Location loc2){
+    public GSCoords(Location loc1, Location loc2, GSplugin plugin){
         this.x1=loc1.getBlockX();
         this.z1=loc1.getBlockZ();
         this.x2=loc2.getBlockX();
@@ -39,7 +42,7 @@ public class GSCoords {
     }
     
     //Konstruktor für int-Coords
-    public GSCoords(int x, int z, int x2, int z2){
+    public GSCoords(int x, int z, int x2, int z2, GSplugin plugin){
         this.x1=x;
         this.z1=z;
         this.x2=x2;
@@ -55,6 +58,7 @@ public class GSCoords {
         	z2=z1;
         	z1=i;
         }
+        lowestY = plugin.getConfigInt("gs.lowestYBlock");
     }
     
     public boolean equals(GSCoords c){

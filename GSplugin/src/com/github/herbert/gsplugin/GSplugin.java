@@ -17,7 +17,16 @@ public class GSplugin extends JavaPlugin {
 		this.getLogger().info("GSplugin deaktiviert");
 	}
 	
-	public String getConfigEntry(String key) {
+	
+	//TODO:
+	//Folgende Configeinträge müssen hinzugefügt werden:
+	//gs.lowestYBlock (int)
+	//
+	public String getConfigString(String key) {
 		return null;
+	}
+	//TODO
+	public int getConfigInt(String key) {
+		return 0;
 	}
 }

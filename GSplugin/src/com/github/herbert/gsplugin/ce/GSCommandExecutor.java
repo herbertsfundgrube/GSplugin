@@ -19,7 +19,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(args[0].equalsIgnoreCase("test")) {
-			sender.sendMessage("Du hast den Befehl /gs eingegeben, vielleicht mit irgendwelchen Argumenten.");
+			sender.sendMessage("Du hast den Befehl /gs eingegeben, mit dem Argument test.");
 			return true;
 		}
 		return false;
