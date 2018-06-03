@@ -5,13 +5,14 @@
  */
 package com.github.herbert.gsplugin.GS;
 
-import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 /**
  *
  * @author john
  */
 public class GS {
+	
     public GS() {
         
     }
@@ -20,5 +21,9 @@ public class GS {
     	
     	return null;
     	//TODO
+    }
+    
+    public boolean hasPermission(Player p) {
+    	return true;
     }
 }
