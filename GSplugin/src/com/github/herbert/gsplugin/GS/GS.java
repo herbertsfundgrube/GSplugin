@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 public class GS {
 	GSinteractor owner;
         
+        
     public GS(GSinteractor owner) {
         this.owner=owner;
     }
