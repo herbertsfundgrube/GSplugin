@@ -1,5 +1,6 @@
 package com.github.herbert.gsplugin.GS;
-
+import java.util.UUID;
+import org.bukkit.entity.Player;
 public interface GSinteractor {
 	
 	
@@ -11,6 +12,6 @@ public interface GSinteractor {
 	//UUID für Spieler
 	//Wenn das Objekt eine Stadt ist, dann muss die UUID als TOWN<Stadtname> oder so gesetzt werden. Auch darauf achten, dass keine zwei
 	//zwei Städte den gleichen Namen haben!
-	public boolean getUUID();
+	public UUID[] getUUIDs();
 	
 }
