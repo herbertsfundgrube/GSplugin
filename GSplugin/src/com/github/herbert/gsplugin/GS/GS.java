@@ -5,6 +5,7 @@
  */
 package com.github.herbert.gsplugin.GS;
 
+
 import org.bukkit.entity.Player;
 
 /**
@@ -12,9 +13,9 @@ import org.bukkit.entity.Player;
  * @author john
  */
 public class GS {
-	
-    public GS() {
-        
+	GSinteractor owner;
+    public GS(GSinteractor owner) {
+        this.owner=owner;
     }
     
     public GSCoords getCoords() {
@@ -23,7 +24,16 @@ public class GS {
     	//TODO
     }
     
-    public boolean hasPermission(Player p) {
-    	return true;
+    public boolean hasPermission(Player p, GSpermissions perm) {
+    	
+    	//TODO: Spieler mit GSpermissions listen
+    	if(owner.isPlayer() && p.getUniqueId().equals(owner.getUUID()))
+    		return true;
+    	
+    	//if(coownerslist.hasEntry(p)) ...
+    	//Vielleich eine HashMap?
+    	//Berechtigungsgruppen (Coowner / Mieter...?)
+    	
+    	return false;
     }
 }
