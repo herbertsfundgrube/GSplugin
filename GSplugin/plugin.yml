@@ -7,5 +7,5 @@ commands:
    gs:
       description: Hauptbefehl für Grundstücke
       usage: /<command> [test / test2]
-      permission: gsplugin.test
+      permission: <plugin name>.gs
       permission-message: Fehlende Berechtigung <permission>
