@@ -1,0 +1,11 @@
+name: GSplugin
+author: Projektteam Herbert
+version: 0.1
+main: com.github.herbert.gsplugin.GSplugin
+
+commands:
+   gs:
+      description: Hauptbefehl für Grundstücke
+      usage: /<command> [test / test2]
+      permission: <plugin name>.gs
+      permission-message: Fehlende Berechtigung <permission>
