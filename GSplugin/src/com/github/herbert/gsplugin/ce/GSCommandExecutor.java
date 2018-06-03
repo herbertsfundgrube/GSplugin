@@ -18,7 +18,10 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 	//onCommand - Ausgabe "false", wenn ein Fehler beim Ausführen des Befehls aufgetreten ist.
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		sender.sendMessage("Du hast den Befehl /gs eingegeben, vielleicht mit irgendwelchen Argumenten.");
+		if(args[0].equalsIgnoreCase("test")) {
+			sender.sendMessage("Du hast den Befehl /gs eingegeben, vielleicht mit irgendwelchen Argumenten.");
+			return true;
+		}
 		return false;
 	}
 }
