@@ -12,16 +12,16 @@ import org.bukkit.entity.Player;
  * @author Leen
  */
 public class Member {
-    int permlvl;
+    byte permlvl;
     UUID id;
-    public Member(Player p,int perm){
+    public Member(Player p,byte perm){
         this.permlvl=perm;
         this.id=p.getUniqueId();
     }
     public UUID getUUID(){
         return id;
     }
-    public int getperm(){
+    public byte getperm(){
         return permlvl;
     }
     
