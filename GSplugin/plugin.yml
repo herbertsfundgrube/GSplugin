@@ -6,6 +6,6 @@ main: com.github.herbert.gsplugin.GSplugin
 commands:
    gs:
       description: Hauptbefehl für Grundstücke
-      usage: /<command> [player]
-      permission: <plugin name>.basic
+      usage: /<command> [test / test2]
+      permission: gsplugin.test
       permission-message: Fehlende Berechtigung <permission>
