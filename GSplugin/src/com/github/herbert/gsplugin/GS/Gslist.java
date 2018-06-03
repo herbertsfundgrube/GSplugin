@@ -43,7 +43,18 @@ public class Gslist {
             l=l.l;
         }
         else{
-            //todo
+            Gslist n=l;
+            GSlist p=this;
+            while(n!=null){
+                if(n.g.getCoords().equals(c)){
+                    p.l=n.l;
+                    n=null;
+                }
+                else{
+                    p=n;
+                    n=n.l;
+                }
+            }
         }
     }
 }
