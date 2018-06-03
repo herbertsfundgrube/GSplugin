@@ -6,7 +6,6 @@
 package com.github.herbert.gsplugin.GS;
 
 
-import java.util.UUID;
 import org.bukkit.entity.Player;
 
 /**
@@ -28,8 +27,8 @@ public class GS {
     public boolean hasPermission(Player p, GSpermissions perm) {
     	
     	//TODO: Spieler mit GSpermissions listen
-        for(UUID i:owner.getUUIDs()){
-            if(i.equals(p.getUniqueId()))
+        for(Member i:owner.getMembers()){
+            if(i.getUUID().equals(p.getUniqueId()))
                 return true;
         }
     	
