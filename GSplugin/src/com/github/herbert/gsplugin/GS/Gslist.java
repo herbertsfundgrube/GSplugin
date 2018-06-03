@@ -6,7 +6,7 @@
 package com.github.herbert.gsplugin.GS;
 
 import org.bukkit.Location;
-
+import org.bukkit.entity.Player;
 /**
  *
  * @author Leen
@@ -41,6 +41,22 @@ public class Gslist {
         else{
             return l.getGS(loc);
         }
+    }
+    public Gslist getGSByOwner(GSinteractor p){
+        Gslist ret =new Gslist(null,null);
+        Gslist it =this;
+        while(it!=null){
+            if(it.g.owner.equals(p)){
+                if(ret.g==null){
+                    ret.g=it.g;
+                }
+                else{
+                    ret.add(it.g);
+                }
+            }
+            it=it.l;
+        }
+        return ret;
     }
     public void del(GSCoords c){
         if(g.getCoords().equals(c)){
