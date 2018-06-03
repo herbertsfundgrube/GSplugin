@@ -44,7 +44,7 @@ public class Gslist {
         }
         else{
             Gslist n=l;
-            GSlist p=this;
+            Gslist p=this;
             while(n!=null){
                 if(n.g.getCoords().equals(c)){
                     p.l=n.l;
