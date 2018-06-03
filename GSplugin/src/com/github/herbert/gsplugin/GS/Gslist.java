@@ -37,4 +37,13 @@ public class Gslist {
             return l.getGS(c);
         }
     }
+    public void del(Location c){
+        if(g.getCoords().equals(c)){
+            g=l.g;
+            l=l.l;
+        }
+        else{
+            //todo
+        }
+    }
 }
