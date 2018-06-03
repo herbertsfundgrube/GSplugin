@@ -18,23 +18,28 @@ public class Gslist {
         this.g=g;
         this.l=l;
     }
-    public void add(GS u){
-        if(l==null){
-            l=new Gslist(u,null);
-        }
-        else{
-            l.add(u);
-        }
+    
+    public void add(GS u){	
+    	if(l==null){
+        	
+    		l=new Gslist(u,null);
+    	}
+    	else{
+    		l.add(u);
+    	}
+
     }
-    public GS getGS(GSCoords c){
-        if(g.getCoords().equals(c)){
+    
+    //Gibt GS für Location, oder null wenn kein GS zur Location gehört.
+    public GS getGS(Location loc){
+        if(g.getCoords().hasLocation(loc)){
             return g;
         }
         else if(l==null){
             return null;
         }
         else{
-            return l.getGS(c);
+            return l.getGS(loc);
         }
     }
     public void del(GSCoords c){

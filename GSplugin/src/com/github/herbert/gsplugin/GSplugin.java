@@ -16,4 +16,8 @@ public class GSplugin extends JavaPlugin {
 	public void onDisable() {
 		this.getLogger().info("GSplugin deaktiviert");
 	}
+	
+	public String getConfigEntry(String key) {
+		return null;
+	}
 }
