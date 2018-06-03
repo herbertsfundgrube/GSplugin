@@ -5,6 +5,8 @@
  */
 package com.github.herbert.gsplugin.GS;
 
+import org.bukkit.Location;
+
 /**
  *
  * @author john
@@ -12,5 +14,11 @@ package com.github.herbert.gsplugin.GS;
 public class GS {
     public GS() {
         
+    }
+    
+    public Location getCoords() {
+    	
+    	return null;
+    	//TODO
     }
 }
