@@ -5,7 +5,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.github.herbert.gsplugin.GSplugin;
-import com.github.herbert.gsplugin.events.BlockEventListener;
 
 public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 	
