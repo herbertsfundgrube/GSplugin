@@ -3,14 +3,15 @@ package com.github.herbert.gsplugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.gsplugin.ce.GSCommandExecutor;
+import com.github.herbert.gsplugin.events.BlockEventListener;
 
 public class GSplugin extends JavaPlugin {
 	
 	private GSCommandExecutor ce;
 	
 	public void onEnable() {
-		ce = new GSCommandExecutor(this);
-		getCommand("gs").setExecutor(ce); //CommandExecutor für Befehl "/gs" setzen
+		registerCommandExecutors();
+		registerListeners();
 	}
 	
 	public void onDisable() {
@@ -32,5 +33,15 @@ public class GSplugin extends JavaPlugin {
 		
 		//Ende Hardcode
 		return 0;
+	}
+	
+	private void registerListeners() {
+		getServer().getPluginManager().registerEvents(new BlockEventListener(), this);
+	}
+	
+	private void registerCommandExecutors() {
+		//CE für den Befehl /gs
+		ce = new GSCommandExecutor(this);
+		getCommand("gs").setExecutor(ce);
 	}
 }
