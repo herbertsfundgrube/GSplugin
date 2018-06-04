@@ -24,10 +24,10 @@ public class GSCoords {
     
     //Konstruktor für Location
     public GSCoords(Location loc1, Location loc2, GSplugin plugin){
-        this.x1=loc1.getBlockX();
-        this.z1=loc1.getBlockZ();
-        this.x2=loc2.getBlockX();
-        this.z2=loc2.getBlockZ();
+        x1=loc1.getBlockX();
+        z1=loc1.getBlockZ();
+        x2=loc2.getBlockX();
+        z2=loc2.getBlockZ();
         //1. Koordinate ist immer der kleinere Wert
         if(x1>x2) {
         	int i = x1;
