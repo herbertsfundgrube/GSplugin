@@ -2,8 +2,10 @@ package com.github.herbert.gsplugin.ce;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.github.herbert.gsplugin.GSplugin;
+import com.github.herbert.gsplugin.events.BlockEventListener;
 
 public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 	
@@ -24,10 +26,25 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			sender.sendMessage("Du hast den Befehl /gs test eingegeben.");
 			return true;
 		}
-		if(args[0].equalsIgnoreCase("test2")) {
-			sender.sendMessage("Du hast den Befehl /gs test2 eingegeben.");
+		
+		//GS kaufen
+		if(args[0].equalsIgnoreCase("buy")) {
+			//Wenn den Sender kein Spieler ist, abbrechen
+			if(!(sender instanceof Player)) {
+				sender.sendMessage("Dies ist ein Spielerbefehl!");
+				return true;
+			}
+			
+			
+			GSBuyThread gsbt =new GSBuyThread((Player) sender);
+			plugin.getServer().getPluginManager().registerEvents(gsbt, plugin);
+			do {
+				
+			} while(gsbt.isAlive());
 			return true;
 		}
+		
+		
 		sender.sendMessage("Da ist etwas schiefgelaufen.\nBitte Teil uns mit, was Du gerade getan hast.");
 		return false;
 	}
