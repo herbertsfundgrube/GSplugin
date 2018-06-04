@@ -3,11 +3,13 @@ package com.github.herbert.gsplugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.gsplugin.ce.GSCommandExecutor;
+import com.github.herbert.gsplugin.datenstruktur.Gslist;
 import com.github.herbert.gsplugin.events.BlockEventListener;
 
 public class GSplugin extends JavaPlugin {
 	
 	private GSCommandExecutor ce;
+	public Gslist gslist;
 	
 	public void onEnable() {
 		registerCommandExecutors();
@@ -36,7 +38,7 @@ public class GSplugin extends JavaPlugin {
 	}
 	
 	private void registerListeners() {
-		getServer().getPluginManager().registerEvents(new BlockEventListener(), this);
+		getServer().getPluginManager().registerEvents(new BlockEventListener(this), this);
 	}
 	
 	private void registerCommandExecutors() {
