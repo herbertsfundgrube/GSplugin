@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.herbert.gsplugin.GS;
+package com.github.herbert.gsplugin.datenstruktur;
 
 import org.bukkit.Location;
+
+import com.github.herbert.gsplugin.GS.GS;
 /**
  *
  * @author Leen
@@ -45,7 +47,7 @@ public class Gslist {
         Gslist ret =new Gslist(null,null);
         Gslist it =this;
         while(it!=null){
-            if(it.g.owner.equals(p)){
+            if(it.g.getOwner().equals(p)){
                 if(ret.g==null){
                     ret.g=it.g;
                 }

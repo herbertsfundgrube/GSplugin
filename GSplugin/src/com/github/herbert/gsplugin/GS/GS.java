@@ -8,6 +8,10 @@ package com.github.herbert.gsplugin.GS;
 
 import org.bukkit.entity.Player;
 
+import com.github.herbert.gsplugin.datenstruktur.GSCoords;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor;
+import com.github.herbert.gsplugin.datenstruktur.Member;
+
 /**
  *
  * @author john
@@ -58,5 +62,8 @@ public class GS {
     //Eine öffentliche Permission ändern
     public void setPublicPerms(byte perm, boolean bool) {
     	publicperms[perm] = bool;
+    }
+    public GSinteractor getOwner() {
+    	return owner;
     }
 }

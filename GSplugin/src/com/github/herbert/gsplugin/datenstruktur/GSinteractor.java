@@ -1,4 +1,5 @@
-package com.github.herbert.gsplugin.GS;
+package com.github.herbert.gsplugin.datenstruktur;
+
 public interface GSinteractor {
 	
 	

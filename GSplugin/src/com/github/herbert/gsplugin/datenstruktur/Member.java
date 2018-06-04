@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.herbert.gsplugin.GS;
+package com.github.herbert.gsplugin.datenstruktur;
 
 import java.util.UUID;
 import org.bukkit.entity.Player;
