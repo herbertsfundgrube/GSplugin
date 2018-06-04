@@ -9,8 +9,8 @@ public interface GSinteractor {
 	public boolean isTown();
 	
 	//UUID für Spieler
-	//Wenn das Objekt eine Stadt ist, dann muss die UUID als TOWN<Stadtname> oder so gesetzt werden. Auch darauf achten, dass keine zwei
-	//zwei Städte den gleichen Namen haben!
-	public Member[] getMembers();
+	//Wenn das Objekt eine Stadt ist, dann muss die UUID als TOWN<Stadtname> oder so gesetzt werden.
+	public Member[] getGlobalGsFriends();
+	public boolean hasGlobalGsFriends();
 	
 }
