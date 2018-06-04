@@ -4,9 +4,11 @@ import org.bukkit.entity.Player;
 
 public class TempHerbertPlayer implements GSinteractor{
 	Player bukkplayer;
-	Member[] globalGsFriends;
+	Member[] Members=new Member[1];;
+    private Member[] Member;
 	public TempHerbertPlayer(Player p) {
 		bukkplayer=p;
+                Member[0]=new Member(p,(byte)-1);
 	}
 	
 	public Player getBukkitPlayer() {
@@ -24,14 +26,7 @@ public class TempHerbertPlayer implements GSinteractor{
 	}
 	
 	@Override
-	public Member[] getGlobalGsFriends() {
-		return globalGsFriends;
-	}
-
-	@Override
-	public boolean hasGlobalGsFriends() {
-		if(getGlobalGsFriends()==null)
-			return false;
-		return true;
+	public Member[] getMembers() {
+		return Members;
 	}
 }
