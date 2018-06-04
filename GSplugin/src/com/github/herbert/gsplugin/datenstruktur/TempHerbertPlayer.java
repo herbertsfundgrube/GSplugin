@@ -8,7 +8,7 @@ public class TempHerbertPlayer implements GSinteractor{
     private Member[] Member;
 	public TempHerbertPlayer(Player p) {
 		bukkplayer=p;
-                Member[0]=new Member(p,(byte)-1);
+        Member[0]=new Member(p,(byte)-1);
 	}
 	
 	public Player getBukkitPlayer() {
