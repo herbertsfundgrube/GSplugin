@@ -21,7 +21,7 @@ public class GS {
 	
 	//Jeder Index entspricht einer Berechtigung.
 	//0 -> Redstone, 1 -> Türen, 2 -> Truhen 3-> Blöcke, 4-> GS verwalten
-    boolean[] publicperms = new boolean[5];
+    byte publicperm=0;
     
     //Konstruktor ohne Permissions
     public GS(GSinteractor owner) {
@@ -31,7 +31,6 @@ public class GS {
     //Konstruktor: Mit bestimmten Public-Permissions initialisieren
     public GS(GSinteractor owner, byte[] enabledPublicPerms) {
         this.owner=owner;
-        setPublicPerms(enabledPublicPerms, true);
     }
     
     //Koordinaten des GS ausgeben
@@ -43,26 +42,25 @@ public class GS {
     
     public boolean hasPermission(Player p, byte permission) {
     	//Member section
-    	if(owner.hasGlobalGsFriends())
-    		for(Member m:owner.getGlobalGsFriends()){
-    			if(m.getUUID().equals(p.getUniqueId())){
-    				return m.hasPerm(permission);
-    			}
-    		}
+        for(Member m:owner.getMembers()){
+            if(m.getUUID().equals(p.getUniqueId())){
+                if((m.getPerms()&permission)==permission){
+                    return true;
+                }
+            }
+        }
         //Public Section
-        return publicperms[permission];
+        if((publicperm&permission)==permission){
+                    return true;
+        }
+        return false;
     }
     
     //Öffentliche Permissions ändern
-    public void setPublicPerms(byte[] perms, boolean setting) {
-    	for(byte b:perms) {
-        	publicperms[b]=setting;
-        }
+    public void setPublicPerms(byte permissons) {
+    	publicperm=permissons;
     }
-    //Eine öffentliche Permission ändern
-    public void setPublicPerms(byte perm, boolean bool) {
-    	publicperms[perm] = bool;
-    }
+    
     public GSinteractor getOwner() {
     	return owner;
     }
