@@ -52,7 +52,7 @@ public class BlockEventListener implements Listener {
 		if(gs==null)
 			return true;
 		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion ebenfalls erlaubt.
-		if(gs.hasPermission(p, (byte) 3))
+		if(gs.hasPermission(p, (byte) 8))
 			return true;
 		//In allen übrigen Fällen ist die Änderung nicht erlaubt.
 		return false;
