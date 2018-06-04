@@ -43,12 +43,12 @@ public class GS {
     
     public boolean hasPermission(Player p, byte permission) {
     	//Member section
-        for(Member m:owner.getMembers()){
-            if(m.getUUID().equals(p.getUniqueId())){
-                return m.hasPerm(permission);
-            }
-                
-        }
+    	if(owner.hasGlobalGsFriends())
+    		for(Member m:owner.getGlobalGsFriends()){
+    			if(m.getUUID().equals(p.getUniqueId())){
+    				return m.hasPerm(permission);
+    			}
+    		}
         //Public Section
         return publicperms[permission];
     }
