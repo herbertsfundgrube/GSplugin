@@ -1,5 +1,4 @@
 package com.github.herbert.gsplugin.GS;
-import org.bukkit.entity.Player;
 public interface GSinteractor {
 	
 	

@@ -6,7 +6,6 @@
 package com.github.herbert.gsplugin.GS;
 
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 /**
  *
  * @author Leen
