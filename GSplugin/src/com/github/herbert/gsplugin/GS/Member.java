@@ -12,17 +12,23 @@ import org.bukkit.entity.Player;
  * @author Leen
  */
 public class Member {
-    byte permlvl;
+	
+	//0 -> Redstone, 1 -> Türen, 2 -> Truhen 3-> Blöcke, 4-> GS verwalten
+    boolean[] perms;
     UUID id;
-    public Member(Player p,byte perm){
-        this.permlvl=perm;
+    public Member(Player p,byte[] perms){
+    	for(byte b : perms) {
+    		this.perms[b]=true;
+    	}
         this.id=p.getUniqueId();
     }
     public UUID getUUID(){
         return id;
     }
-    public byte getperm(){
-        return permlvl;
+    
+    
+    public boolean hasPerm(byte perm){
+        return perms[perm];
     }
     
 }

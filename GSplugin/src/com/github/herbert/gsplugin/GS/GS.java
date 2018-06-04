@@ -14,32 +14,44 @@ import org.bukkit.entity.Player;
  */
 public class GS {
 	GSinteractor owner;
-        byte publicperm=0;
-        
+	
+	//Jeder Index entspricht einer Berechtigung.
+	//0 -> Redstone, 1 -> Türen, 2 -> Truhen 3-> Blöcke, 4-> GS verwalten
+    boolean[] publicperms = new boolean[5];
+    
+    //Konstruktor ohne Permissions
     public GS(GSinteractor owner) {
         this.owner=owner;
     }
     
+    //Konstruktor: Mit bestimmten Public-Permissions initialisieren
+    public GS(GSinteractor owner, byte[] enabledPublicPerms) {
+        this.owner=owner;
+        setPublicPermissions(enabledPublicPerms, true);
+    }
+    
+    //Koordinaten des GS ausgeben
     public GSCoords getCoords() {
     	
     	return null;
     	//TODO
     }
     
-    public boolean hasPermission(Player p, byte perm) {
+    public boolean hasPermission(Player p, byte permission) {
     	//Member section
-        for(Member i:owner.getMembers()){
-            if(i.getUUID().equals(p.getUniqueId())){
-                if((i.permlvl&perm)==perm){
-                    return true;
-                }
+        for(Member m:owner.getMembers()){
+            if(m.getUUID().equals(p.getUniqueId())){
+                return m.hasPerm(permission);
             }
                 
         }
         //Public Section
-        if((publicperm&perm)==perm){
-                    return true;
+        return publicperms[permission];
+    }
+    
+    public void setPublicPermissions(byte[] perms, boolean setting) {
+    	for(byte b:perms) {
+        	publicperms[b]=setting;
         }
-    	return false;
     }
 }
