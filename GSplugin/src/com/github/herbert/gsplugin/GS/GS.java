@@ -27,7 +27,7 @@ public class GS {
     //Konstruktor: Mit bestimmten Public-Permissions initialisieren
     public GS(GSinteractor owner, byte[] enabledPublicPerms) {
         this.owner=owner;
-        setPublicPermissions(enabledPublicPerms, true);
+        setPublicPerms(enabledPublicPerms, true);
     }
     
     //Koordinaten des GS ausgeben
@@ -49,9 +49,14 @@ public class GS {
         return publicperms[permission];
     }
     
-    public void setPublicPermissions(byte[] perms, boolean setting) {
+    //Öffentliche Permissions ändern
+    public void setPublicPerms(byte[] perms, boolean setting) {
     	for(byte b:perms) {
         	publicperms[b]=setting;
         }
+    }
+    //Eine öffentliche Permission ändern
+    public void setPublicPerms(byte perm, boolean bool) {
+    	publicperms[perm] = bool;
     }
 }
