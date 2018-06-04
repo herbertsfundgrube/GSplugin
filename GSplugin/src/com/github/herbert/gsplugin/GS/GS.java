@@ -33,9 +33,6 @@ public class GS {
                 if((i.permlvl&perm)==perm){
                     return true;
                 }
-                else{
-                    return false;
-                }
             }
                 
         }
@@ -43,12 +40,6 @@ public class GS {
         if((publicperm&perm)==perm){
                     return true;
         }
-        
-    	
-    	//if(coownerslist.hasEntry(p)) ...
-    	//Vielleich eine HashMap?
-    	//Berechtigungsgruppen (Coowner / Mieter...?)
-    	
     	return false;
     }
 }
