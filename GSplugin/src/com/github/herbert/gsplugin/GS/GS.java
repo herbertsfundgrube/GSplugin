@@ -19,8 +19,14 @@ import com.github.herbert.gsplugin.datenstruktur.Member;
 public class GS {
 	GSinteractor owner;
 	
-	//Jeder Index entspricht einer Berechtigung.
-	//0 -> Redstone, 1 -> Türen, 2 -> Truhen 3-> Blöcke, 4-> GS verwalten
+	//Jeder Bit entspricht einer Berechtigung.
+	//1 -> Redstone, 2 -> Türen, 4 -> Truhen 8-> Blöcke, 16-> GS verwalten
+        //beispielvergleich von permissions:
+        //Hat der spieler mit der Permission "perm" die berechtigung Türen und Blöcke zu verwenden?
+        //if((perm&(2+8))==(2+8)) return True;
+        //beispielsetzen von permissions:
+        //Der Spieler soll die Permissions für Türen, Truhen und Redstone bekommen:
+        //perm=1+2+4;
     byte publicperm=0;
     
     //Konstruktor ohne Permissions
