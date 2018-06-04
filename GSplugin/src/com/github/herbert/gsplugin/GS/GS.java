@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
  */
 public class GS {
 	GSinteractor owner;
-        
+        byte publicperm=0;
         
     public GS(GSinteractor owner) {
         this.owner=owner;
@@ -27,16 +27,23 @@ public class GS {
     }
     
     public boolean hasPermission(Player p, byte perm) {
-    	
-    	//TODO: Spieler mit GSpermissions listen
+    	//Member section
         for(Member i:owner.getMembers()){
             if(i.getUUID().equals(p.getUniqueId())){
                 if((i.permlvl&perm)==perm){
                     return true;
                 }
+                else{
+                    return false;
+                }
             }
                 
         }
+        //Public Section
+        if((publicperm&perm)==perm){
+                    return true;
+        }
+        
     	
     	//if(coownerslist.hasEntry(p)) ...
     	//Vielleich eine HashMap?
