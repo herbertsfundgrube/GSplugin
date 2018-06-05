@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package com.github.herbert.gsplugin.fileInterface;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractorList;
-import com.github.herbert.gsplugin.datenstruktur.Gslist;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Gslist;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;

@@ -9,7 +9,7 @@ package com.github.herbert.gsplugin.GS;
 import org.bukkit.entity.Player;
 
 import com.github.herbert.gsplugin.datenstruktur.GSCoords;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
 import com.github.herbert.gsplugin.datenstruktur.Member;
 
 /**
