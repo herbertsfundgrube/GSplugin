@@ -2,6 +2,7 @@ package com.github.herbert.gsplugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.github.herbert.gsplugin.GS.GS;
 import com.github.herbert.gsplugin.ce.GSCommandExecutor;
 import com.github.herbert.gsplugin.datenstruktur.Gslist;
 import com.github.herbert.gsplugin.events.BlockEventListener;
@@ -51,5 +52,11 @@ public class GSplugin extends JavaPlugin {
 		//CE für den Befehl /gs
 		ce = new GSCommandExecutor(this);
 		getCommand("gs").setExecutor(ce);
+	}
+	
+	public void addGS(GS gs) {
+		if(gslist==null)
+			gslist = new Gslist(gs, null);
+		else gslist.add(gs);
 	}
 }
