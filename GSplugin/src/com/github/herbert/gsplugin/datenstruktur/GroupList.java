@@ -30,7 +30,7 @@ public class GroupList {
     @Override
     public String toString(){
         //Trennzeichen
-        char c=(char)92;
+        char c=(char)146;
         if(n==null){
             return (g.toString()+c);
         }

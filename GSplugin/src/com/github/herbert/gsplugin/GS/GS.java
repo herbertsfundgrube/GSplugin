@@ -74,7 +74,7 @@ public class GS {
     public String toString(){
         
         //Trennzeichen
-        char c=(char)91;
+        char c=(char)145;
         String out=owner.getIdent()+c+publicperm+c;
         return out;
     }

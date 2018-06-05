@@ -29,7 +29,7 @@ public class Member {
     @Override
     public String toString(){
         //Trennzeichen
-        char c=(char)91;
+        char c=(char)145;
         return (""+perms+c+id.getMostSignificantBits()+c+id.getLeastSignificantBits());
     }
     
