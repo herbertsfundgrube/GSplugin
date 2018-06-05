@@ -70,4 +70,12 @@ public class GS {
     public GSinteractor getOwner() {
     	return owner;
     }
+    
+    public String toString(){
+        
+        //Trennzeichen
+        char c=(char)91;
+        String out=owner.getIdent()+c+publicperm+c;
+        return out;
+    }
 }

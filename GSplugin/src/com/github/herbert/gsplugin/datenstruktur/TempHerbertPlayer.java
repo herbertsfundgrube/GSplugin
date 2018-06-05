@@ -15,4 +15,9 @@ public class TempHerbertPlayer implements GSinteractor{
 	public Member[] getMembers() {
 		return Members;
 	}
+
+        @Override
+        public String getIdent() {
+            return "Herbert";
+        }
 }
