@@ -23,6 +23,10 @@ public class GSCoords {
         this.x=x;
         this.z=z;
     }
+    public GSCoords(Location loc) {
+    	x=loc.getChunk().getX();
+    	z=loc.getChunk().getZ();
+    }
     
     public boolean equals(GSCoords c){
         if(c.x==x&&c.z==z){
