@@ -5,16 +5,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class GSBuyThread extends Thread implements org.bukkit.event.Listener {
+public class SetupCornersThread extends Thread implements org.bukkit.event.Listener {
 	
 	Player buyingPlayer;
 	Location corner1;
 	Location corner2;
 	boolean cancelled;
-	public GSBuyThread(Player p) {
+	public SetupCornersThread (Player p) {
 		buyingPlayer=p;
 	}
 	
+	
+	//Klasse wird vielleicht später Verwendung finden, um via Chat zwei Eckpunkte anzugeben.
 	//Starten mit GSBuyThread.start()
 	@Override
 	public void run() {

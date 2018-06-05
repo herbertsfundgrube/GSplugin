@@ -33,13 +33,6 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 				sender.sendMessage("Dies ist ein Spielerbefehl!");
 				return true;
 			}
-			
-			
-			GSBuyThread gsbt =new GSBuyThread((Player) sender);
-			plugin.getServer().getPluginManager().registerEvents(gsbt, plugin);
-			do {
-				
-			} while(gsbt.isAlive());
 			return true;
 		}
 		
