@@ -44,6 +44,7 @@ public class BlockEventListener implements Listener {
 	//oder wenn der Spieler die Permission "8" (bauen) auf dem GS hat.
 	private boolean isGsBlockChangePermitted(Player p, Location loc) {
 		
+		plugin.getServer().broadcastMessage("BlockCheck läuft");
 		//Wenn der Spieler Operator ist oder die entsprechende Permission (Admin) hat
 		if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere"))
 			return true;
