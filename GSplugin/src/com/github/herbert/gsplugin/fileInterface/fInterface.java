@@ -5,7 +5,7 @@
  */
 package com.github.herbert.gsplugin.fileInterface;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Gslist;
+import com.github.herbert.gsplugin.datenstruktur.Gslist;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;

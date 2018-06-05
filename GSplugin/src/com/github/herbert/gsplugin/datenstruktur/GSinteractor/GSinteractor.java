@@ -1,7 +1,5 @@
 package com.github.herbert.gsplugin.datenstruktur.GSinteractor;
 
-import com.github.herbert.gsplugin.datenstruktur.Member;
-
 public interface GSinteractor {
 	public String getIdent();
 	

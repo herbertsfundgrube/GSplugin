@@ -1,7 +1,6 @@
 package com.github.herbert.gsplugin.datenstruktur.GSinteractor;
 
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
-import com.github.herbert.gsplugin.datenstruktur.Member;
 import java.util.UUID;
 
 

@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 import com.github.herbert.gsplugin.datenstruktur.GSCoords;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
-import com.github.herbert.gsplugin.datenstruktur.Member;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
 
 /**
  *

@@ -3,7 +3,7 @@ package com.github.herbert.gsplugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.gsplugin.ce.GSCommandExecutor;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Gslist;
+import com.github.herbert.gsplugin.datenstruktur.Gslist;
 import com.github.herbert.gsplugin.events.BlockEventListener;
 
 import net.md_5.bungee.api.ChatColor;
