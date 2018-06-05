@@ -22,6 +22,7 @@ public class TempHerbertPlayer implements GSinteractor{
         
         @Override
         public String toString(){
-            return Members[0].toString();
+            char c=(char)145;
+            return ("h"+c+Members[0].toString());
         }
 }
