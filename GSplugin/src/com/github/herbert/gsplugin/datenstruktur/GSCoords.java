@@ -40,4 +40,11 @@ public class GSCoords {
     	if(loc.getChunk().getX()==x&&loc.getChunk().getZ()==z) return true;
         return false;
     }
+    
+    public int getX() {
+    	return x;
+    }
+    public int getZ() {
+    	return z;
+    }
 }

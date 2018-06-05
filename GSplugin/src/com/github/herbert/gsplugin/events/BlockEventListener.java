@@ -29,6 +29,7 @@ public class BlockEventListener implements Listener {
 		
 	}
 	//Abfangen des BlockBreakEvents
+	@EventHandler
 	public void onBlockBreakEvent(BlockBreakEvent event) {
 		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
 		if(!isGsBlockChangePermitted(event.getPlayer(), event.getBlock().getLocation())) {
@@ -45,23 +46,35 @@ public class BlockEventListener implements Listener {
 	private boolean isGsBlockChangePermitted(Player p, Location loc) {
 		
 		plugin.getServer().broadcastMessage("BlockCheck läuft");
+		plugin.getServer().broadcastMessage("Chunk: " + loc.getChunk().getX() + " / " + loc.getChunk().getZ());
+		
 		//Wenn der Spieler Operator ist oder die entsprechende Permission (Admin) hat
-		if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere"))
+		if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere")) {
+			plugin.getServer().broadcastMessage(p.getName() + " hat das Recht zu bauen!");
 			return true;
+		}
 		//Wenn kein GS auf dem Server gelistet ist, ist BlockChange immer erlaubt
-		if(!serverHasGs())
+		if(!serverHasGs()) {
+			plugin.getServer().broadcastMessage("Server hat kein GS");
 			return true;
+		}
 		//Wenn der Block auf der Miningebene liegt
-		if(loc.getY()< plugin.getConfigInt("gs.lowestProtectedY"))
+		if(loc.getY()< plugin.getConfigInt("gs.lowestProtectedY")) {
+			plugin.getServer().broadcastMessage(p.getName() + " ist unter der Mininghöhe!");
 			return true;
+		}
 		
 		GS gs = plugin.gslist.getGS(loc);
 		//Wenn in der GSlist kein GS mit dieser Location eingetragen ist, ist diese BlockChange ebenfalls erlaubt
-		if(gs==null)
+		if(gs==null) {
+			plugin.getServer().broadcastMessage(p.getName() + " ist auf keinem GS");
 			return true;
+		}
 		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion ebenfalls erlaubt.
-		if(gs.hasPermission(p, (byte) 8))
+		if(gs.hasPermission(p, (byte) 8)) {
+			plugin.getServer().broadcastMessage(p.getName() + " hat die Permissions");
 			return true;
+		}
 		//In allen übrigen Fällen ist die Änderung nicht erlaubt.
 		return false;
 	}

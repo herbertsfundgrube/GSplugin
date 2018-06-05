@@ -31,14 +31,18 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 		//GS kaufen
 		if(args[0].equalsIgnoreCase("buy")) {
 			//Wenn den Sender kein Spieler ist, abbrechen
-			if(!(sender instanceof Player)) {
+			if(! (sender instanceof Player) ) {
 				sender.sendMessage(plugin.convMessage("Dies ist ein Spielerbefehl!"));
 				return true;
 			}
 			
 			Player p = (Player) sender;
+			plugin.getServer().broadcastMessage("Spielername:" +p.getName());
 			TempHerbertPlayer tempPlayer = new TempHerbertPlayer(p.getUniqueId());
 			GS gs = new GS (tempPlayer, p.getLocation());
+
+			plugin.getServer().broadcastMessage("GS.toString() = " + gs.toString());
+			plugin.getServer().broadcastMessage("GS Coords: " + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
 			plugin.addGS(gs);
 			
 			return true;
