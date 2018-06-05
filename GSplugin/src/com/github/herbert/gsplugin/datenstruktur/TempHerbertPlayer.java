@@ -1,11 +1,12 @@
 package com.github.herbert.gsplugin.datenstruktur;
 
-import org.bukkit.entity.Player;
+import java.util.UUID;
+
 
 public class TempHerbertPlayer implements GSinteractor{
 	Member[] Members=new Member[1];;
-	public TempHerbertPlayer(Player p) {
-        Members[0]=new Member(p,(byte)-1);
+	public TempHerbertPlayer(UUID id) {
+        Members[0]=new Member(id,(byte)-1);
         }
 	
 	@Override

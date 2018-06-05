@@ -6,7 +6,6 @@
 package com.github.herbert.gsplugin.datenstruktur;
 
 import java.util.UUID;
-import org.bukkit.entity.Player;
 /**
  *
  * @author Leen
@@ -16,9 +15,9 @@ public class Member {
 	//0 -> Redstone, 1 -> Türen, 2 -> Truhen 3-> Blöcke, 4-> GS verwalten
     byte perms;
     UUID id;
-    public Member(Player p,byte perms){
+    public Member(UUID id,byte perms){
     	this.perms=perms;
-        this.id=p.getUniqueId();
+        this.id=id;
     }
     public UUID getUUID(){
         return id;
