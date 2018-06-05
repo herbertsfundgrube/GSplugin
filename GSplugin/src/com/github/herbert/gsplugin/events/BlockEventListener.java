@@ -36,15 +36,19 @@ public class BlockEventListener implements Listener {
 	
 	
 	//Ob die Änderung eines Blocks - nach dem grundlegenden GS-Prinzip - gestattet ist.
-	//Das heißt: Immer true, wenn der Block entweder auf keinem GS liegt, oder wenn der Spieler die Permission "3" auf dem GS hat.
+	//Das heißt: Immer true, wenn der Block entweder auf keinem GS bzw. auf der Mining-Ebene liegt
+	//oder wenn der Spieler die Permission "8" (bauen) auf dem GS hat.
 	//Der Code würde sich in BlockPlace und BlockBreak doppeln, daher ist er als Methode ausgelagert.
 	private boolean isGsBlockChangePermitted(Player p, Location loc) {
 		
-		//Wenn der Spieler Operator ist
-		if(p.isOp())
+		//Wenn der Spieler Operator ist oder die entsprechende Permission (Admin) hat
+		if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere"))
 			return true;
 		//Wenn kein GS auf dem Server gelistet ist, ist BlockChange immer erlaubt
 		if(!serverHasGs())
+			return true;
+		//Wenn der Block auf der Miningebene liegt
+		if(loc.getY()< plugin.getConfigInt("gs.lowestProtectedY"))
 			return true;
 		
 		GS gs = plugin.gslist.getGS(loc);

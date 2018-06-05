@@ -29,7 +29,7 @@ public class GSplugin extends JavaPlugin {
 	public int getConfigInt(String key) {
 		
 		//Bis die Config eingebunden ist werden die Werte hardcoded.
-		if(key.equals("gs.lowestBlockInt"))
+		if(key.equals("gs.lowestProtectedY"))
 			return 10;
 		
 		
