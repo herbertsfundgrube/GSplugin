@@ -22,7 +22,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 		if(args.length == 0)
 			return false;
 		if(args[0].equalsIgnoreCase("test")) {
-			sender.sendMessage("Du hast den Befehl /gs test eingegeben.");
+			sender.sendMessage(plugin.convMessage("Du hast den Befehl /gs test eingegeben."));
 			return true;
 		}
 		
@@ -30,14 +30,14 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 		if(args[0].equalsIgnoreCase("buy")) {
 			//Wenn den Sender kein Spieler ist, abbrechen
 			if(!(sender instanceof Player)) {
-				sender.sendMessage("Dies ist ein Spielerbefehl!");
+				sender.sendMessage(plugin.convMessage("Dies ist ein Spielerbefehl!"));
 				return true;
 			}
 			return true;
 		}
 		
 		
-		sender.sendMessage("Da ist etwas schiefgelaufen.\nBitte Teil uns mit, was Du gerade getan hast.");
+		sender.sendMessage(plugin.convMessage("Da ist etwas schiefgelaufen.\nBitte Teil uns mit, was Du gerade getan hast."));
 		return false;
 	}
 }

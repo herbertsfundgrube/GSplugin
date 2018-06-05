@@ -21,24 +21,27 @@ public class BlockEventListener implements Listener {
 	@EventHandler
 	public void onBlockPlaceEvent(BlockPlaceEvent event) {
 		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
-		if(isGsBlockChangePermitted(event.getPlayer(), event.getBlock().getLocation())) 
+		if(!isGsBlockChangePermitted(event.getPlayer(), event.getBlock().getLocation())) {
+			event.getPlayer().sendMessage(plugin.convMessage("Dir fehlt die Berechtigung, um hier zu bauen."));
 			event.setCancelled(true);
+		}
 			
 		
 	}
 	//Abfangen des BlockBreakEvents
 	public void onBlockBreakEvent(BlockBreakEvent event) {
 		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
-		if(isGsBlockChangePermitted(event.getPlayer(), event.getBlock().getLocation())) 
+		if(!isGsBlockChangePermitted(event.getPlayer(), event.getBlock().getLocation())) {
+			event.getPlayer().sendMessage(plugin.convMessage("Dir fehlt die Berechtigung, um hier zu bauen."));
 			event.setCancelled(true);
+		}
 			
 	}
 	
 	
 	//Ob die Änderung eines Blocks - nach dem grundlegenden GS-Prinzip - gestattet ist.
-	//Das heißt: Immer true, wenn der Block entweder auf keinem GS bzw. auf der Mining-Ebene liegt
+	//true, wenn der Block entweder auf keinem GS bzw. auf der Mining-Ebene liegt
 	//oder wenn der Spieler die Permission "8" (bauen) auf dem GS hat.
-	//Der Code würde sich in BlockPlace und BlockBreak doppeln, daher ist er als Methode ausgelagert.
 	private boolean isGsBlockChangePermitted(Player p, Location loc) {
 		
 		//Wenn der Spieler Operator ist oder die entsprechende Permission (Admin) hat

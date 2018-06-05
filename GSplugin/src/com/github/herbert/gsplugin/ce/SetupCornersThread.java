@@ -5,19 +5,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import com.github.herbert.gsplugin.GSplugin;
+
 public class SetupCornersThread extends Thread implements org.bukkit.event.Listener {
 	
 	Player buyingPlayer;
 	Location corner1;
 	Location corner2;
 	boolean cancelled;
-	public SetupCornersThread (Player p) {
+	GSplugin plugin;
+	public SetupCornersThread (Player p, GSplugin plugin) {
 		buyingPlayer=p;
+		this.plugin=plugin;
 	}
 	
+	//IM MOMENT IST DIESE KLASSE REDUNDANT
+	//Wird vielleicht später Verwendung finden, um via Chat zwei Eckpunkte anzugeben. Daher Code behalten.
 	
-	//Klasse wird vielleicht später Verwendung finden, um via Chat zwei Eckpunkte anzugeben.
-	//Starten mit GSBuyThread.start()
+	
+	
+	
+	//Der Thread läuft, bis die Schleife unten abbricht. Während der Thread läuft hat player p die Möglichkeit zur Dateneingabe.
 	@Override
 	public void run() {
 		int i = 0;
@@ -27,7 +35,7 @@ public class SetupCornersThread extends Thread implements org.bukkit.event.Liste
 				//Eine Sekunde sleep
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				buyingPlayer.sendMessage("Fehler 1 (InterruptedException) im GSBuyThread! Bitte melde diesen Vorfall der Serverleitung.");
+				buyingPlayer.sendMessage(plugin.convMessage("Fehler 1 (InterruptedException) im GSBuyThread! Bitte melde diesen Vorfall der Serverleitung."));
 			}
 		//Die Schleife bricht ab, wenn beide Ecken gesetzt sind, wenn der Spieler abbricht, oder wenn 15 Sekunden verstrichen sind.
 		} while( (corner1==null || corner2==null)&& i>=15 && cancelled == false);

@@ -6,6 +6,8 @@ import com.github.herbert.gsplugin.ce.GSCommandExecutor;
 import com.github.herbert.gsplugin.datenstruktur.Gslist;
 import com.github.herbert.gsplugin.events.BlockEventListener;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class GSplugin extends JavaPlugin {
 	
 	private GSCommandExecutor ce;
@@ -20,6 +22,10 @@ public class GSplugin extends JavaPlugin {
 		this.getLogger().info("GSplugin deaktiviert");
 	}
 	
+	
+	public String convMessage(String input) {
+		return "["+ChatColor.DARK_GRAY + this.getName()+ ChatColor.RESET + "] " + input;
+	}
 	
 	//TODO
 	public String getConfigString(String key) {
