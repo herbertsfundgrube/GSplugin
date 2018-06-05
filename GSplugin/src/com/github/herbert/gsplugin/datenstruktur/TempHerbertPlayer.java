@@ -6,7 +6,6 @@ public class TempHerbertPlayer implements GSinteractor{
 	Player bukkplayer;
 	Member[] Members=new Member[1];;
 	public TempHerbertPlayer(Player p) {
-		bukkplayer=p;
         Members[0]=new Member(p,(byte)-1);
         }
 	
