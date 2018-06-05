@@ -5,10 +5,9 @@ import org.bukkit.entity.Player;
 public class TempHerbertPlayer implements GSinteractor{
 	Player bukkplayer;
 	Member[] Members=new Member[1];;
-        private Member[] Member;
 	public TempHerbertPlayer(Player p) {
 		bukkplayer=p;
-        Member[0]=new Member(p,(byte)-1);
+        Members[0]=new Member(p,(byte)-1);
         }
 	
 	@Override
@@ -19,5 +18,10 @@ public class TempHerbertPlayer implements GSinteractor{
         @Override
         public String getIdent() {
             return "Herbert";
+        }
+        
+        @Override
+        public String toString(){
+            return Members[0].toString();
         }
 }

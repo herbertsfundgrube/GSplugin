@@ -26,5 +26,11 @@ public class Member {
     public byte getPerms(){
         return perms;
     }
+    @Override
+    public String toString(){
+        //Trennzeichen
+        char c=(char)91;
+        return (""+perms+c+id.getMostSignificantBits()+c+id.getLeastSignificantBits());
+    }
     
 }

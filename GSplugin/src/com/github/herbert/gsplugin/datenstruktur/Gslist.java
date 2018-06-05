@@ -79,6 +79,7 @@ public class Gslist {
             }
         }
     }
+    @Override
     public String toString(){
         //Trennzeichen
         char c=(char)92;
