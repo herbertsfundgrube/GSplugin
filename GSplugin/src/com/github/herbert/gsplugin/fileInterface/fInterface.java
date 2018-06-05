@@ -49,7 +49,7 @@ public class fInterface {
             //Fehler beim Dateizugriff
         }
     }
-    public GSinteractor gsInteractorsLaden(){
+    public GSinteractorList gsInteractorsLaden(){
         GSinteractorList l=null;
         String rep="";
         try{
