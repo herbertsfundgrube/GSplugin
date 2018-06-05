@@ -9,10 +9,10 @@ package com.github.herbert.gsplugin.datenstruktur;
  *
  * @author Leen
  */
-public class GroupList {
+public class GSinteractorList {
     GSinteractor g;
-    GroupList n;
-    public GroupList(GSinteractor g,GroupList l){
+    GSinteractorList n;
+    public GSinteractorList(GSinteractor g,GSinteractorList l){
         this.g=g;
         this.n=l;
     }
@@ -20,7 +20,7 @@ public class GroupList {
     public void add(GSinteractor u){	
     	if(n==null){
         	
-    		n=new GroupList(u,null);
+    		n=new GSinteractorList(u,null);
     	}
     	else{
     		n.add(u);
@@ -35,7 +35,7 @@ public class GroupList {
             return (g.toString()+c);
         }
         else{
-            return (g.toString()+c+n.toString());
+            return (g.toString()+c+n.toString()+c);
         }
     
     }

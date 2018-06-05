@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package com.github.herbert.gsplugin.fileInterface;
-import com.github.herbert.gsplugin.GSplugin;
-import com.github.herbert.gsplugin.datenstruktur.GroupList;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractorList;
 import com.github.herbert.gsplugin.datenstruktur.Gslist;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -49,8 +49,8 @@ public class fInterface {
             //Fehler beim Dateizugriff
         }
     }
-    public GroupList gsInteractorsLaden(){
-        GroupList l=null;
+    public GSinteractor gsInteractorsLaden(){
+        GSinteractorList l=null;
         String rep="";
         try{
             //einlesen des die Gruppenliste repräsentierenden Strings
@@ -66,7 +66,7 @@ public class fInterface {
         //todo: Verarbeitung des Strings
         return l;
     }
-    public void gsInteractorsSpeichern(GroupList l){
+    public void gsInteractorsSpeichern(GSinteractorList l){
         try{
             //schreiben des die Gruppenliste repräsentierenden Strings
             FileWriter f=new FileWriter("/GSplugin/GSinteractors.txt");
