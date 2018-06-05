@@ -6,6 +6,7 @@
 package com.github.herbert.gsplugin.GS;
 
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.github.herbert.gsplugin.datenstruktur.GSCoords;
@@ -18,6 +19,7 @@ import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
  */
 public class GS {
 	GSinteractor owner;
+	GSCoords coords;
 	
 	//Jeder Bit entspricht einer Berechtigung.
 	//1 -> Redstone, 2 -> Türen, 4 -> Truhen 8-> Blöcke, 16-> GS verwalten
@@ -30,20 +32,15 @@ public class GS {
     byte publicperm=0;
     
     //Konstruktor ohne Permissions
-    public GS(GSinteractor owner) {
+    public GS(GSinteractor owner, Location loc) {
         this.owner=owner;
-    }
-    
-    //Konstruktor: Mit bestimmten Public-Permissions initialisieren
-    public GS(GSinteractor owner, byte[] enabledPublicPerms) {
-        this.owner=owner;
+        coords = new GSCoords(loc);
     }
     
     //Koordinaten des GS ausgeben
     public GSCoords getCoords() {
     	
-    	return null;
-    	//TODO
+    	return coords;
     }
     
     public boolean hasPermission(Player p, byte permission) {

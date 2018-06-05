@@ -5,6 +5,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.github.herbert.gsplugin.GSplugin;
+import com.github.herbert.gsplugin.GS.GS;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
 
 public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 	
@@ -33,6 +35,12 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 				sender.sendMessage(plugin.convMessage("Dies ist ein Spielerbefehl!"));
 				return true;
 			}
+			
+			Player p = (Player) sender;
+			TempHerbertPlayer tempPlayer = new TempHerbertPlayer(p.getUniqueId());
+			GS gs = new GS (tempPlayer, p.getLocation());
+			plugin.addGS(gs);
+			
 			return true;
 		}
 		
