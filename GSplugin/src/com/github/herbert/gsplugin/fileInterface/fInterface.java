@@ -21,7 +21,7 @@ public class fInterface {
         String rep="";
         try{
             //einlesen des die Gslist repräsentierenden Strings
-            FileReader f=new FileReader("/GS.txt");
+            FileReader f=new FileReader("GS.txt");
             BufferedReader r=new BufferedReader(f);
             rep=r.readLine();
             r.close();
@@ -36,7 +36,7 @@ public class fInterface {
     public void GsSpeichern(Gslist l){
         try{
             //schreiben des die Gslist repräsentierenden Strings
-            FileWriter f=new FileWriter("/GS.txt");
+            FileWriter f=new FileWriter("GS.txt");
             BufferedWriter w=new BufferedWriter(f);
             w.write(l.toString());
             w.close();
@@ -51,7 +51,7 @@ public class fInterface {
         String rep="";
         try{
             //einlesen des die Gruppenliste repräsentierenden Strings
-            FileReader f=new FileReader("/Group.txt");
+            FileReader f=new FileReader("Group.txt");
             BufferedReader r=new BufferedReader(f);
             rep=r.readLine();
             r.close();
@@ -66,7 +66,7 @@ public class fInterface {
     public void GroupSpeichern(GroupList l){
         try{
             //schreiben des die Gruppenliste repräsentierenden Strings
-            FileWriter f=new FileWriter("/Group.txt");
+            FileWriter f=new FileWriter("Group.txt");
             BufferedWriter w=new BufferedWriter(f);
             w.write(l.toString());
             w.close();
