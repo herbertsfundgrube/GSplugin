@@ -79,4 +79,15 @@ public class Gslist {
             }
         }
     }
+    public String toString(){
+        //Trennzeichen
+        char c=(char)92;
+        if(l==null){
+            return (g.toString()+c);
+        }
+        else{
+            return (g.toString()+c+l.toString());
+        }
+    
+    }
 }
