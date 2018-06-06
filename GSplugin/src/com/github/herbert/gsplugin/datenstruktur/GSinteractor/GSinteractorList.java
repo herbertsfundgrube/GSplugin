@@ -20,6 +20,9 @@ public class GSinteractorList {
         return g.getIdent();
     }
     
+    public GSinteractorList getNext(){
+        return n;
+    }
     public void add(GSinteractor u){
     	if(n==null){
         	
