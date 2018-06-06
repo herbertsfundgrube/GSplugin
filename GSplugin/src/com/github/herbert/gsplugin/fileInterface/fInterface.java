@@ -147,7 +147,7 @@ public class fInterface {
         }
     }
     public void GsSpeichern(){
-    	
+    	String out=plugin.gslist.toString();
     }
     public void gsInteractorsLaden(){
         String rep="";
@@ -207,7 +207,7 @@ public class fInterface {
         
     }
     public void gsInteractorsSpeichern(){
-    	GSinteractorList l = plugin.gsintlist;
+    	String out=plugin.gsintlist.toString();
     }
     
 }
