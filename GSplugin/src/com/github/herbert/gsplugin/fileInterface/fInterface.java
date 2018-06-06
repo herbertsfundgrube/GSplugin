@@ -39,6 +39,7 @@ public class fInterface {
         }
         catch(IOException i){
             //Fehler beim Dateizugriff
+            plugin.getLogger().info("GS Dateizugrifffehler");
         }
         char[] c=rep.toCharArray();
         int point=0;
@@ -157,7 +158,9 @@ public class fInterface {
             f.close();
         }
         catch(IOException i){
+            
             //Fehler beim Dateizugriff
+            plugin.getLogger().info("Interactors Dateizugrifffehler");
         }
         char[] c=rep.toCharArray();
         int point=0;
