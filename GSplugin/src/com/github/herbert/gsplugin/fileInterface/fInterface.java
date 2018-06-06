@@ -114,6 +114,7 @@ public class fInterface {
                 TempHerbertPlayer p=new TempHerbertPlayer(m,ident);
                 plugin.addGSint(p);
             }
+            point++;
             
             
         }
