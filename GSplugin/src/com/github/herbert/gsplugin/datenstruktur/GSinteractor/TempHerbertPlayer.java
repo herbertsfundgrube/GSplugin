@@ -12,6 +12,11 @@ public class TempHerbertPlayer implements GSinteractor{
 		//Alle Rechte außer GS verwalten auf Standart-GS
         Members[0]=new HerbertPlayer(id,(byte) (1+2+4+8));
         }
+        public TempHerbertPlayer(Member m,String ident) {
+            this.ident=ident;
+		//Alle Rechte außer GS verwalten auf Standart-GS
+            Members[0]=m;
+        }
 	
 	@Override
 	public Member[] getMembers() {
@@ -26,6 +31,6 @@ public class TempHerbertPlayer implements GSinteractor{
         @Override
         public String toString(){
             char c=(char)145;
-            return ("h"+c+ident+c+Members[0].toString());
+            return ("h"+c+ident+c+Members[0].toString()+c);
         }
 }

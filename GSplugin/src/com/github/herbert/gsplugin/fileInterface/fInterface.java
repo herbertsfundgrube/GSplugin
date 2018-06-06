@@ -4,13 +4,17 @@
  * and open the template in the editor.
  */
 package com.github.herbert.gsplugin.fileInterface;
+import com.github.herbert.gsplugin.GSplugin;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
 import com.github.herbert.gsplugin.datenstruktur.Gslist;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.UUID;
 /**
  *
  * @author Leen
@@ -48,9 +52,11 @@ public class fInterface {
             //Fehler beim Dateizugriff
         }
     }
-    public GSinteractorList gsInteractorsLaden(){
+    public GSinteractorList gsInteractorsLaden(GSplugin plugin){
         GSinteractorList l=null;
         String rep="";
+        char t1=(char)146;
+        char t2=(char)145;
         try{
             //einlesen des die Gruppenliste repräsentierenden Strings
             FileReader f=new FileReader("/GSplugin/GSinteractors.txt");
@@ -62,7 +68,55 @@ public class fInterface {
         catch(IOException i){
             //Fehler beim Dateizugriff
         }
-        //todo: Verarbeitung des Strings
+        char[] c=rep.toCharArray();
+        int point=0;
+        while (point<c.length){
+            if(c[point]=='h'){
+                //der Gsinteractor zum Laden ist ein TempHerbertplayer
+                String ident="";
+                point++;
+                //ident laden
+                while(c[point]!=t2){
+                    ident=ident+c[point];
+                    point++;
+                }
+                point++;
+                //Member Laden
+                String permsS="";
+                int perms=0;
+                //permissions laden
+                while(c[point]!=t2){
+                    permsS=permsS+c[point];
+                    point++;
+                }
+                point++;
+                perms=Integer.parseInt(permsS);
+                //UUID laden
+                String idmS="";
+                String idlS="";
+                long idm;
+                long idl;
+                while(c[point]!=t2){
+                    idmS=idmS+c[point];
+                    point++;
+                }
+                point++;
+                while(c[point]!=t2){
+                    idlS=idlS+c[point];
+                    point++;
+                }
+                point++;
+                idm=Long.parseLong(idmS);
+                idl=Long.parseLong(idlS);
+                //Objekte Erstellen
+                UUID u=new UUID(idm,idl);
+                Member m=new Member(u,perms);
+                TempHerbertPlayer p=new TempHerbertPlayer(m,ident);
+                plugin.addGSint(p);
+            }
+            
+            
+        }
         return l;
     }
     public void gsInteractorsSpeichern(GSinteractorList l){
