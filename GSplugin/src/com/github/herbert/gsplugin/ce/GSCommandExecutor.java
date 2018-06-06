@@ -38,7 +38,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			
 			Player p = (Player) sender;
 			plugin.getServer().broadcastMessage("Spielername:" +p.getName());
-			TempHerbertPlayer tempPlayer = new TempHerbertPlayer(p.getUniqueId(),("Herbert"+p.getCompassTarget().getBlockX()));
+			TempHerbertPlayer tempPlayer = new TempHerbertPlayer(p.getUniqueId(),("Herbert"+p.getLocation().getBlockY()+"/"+p.getEyeLocation().getBlockX()));
                         plugin.addGSint(tempPlayer);
 			GS gs = new GS (tempPlayer, p.getLocation());
 

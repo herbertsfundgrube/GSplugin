@@ -22,7 +22,8 @@ public class GS {
 	GSCoords coords;
 	
 	//Jeder Bit entspricht einer Berechtigung.
-	//1 -> Redstone, 2 -> Türen, 4 -> Truhen 8-> Blöcke, 16-> GS verwalten falls Int extension: Exclusiv:32 -> Redstone, 64 -> Türen, 128 -> Truhen 256-> Blöcke, 512-> GS verwalten
+	//1 -> Redstone, 2 -> Türen, 4 -> Truhen 8-> Blöcke, 16-> GS verwalten 
+        //falls Int extension: Exclusiv:32 -> Redstone, 64 -> Türen, 128 -> Truhen 256-> Blöcke, 512-> GS verwalten
         //beispielvergleich von permissions:
         //Hat der spieler mit der Permission "perm" die berechtigung Türen und Blöcke zu verwenden?
         //if((perm&(2+8))==(2+8)) return True;

@@ -12,7 +12,8 @@ import java.util.UUID;
  */
 public class Member {
 	
-	//0 -> Redstone, 1 -> Türen, 2 -> Truhen 3-> Blöcke, 4-> GS verwalten
+	//1 -> Redstone, 2 -> Türen, 4 -> Truhen 8-> Blöcke, 16-> GS verwalten 
+        //falls Int extension: Exclusiv:32 -> Redstone, 64 -> Türen, 128 -> Truhen 256-> Blöcke, 512-> GS verwalten
     int perms;
     UUID id;
     public Member(UUID id,int perms){
