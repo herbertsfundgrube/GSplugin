@@ -5,8 +5,6 @@
  */
 package com.github.herbert.gsplugin.datenstruktur.GSinteractor;
 
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
-
 /**
  *
  * @author Leen
