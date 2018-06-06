@@ -68,11 +68,12 @@ public class GS {
     	return owner;
     }
     
+        @Override
     public String toString(){
         
         //Trennzeichen
         char c=(char)145;
-        String out=owner.getIdent()+c+publicperm+c;
+        String out="g"+c+owner.getIdent()+c+publicperm+c;
         return out;
     }
 }

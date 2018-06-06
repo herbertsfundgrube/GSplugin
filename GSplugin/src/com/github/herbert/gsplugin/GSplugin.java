@@ -4,6 +4,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.gsplugin.GS.GS;
 import com.github.herbert.gsplugin.ce.GSCommandExecutor;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
 import com.github.herbert.gsplugin.datenstruktur.Gslist;
 import com.github.herbert.gsplugin.events.BlockEventListener;
 
@@ -13,6 +15,7 @@ public class GSplugin extends JavaPlugin {
 	
 	private GSCommandExecutor ce;
 	public Gslist gslist;
+        public GSinteractorList gsintlist;
 	
 	public void onEnable() {
 		registerCommandExecutors();
@@ -55,8 +58,23 @@ public class GSplugin extends JavaPlugin {
 	}
 	
 	public void addGS(GS gs) {
+            if(gslist.getGS(gs.getCoords())==null){
 		if(gslist==null)
 			gslist = new Gslist(gs, null);
 		else gslist.add(gs);
+                }
+            else{
+                //Auf dem gebiet Liegt bereits ein GS
+            }
+	}
+        public void addGSint(GSinteractor gs) {
+            if(gsintlist.getByIdent(gs.getIdent())==null){
+		if(gsintlist==null)
+			gsintlist = new GSinteractorList(gs, null);
+		else gsintlist.add(gs);
+            }
+            else{
+                //Es gibt bereits eine Gruppe mit diesem Identifier
+            }
 	}
 }

@@ -18,8 +18,11 @@ public class GSinteractorList {
         this.g=g;
         this.n=l;
     }
+    public String getIdent(){
+        return g.getIdent();
+    }
     
-    public void add(GSinteractor u){	
+    public void add(GSinteractor u){
     	if(n==null){
         	
     		n=new GSinteractorList(u,null);
@@ -27,7 +30,20 @@ public class GSinteractorList {
     	else{
     		n.add(u);
     	}
+        
 
+    }
+    
+    public GSinteractor getByIdent(String ident){
+        if(getIdent().equals(ident)){
+            return g;
+        }
+        else if(n==null){
+            return null;
+        }
+        else{
+            return n.getByIdent(ident);
+        }
     }
     @Override
     public String toString(){

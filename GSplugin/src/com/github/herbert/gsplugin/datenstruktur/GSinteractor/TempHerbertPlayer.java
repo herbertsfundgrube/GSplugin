@@ -5,8 +5,10 @@ import java.util.UUID;
 
 
 public class TempHerbertPlayer implements GSinteractor{
-	Member[] Members=new HerbertPlayerFriend[1];;
-	public TempHerbertPlayer(UUID id) {
+	Member[] Members=new HerbertPlayerFriend[1];
+        String ident;
+	public TempHerbertPlayer(UUID id,String ident) {
+            this.ident=ident;
 		//Alle Rechte außer GS verwalten auf Standart-GS
         Members[0]=new HerbertPlayerFriend(id,(byte) (1+2+4+8));
         }
@@ -18,12 +20,12 @@ public class TempHerbertPlayer implements GSinteractor{
 
         @Override
         public String getIdent() {
-            return "Herbert";
+            return ident;
         }
         
         @Override
         public String toString(){
             char c=(char)145;
-            return ("h"+c+Members[0].toString());
+            return ("h"+c+ident+c+Members[0].toString());
         }
 }

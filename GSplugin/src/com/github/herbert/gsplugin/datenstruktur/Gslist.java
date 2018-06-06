@@ -46,6 +46,17 @@ public class Gslist {
             return l.getGS(loc);
         }
     }
+    public GS getGS(GSCoords loc){
+        if(g.getCoords().equals(loc)){
+            return g;
+        }
+        else if(l==null){
+            return null;
+        }
+        else{
+            return l.getGS(loc);
+        }
+    }
     public Gslist getGSByOwner(GSinteractor p){
         Gslist ret =new Gslist(null,null);
         Gslist it =this;

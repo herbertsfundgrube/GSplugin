@@ -53,11 +53,12 @@ public class Lager extends GS{
         return false;
     }
     
+    @Override
     public String toString(){
         
         //Trennzeichen
         char c=(char)145;
-        String out=owner.getIdent()+c+publicperm+c;
+        String out="l"+c+owner.getIdent()+c+publicperm+c;
         return out;
     }
 }
