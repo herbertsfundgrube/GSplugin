@@ -8,6 +8,7 @@ import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
 import com.github.herbert.gsplugin.datenstruktur.Gslist;
 import com.github.herbert.gsplugin.events.BlockEventListener;
+import com.github.herbert.gsplugin.fileInterface.fInterface;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -16,14 +17,21 @@ public class GSplugin extends JavaPlugin {
 	private GSCommandExecutor ce;
 	public Gslist gslist;
         public GSinteractorList gsintlist;
+        fInterface f=new fInterface();
 	
+        @Override
 	public void onEnable() {
 		registerCommandExecutors();
 		registerListeners();
+                f.gsInteractorsLaden(this);
+                f.GsLaden(this);
 	}
 	
+        @Override
 	public void onDisable() {
 		this.getLogger().info("GSplugin deaktiviert");
+                f.gsInteractorsSpeichern(gsintlist);
+                f.GsSpeichern(gslist);
 	}
 	
 	

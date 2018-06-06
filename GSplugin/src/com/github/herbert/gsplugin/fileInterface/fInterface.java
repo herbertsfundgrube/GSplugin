@@ -25,8 +25,7 @@ import java.util.UUID;
 public class fInterface {
 	
 	
-    public Gslist GsLaden(GSplugin plugin){
-        Gslist l=null;
+    public void GsLaden(GSplugin plugin){
         String rep="";
         char t1=(char)146;
         char t2=(char)145;
@@ -131,7 +130,6 @@ public class fInterface {
             }
             point++;
         }
-        return l;
     }
     public void GsSpeichern(Gslist l){
         try{
@@ -146,8 +144,7 @@ public class fInterface {
             //Fehler beim Dateizugriff
         }
     }
-    public GSinteractorList gsInteractorsLaden(GSplugin plugin){
-        GSinteractorList l=null;
+    public void gsInteractorsLaden(GSplugin plugin){
         String rep="";
         char t1=(char)146;
         char t2=(char)145;
@@ -213,7 +210,6 @@ public class fInterface {
             
             
         }
-        return l;
     }
     public void gsInteractorsSpeichern(GSinteractorList l){
         try{
