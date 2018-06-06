@@ -48,11 +48,15 @@ public class BlockEventListener implements Listener {
 		plugin.getServer().broadcastMessage("BlockCheck läuft");
 		plugin.getServer().broadcastMessage("Chunk: " + loc.getChunk().getX() + " / " + loc.getChunk().getZ());
 		
+		//TODO : Nach debugging wieder einführen
 		//Wenn der Spieler Operator ist oder die entsprechende Permission (Admin) hat
-		if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere")) {
-			plugin.getServer().broadcastMessage(p.getName() + " hat das Recht zu bauen!");
-			return true;
-		}
+		
+			//if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere")) {
+			//	plugin.getServer().broadcastMessage(p.getName() + " hat das Recht zu bauen!");
+			//	return true;
+			//}
+		
+		
 		//Wenn kein GS auf dem Server gelistet ist, ist BlockChange immer erlaubt
 		if(!serverHasGs()) {
 			plugin.getServer().broadcastMessage("Server hat kein GS");
@@ -75,7 +79,8 @@ public class BlockEventListener implements Listener {
 			plugin.getServer().broadcastMessage(p.getName() + " hat die Permissions");
 			return true;
 		}
-		//In allen übrigen Fällen ist die Änderung nicht erlaubt.
+		//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt schaden.
+		p.damage(2);
 		return false;
 	}
 	
