@@ -1,6 +1,7 @@
 package com.github.herbert.gsplugin;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,10 +23,10 @@ public class GSplugin extends JavaPlugin {
 	public Gslist gslist;
     public GSinteractorList gsintlist;
     fInterface f;
-    public File gsfile = new File(this.getDataFolder(),"gs.yml");
-    public File gsinteractorsfile = new File(this.getDataFolder(),"gsinteractors.yml");
-    public FileConfiguration ymlGS = YamlConfiguration.loadConfiguration(gsfile);
-    public FileConfiguration ymlgsints = YamlConfiguration.loadConfiguration(gsinteractorsfile);
+    public File gsfile = new File(this.getDataFolder(),"gs.txt");
+    public File gsinteractorsfile = new File(this.getDataFolder(),"gsinteractors.txt");
+    //public FileConfiguration ymlGS = YamlConfiguration.loadConfiguration(gsfile);
+    //public FileConfiguration ymlgsints = YamlConfiguration.loadConfiguration(gsinteractorsfile);
 	
         @Override
 	public void onEnable() {
@@ -33,7 +34,13 @@ public class GSplugin extends JavaPlugin {
 		registerCommandExecutors();
 		registerListeners();
 		f=new fInterface(this);
-		
+		try {
+			gsfile.createNewFile();
+			gsinteractorsfile.createNewFile();
+		} catch (IOException e) {
+			this.getLogger().info("Datei konnte nicht geladen werden:");
+			e.printStackTrace();
+		}
         f.gsInteractorsLaden();
         f.GsLaden();
 	}

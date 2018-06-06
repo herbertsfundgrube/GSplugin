@@ -11,6 +11,10 @@ import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -25,20 +29,26 @@ public class fInterface {
 		this.plugin = plugin;
 	}
     public void GsLaden(){
-        String rep=plugin.ymlGS.getString("derp");
+    	
+        String rep=null;
+        char t1=(char)146;
+        char t2=(char)145;
+        
+        try {
+			BufferedReader in = new BufferedReader(new FileReader(plugin.gsfile));
+			rep=in.readLine();
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         if(rep==null)
         	return;
         
 
-    	//DEBUG
+    	//DEBUG TODO
     	plugin.getLogger().info("Geladene GS: "+rep);
     	
-        char t1=(char)146;
-        char t2=(char)145;
-        
-        //Beipiel: Gibt alle Keys aus, die in der Section "derp" gespeichert sind.
-        
-        
+    	
         char[] c=rep.toCharArray();
         int point=0;
         while (point<c.length){
@@ -132,23 +142,32 @@ public class fInterface {
     }
     public void GsSpeichern(){
     	String out=plugin.gslist.toString();
-    	plugin.ymlGS.set("derp", out);
-    	
-
-    	//DEBUG
-    	plugin.getLogger().info("Gespeicherte GS: "+out);
     	
     	try {
-			plugin.ymlGS.save(plugin.gsfile);
+			BufferedWriter writer = new BufferedWriter(new FileWriter(plugin.gsfile));
+			writer.write(out);
+			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+    	//DEBUG TODO
+    	plugin.getLogger().info("Gespeicherte GS: "+out);
+    	
+    	
+		//plugin.ymlGS.save(plugin.gsfile);
     }
     public void gsInteractorsLaden(){
-        String rep=plugin.ymlgsints.getString("derp");
+        String rep=null;
+        try {
+			BufferedReader in = new BufferedReader(new FileReader(plugin.gsfile));
+			rep=in.readLine();
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         if(rep==null)
         	return;
-
     	//DEBUG
     	plugin.getLogger().info("GSI list: "+rep);
     	
@@ -210,14 +229,17 @@ public class fInterface {
     }
     public void gsInteractorsSpeichern(){
     	String out=plugin.gsintlist.toString();
-    	//DEBUG
-    	plugin.getLogger().info("Gespeicherte GSIlist: " + out);
-    	plugin.ymlgsints.set("derp", out);
+    	
     	try {
-			plugin.ymlGS.save(plugin.gsinteractorsfile);
+			BufferedWriter writer = new BufferedWriter(new FileWriter(plugin.gsfile));
+			writer.write(out);
+			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    	//DEBUG
+    	plugin.getLogger().info("Gespeicherte GSIlist: " + out);
+    	//plugin.ymlgsints.set("derp", out);
     }
     
 }
