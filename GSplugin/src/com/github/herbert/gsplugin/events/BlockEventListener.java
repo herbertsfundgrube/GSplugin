@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.github.herbert.gsplugin.GSplugin;
 import com.github.herbert.gsplugin.GS.GS;
@@ -47,6 +49,12 @@ public class BlockEventListener implements Listener {
 			}
 			
 	}
+	//Event zum prüfen der Truhernpermissions
+	@EventHandler
+	public void onPlayerInteract(PlayerInteractEvent event) {
+		
+		
+	}
 	
 	
 	
@@ -56,7 +64,7 @@ public class BlockEventListener implements Listener {
 		GS gs = plugin.gslist.getGS(loc);
 		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion erlaubt.
 		if(gs.hasPermission(p, (byte) 8)) {
-			plugin.getServer().broadcastMessage(p.getName() + " hat die Permissions");
+			plugin.getServer().broadcastMessage(p.getName() + " hat die Permissions für das GS" + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
 			return true;
 		}
 		//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spammen zu verhindern.
