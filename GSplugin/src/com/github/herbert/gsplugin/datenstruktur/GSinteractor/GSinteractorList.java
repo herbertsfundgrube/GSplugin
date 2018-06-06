@@ -45,6 +45,28 @@ public class GSinteractorList {
             return n.getByIdent(ident);
         }
     }
+    
+    public void del(String ident){
+        if(g.getIdent().equals(ident)){
+            g=n.g;
+            n=n.n;
+        }
+        else{
+            GSinteractorList next=n;
+            GSinteractorList p=this;
+            while(next!=null){
+                if(next.g.getIdent().equals(ident)){
+                    p.n=next.n;
+                    next=null;
+                }
+                else{
+                    p=next;
+                    next=next.n;
+                }
+            }
+        }
+    }
+    
     @Override
     public String toString(){
         //Trennzeichen
