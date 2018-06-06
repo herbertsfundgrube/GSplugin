@@ -13,16 +13,16 @@ import java.util.UUID;
 public class Member {
 	
 	//0 -> Redstone, 1 -> Türen, 2 -> Truhen 3-> Blöcke, 4-> GS verwalten
-    byte perms;
+    int perms;
     UUID id;
-    public Member(UUID id,byte perms){
+    public Member(UUID id,int perms){
     	this.perms=perms;
         this.id=id;
     }
     public UUID getUUID(){
         return id;
     }
-    public byte getPerms(){
+    public int getPerms(){
         return perms;
     }
     @Override

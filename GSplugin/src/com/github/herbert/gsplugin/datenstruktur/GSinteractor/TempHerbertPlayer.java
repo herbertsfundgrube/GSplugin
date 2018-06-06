@@ -5,9 +5,10 @@ import java.util.UUID;
 
 
 public class TempHerbertPlayer implements GSinteractor{
-	Member[] Members=new Member[1];;
+	Member[] Members=new HerbertPlayerFriend[1];;
 	public TempHerbertPlayer(UUID id) {
-        Members[0]=new Member(id,(byte)-1);
+		//Alle Rechte außer GS verwalten auf Standart-GS
+        Members[0]=new HerbertPlayerFriend(id,(byte) (1+2+4+8));
         }
 	
 	@Override
