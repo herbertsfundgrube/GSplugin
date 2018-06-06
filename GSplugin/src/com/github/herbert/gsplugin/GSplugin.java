@@ -16,22 +16,24 @@ public class GSplugin extends JavaPlugin {
 	
 	private GSCommandExecutor ce;
 	public Gslist gslist;
-        public GSinteractorList gsintlist;
-        fInterface f=new fInterface();
+    public GSinteractorList gsintlist;
+    fInterface f;
 	
         @Override
 	public void onEnable() {
 		registerCommandExecutors();
 		registerListeners();
-                f.gsInteractorsLaden(this);
-                f.GsLaden(this);
+		f=new fInterface();
+		
+        f.gsInteractorsLaden(this);
+        f.GsLaden(this);
 	}
 	
         @Override
 	public void onDisable() {
 		this.getLogger().info("GSplugin deaktiviert");
-                f.gsInteractorsSpeichern(gsintlist);
-                f.GsSpeichern(gslist);
+        f.gsInteractorsSpeichern(gsintlist);
+        f.GsSpeichern(gslist);
 	}
 	
 	

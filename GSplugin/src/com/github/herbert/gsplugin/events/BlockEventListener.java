@@ -1,9 +1,11 @@
 package com.github.herbert.gsplugin.events;
 
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
@@ -52,7 +54,13 @@ public class BlockEventListener implements Listener {
 	//Event zum prüfen der Truhernpermissions
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		
+		if(event.getAction()==Action.RIGHT_CLICK_BLOCK) {
+			Block block = event.getClickedBlock();
+			Player p = event.getPlayer();
+			if( hasContainerPermission(p, block)) {
+				
+			}
+		}
 		
 	}
 	
@@ -95,6 +103,12 @@ public class BlockEventListener implements Listener {
 	private boolean hasWorldPermission(Player p) {
 		if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere"))
 			return true;
+		return false;
+	}
+	
+	private boolean hasContainerPermission(Player p, Block b) {
+		
+		p.damage(2);
 		return false;
 	}
 	
