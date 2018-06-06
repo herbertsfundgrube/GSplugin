@@ -11,9 +11,9 @@ import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
 
+import java.io.IOException;
 import java.util.UUID;
 
-import org.bukkit.configuration.file.FileConfiguration;
 /**
  *
  * @author Leen
@@ -25,27 +25,18 @@ public class fInterface {
 		this.plugin = plugin;
 	}
     public void GsLaden(){
-    	FileConfiguration gsfile = plugin.ymlGS;
-        String rep="";
+        String rep=plugin.ymlGS.getString("derp");
+        if(rep==null)
+        	return;
+        
+
+    	//DEBUG
+    	plugin.getLogger().info("Geladene GS: "+rep);
+    	
         char t1=(char)146;
         char t2=(char)145;
         
         //Beipiel: Gibt alle Keys aus, die in der Section "derp" gespeichert sind.
-        for(String key: gsfile.getConfigurationSection("derp").getKeys(false)) {
-        	plugin.getLogger().info(gsfile.getString("derp." + key));
-        }
-        
-        //Die Datei wird in diesem Format abgespeichert:
-        //derp:
-        //  derp1: "herp1"
-        //  herp1: "derp1"
-        //herp:
-        //  derp2: "herp2"
-        //  herp2: "derp2"
-        
-        //Die schleife oben gibt dann aus:
-        //herp1
-        //derp1
         
         
         char[] c=rep.toCharArray();
@@ -141,9 +132,27 @@ public class fInterface {
     }
     public void GsSpeichern(){
     	String out=plugin.gslist.toString();
+    	plugin.ymlGS.set("derp", out);
+    	
+
+    	//DEBUG
+    	plugin.getLogger().info("Gespeicherte GS: "+out);
+    	
+    	try {
+			plugin.ymlGS.save(plugin.gsfile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     public void gsInteractorsLaden(){
-        String rep="";
+        String rep=plugin.ymlgsints.getString("derp");
+        if(rep==null)
+        	return;
+
+    	//DEBUG
+    	plugin.getLogger().info("GSI list: "+rep);
+    	
+    	
         char t1=(char)146;
         char t2=(char)145;
         char[] c=rep.toCharArray();
@@ -201,6 +210,14 @@ public class fInterface {
     }
     public void gsInteractorsSpeichern(){
     	String out=plugin.gsintlist.toString();
+    	//DEBUG
+    	plugin.getLogger().info("Gespeicherte GSIlist: " + out);
+    	plugin.ymlgsints.set("derp", out);
+    	try {
+			plugin.ymlGS.save(plugin.gsinteractorsfile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
 }
