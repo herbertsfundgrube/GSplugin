@@ -1,5 +1,9 @@
 package com.github.herbert.gsplugin;
 
+import java.io.File;
+
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.gsplugin.GS.GS;
@@ -18,9 +22,14 @@ public class GSplugin extends JavaPlugin {
 	public Gslist gslist;
     public GSinteractorList gsintlist;
     fInterface f;
+    public File gsfile = new File(this.getDataFolder(),"gs.yml");
+    public File gsinteractorsfile = new File(this.getDataFolder(),"gsinteractors.yml");
+    public FileConfiguration ymlGS = YamlConfiguration.loadConfiguration(gsfile);
+    public FileConfiguration ymlgsints = YamlConfiguration.loadConfiguration(gsinteractorsfile);
 	
         @Override
 	public void onEnable() {
+        this.getLogger().info(this.getName()+" wird gestartet");
 		registerCommandExecutors();
 		registerListeners();
 		f=new fInterface(this);
@@ -31,32 +40,11 @@ public class GSplugin extends JavaPlugin {
 	
         @Override
 	public void onDisable() {
-		this.getLogger().info("GSplugin deaktiviert");
-		if(gsintlist!=null)
-			f.gsInteractorsSpeichern(gsintlist);
-		if(gslist!=null)
-			f.GsSpeichern(gslist);
-	}
-	
-	
-	public String convMessage(String input) {
-		return "["+ChatColor.DARK_GRAY + this.getName()+ ChatColor.RESET + "] " + input;
-	}
-	
-	//TODO
-	public String getConfigString(String key) {
-		return null;
-	}
-	//TODO
-	public int getConfigInt(String key) {
+		this.getLogger().info(this.getName()+" speichert Daten");
 		
-		//Bis die Config eingebunden ist werden die Werte hardcoded.
-		if(key.equals("gs.lowestProtectedY"))
-			return 10;
+		saveData();
 		
-		
-		//Ende Hardcode
-		return 0;
+		this.getLogger().info(this.getName()+" deaktiviert!");
 	}
 	
 	private void registerListeners() {
@@ -67,6 +55,13 @@ public class GSplugin extends JavaPlugin {
 		//CE für den Befehl /gs
 		ce = new GSCommandExecutor(this);
 		getCommand("gs").setExecutor(ce);
+	}
+	private void saveData() {
+		if(gsintlist!=null)
+			f.gsInteractorsSpeichern();
+		if(gslist!=null)
+			f.GsSpeichern();
+		
 	}
 	
 	public void addGS(GS gs) {
@@ -83,13 +78,13 @@ public class GSplugin extends JavaPlugin {
                 }
             
 	}
-        public void addGSint(GSinteractor gs) {
+    public void addGSint(GSinteractor interactor) {
             
 		if(gsintlist==null)
-			gsintlist = new GSinteractorList(gs, null);
+			gsintlist = new GSinteractorList(interactor, null);
 		else {
-                    if(gsintlist.getByIdent(gs.getIdent())==null){
-                    gsintlist.add(gs);
+                    if(gsintlist.getByIdent(interactor.getIdent())==null){
+                    gsintlist.add(interactor);
                     }
                     else{
                         this.getServer().broadcastMessage("Gruppe mit dem Namen existiert bereits");
@@ -97,4 +92,26 @@ public class GSplugin extends JavaPlugin {
             }
             
 	}
+    	
+    	
+    public String convMessage(String input) {
+	   return "["+ChatColor.DARK_GRAY + this.getName()+ ChatColor.RESET + "] " + input;
+    }
+    	
+    //TODO
+    public String getConfigString(String key) {
+    	return null;
+    }
+    //TODO
+    public int getConfigInt(String key) {
+    	
+    	//Bis die Config eingebunden ist werden die Werte hardcoded.
+    	if(key.equals("gs.lowestProtectedY"))
+    		return 10;
+    	
+    	
+    	//Ende Hardcode
+    	return 0;
+    }
+    
 }

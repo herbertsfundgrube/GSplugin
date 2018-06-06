@@ -11,14 +11,16 @@ import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
-import com.github.herbert.gsplugin.datenstruktur.Gslist;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 /**
  *
  * @author Leen
@@ -30,24 +32,29 @@ public class fInterface {
 		this.plugin = plugin;
 	}
     public void GsLaden(){
-        File temp = new File("plugins/GSplugin/","GS.txt");
-        if(temp.exists()){
+    	FileConfiguration gsfile = plugin.ymlGS;
         String rep="";
         char t1=(char)146;
         char t2=(char)145;
-        try{
-            //einlesen des die Gslist repräsentierenden Strings
-            FileReader f=new FileReader(temp);
-            plugin.getServer().getLogger().info("GS.txt Wurde geladen.");
-            BufferedReader r=new BufferedReader(f);
-            rep=r.readLine();
-            r.close();
-            f.close();
+        
+        //Beipiel: Gibt alle Keys aus, die in der Section "derp" gespeichert sind.
+        for(String key: gsfile.getConfigurationSection("derp").getKeys(false)) {
+        	plugin.getLogger().info(gsfile.getString("derp." + key));
         }
-        catch(IOException i){
-            //Fehler beim Dateizugriff
-            plugin.getLogger().info("GS Dateizugrifffehler");
-        }
+        
+        //Die Datei wird in diesem Format abgespeichert:
+        //derp:
+        //  derp1: "herp1"
+        //  herp1: "derp1"
+        //herp:
+        //  derp2: "herp2"
+        //  herp2: "derp2"
+        
+        //Die schleife oben gibt dann aus:
+        //herp1
+        //derp1
+        
+        
         char[] c=rep.toCharArray();
         int point=0;
         while (point<c.length){
@@ -138,44 +145,14 @@ public class fInterface {
             }
             point++;
         }
-        }
     }
-    public void GsSpeichern(Gslist l){
-        try{
-            //schreiben des die Gslist repräsentierenden Strings
-            File temp = new File("plugins/GSplugin/","GS.txt");
-            FileWriter f=new FileWriter(temp);
-            plugin.getServer().getLogger().info("GS.txt wurde gespeichert.");
-            BufferedWriter w=new BufferedWriter(f);
-            w.write(l.toString());
-            w.close();
-            f.close();
-        }
-        catch(IOException i){
-            plugin.getServer().getLogger().info("GS.txt konnte nicht gespeichert werden.");
-            i.printStackTrace();
-        }
+    public void GsSpeichern(){
+    	
     }
     public void gsInteractorsLaden(){
-        File temp = new File("plugins/GSplugin/","GSinteractors.txt");
-        if(temp.exists()){
         String rep="";
         char t1=(char)146;
         char t2=(char)145;
-        try{
-            //einlesen des die Gruppenliste repräsentierenden Strings
-            FileReader f=new FileReader(temp);
-            plugin.getServer().getLogger().info("GSinteractors.txt Wurde geladen.");
-            BufferedReader r=new BufferedReader(f);
-            rep=r.readLine();
-            r.close();
-            f.close();
-        }
-        catch(IOException i){
-            
-            //Fehler beim Dateizugriff
-            plugin.getLogger().info("Interactors Dateizugrifffehler");
-        }
         char[] c=rep.toCharArray();
         int point=0;
         while (point<c.length){
@@ -227,23 +204,10 @@ public class fInterface {
             
             
         }
-        }
+        
     }
-    public void gsInteractorsSpeichern(GSinteractorList l){
-        try{ 
-            //schreiben des die Gruppenliste repräsentierenden Strings
-            File temp = new File("plugins/GSplugin/","GSinteractors.txt");
-            FileWriter f=new FileWriter(temp);
-            plugin.getServer().getLogger().info("GSinteractors.txt Wurde gespeichert.");
-            BufferedWriter w=new BufferedWriter(f);
-            w.write(l.toString());
-            w.close();
-            f.close();
-        }
-        catch(IOException i){
-            plugin.getServer().getLogger().info("GSinteractors.txt konnte nicht gespeichert werden.");
-            i.printStackTrace();
-        }
+    public void gsInteractorsSpeichern(){
+    	GSinteractorList l = plugin.gsintlist;
     }
     
 }
