@@ -10,7 +10,6 @@ import org.bukkit.Location;
 
 import com.github.herbert.gsplugin.GS.GS;
 import com.github.herbert.gsplugin.datenstruktur.GSCoords;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
 /**
  *
  * @author Leen
