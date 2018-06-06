@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 /**
@@ -26,12 +27,14 @@ public class fInterface {
 	
 	GSplugin plugin;
     public void GsLaden(GSplugin plugin){
+        File temp = new File(plugin.getDataFolder() + "/GS.txt");
+        if(temp.exists()){
         String rep="";
         char t1=(char)146;
         char t2=(char)145;
         try{
             //einlesen des die Gslist repräsentierenden Strings
-            FileReader f=new FileReader(plugin.getDataFolder() + "/GS.txt");
+            FileReader f=new FileReader(temp);
             plugin.getServer().getLogger().info("GS.txt Wurde geladen.");
             BufferedReader r=new BufferedReader(f);
             rep=r.readLine();
@@ -132,6 +135,7 @@ public class fInterface {
             }
             point++;
         }
+        }
     }
     public void GsSpeichern(Gslist l){
         try{
@@ -148,13 +152,15 @@ public class fInterface {
         }
     }
     public void gsInteractorsLaden(GSplugin plugin){
+        File temp = new File(plugin.getDataFolder() +"/GSinteractors.txt");
+        if(temp.exists()){
     	this.plugin=plugin;
         String rep="";
         char t1=(char)146;
         char t2=(char)145;
         try{
             //einlesen des die Gruppenliste repräsentierenden Strings
-            FileReader f=new FileReader(plugin.getDataFolder() + "/GSinteractors.txt");
+            FileReader f=new FileReader(temp);
             plugin.getServer().getLogger().info("GSinteractors.txt Wurde geladen.");
             BufferedReader r=new BufferedReader(f);
             rep=r.readLine();
@@ -217,11 +223,12 @@ public class fInterface {
             
             
         }
+        }
     }
     public void gsInteractorsSpeichern(GSinteractorList l){
-        try{
+        try{ 
             //schreiben des die Gruppenliste repräsentierenden Strings
-            FileWriter f=new FileWriter(plugin.getDataFolder() + "/GSinteractors.txt");
+            FileWriter f=new FileWriter(plugin.getDataFolder() +"/GSinteractors.txt");
             plugin.getServer().getLogger().info("GSinteractors.txt Wurde gespeichert.");
             BufferedWriter w=new BufferedWriter(f);
             w.write(l.toString());
