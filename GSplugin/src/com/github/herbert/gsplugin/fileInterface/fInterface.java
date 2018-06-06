@@ -31,7 +31,7 @@ public class fInterface {
         char t2=(char)145;
         try{
             //einlesen des die Gslist repräsentierenden Strings
-            FileReader f=new FileReader(plugin.getDataFolder() + "GS.txt");
+            FileReader f=new FileReader(plugin.getDataFolder() + "/GS.txt");
             plugin.getServer().getLogger().info("GS.txt Wurde geladen.");
             BufferedReader r=new BufferedReader(f);
             rep=r.readLine();
@@ -136,7 +136,7 @@ public class fInterface {
     public void GsSpeichern(Gslist l){
         try{
             //schreiben des die Gslist repräsentierenden Strings
-            FileWriter f=new FileWriter(plugin.getDataFolder() + "GS.txt");
+            FileWriter f=new FileWriter(plugin.getDataFolder() + "/GS.txt");
             plugin.getServer().getLogger().info("GS.txt wurde gespeichert.");
             BufferedWriter w=new BufferedWriter(f);
             w.write(l.toString());
@@ -154,7 +154,7 @@ public class fInterface {
         char t2=(char)145;
         try{
             //einlesen des die Gruppenliste repräsentierenden Strings
-            FileReader f=new FileReader(plugin.getDataFolder() + "GSinteractors.txt");
+            FileReader f=new FileReader(plugin.getDataFolder() + "/GSinteractors.txt");
             plugin.getServer().getLogger().info("GSinteractors.txt Wurde geladen.");
             BufferedReader r=new BufferedReader(f);
             rep=r.readLine();
@@ -221,7 +221,7 @@ public class fInterface {
     public void gsInteractorsSpeichern(GSinteractorList l){
         try{
             //schreiben des die Gruppenliste repräsentierenden Strings
-            FileWriter f=new FileWriter(plugin.getDataFolder() + "GSinteractors.txt");
+            FileWriter f=new FileWriter(plugin.getDataFolder() + "/GSinteractors.txt");
             plugin.getServer().getLogger().info("GSinteractors.txt Wurde gespeichert.");
             BufferedWriter w=new BufferedWriter(f);
             w.write(l.toString());

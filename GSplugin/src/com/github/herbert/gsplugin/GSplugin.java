@@ -32,8 +32,10 @@ public class GSplugin extends JavaPlugin {
         @Override
 	public void onDisable() {
 		this.getLogger().info("GSplugin deaktiviert");
-        f.gsInteractorsSpeichern(gsintlist);
-        f.GsSpeichern(gslist);
+		if(gsintlist!=null)
+			f.gsInteractorsSpeichern(gsintlist);
+		if(gslist!=null)
+			f.GsSpeichern(gslist);
 	}
 	
 	
