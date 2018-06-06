@@ -27,7 +27,7 @@ public class fInterface {
 	
 	GSplugin plugin;
     public void GsLaden(GSplugin plugin){
-        File temp = new File(plugin.getDataFolder() + "/GS.txt");
+        File temp = new File("plugins/GSplugin","GS.txt");
         if(temp.exists()){
         String rep="";
         char t1=(char)146;
@@ -140,7 +140,8 @@ public class fInterface {
     public void GsSpeichern(Gslist l){
         try{
             //schreiben des die Gslist repräsentierenden Strings
-            FileWriter f=new FileWriter(plugin.getDataFolder() + "/GS.txt");
+            File temp = new File("plugins/GSplugin","GS.txt");
+            FileWriter f=new FileWriter(temp);
             plugin.getServer().getLogger().info("GS.txt wurde gespeichert.");
             BufferedWriter w=new BufferedWriter(f);
             w.write(l.toString());
@@ -152,7 +153,7 @@ public class fInterface {
         }
     }
     public void gsInteractorsLaden(GSplugin plugin){
-        File temp = new File(plugin.getDataFolder() +"/GSinteractors.txt");
+        File temp = new File("plugins/GSplugin","GSinteractors.txt");
         if(temp.exists()){
     	this.plugin=plugin;
         String rep="";
@@ -228,7 +229,8 @@ public class fInterface {
     public void gsInteractorsSpeichern(GSinteractorList l){
         try{ 
             //schreiben des die Gruppenliste repräsentierenden Strings
-            FileWriter f=new FileWriter(plugin.getDataFolder() +"/GSinteractors.txt");
+            File temp = new File("plugins/GSplugin","GSinteractors.txt");
+            FileWriter f=new FileWriter(temp);
             plugin.getServer().getLogger().info("GSinteractors.txt Wurde gespeichert.");
             BufferedWriter w=new BufferedWriter(f);
             w.write(l.toString());
