@@ -20,67 +20,73 @@ public class BlockEventListener implements Listener {
 	//Abfangen des BlockPlaceEvents
 	@EventHandler
 	public void onBlockPlaceEvent(BlockPlaceEvent event) {
+		Player p = event.getPlayer();
+		Location loc=event.getBlock().getLocation();
 		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
-		if(!isGsBlockChangePermitted(event.getPlayer(), event.getBlock().getLocation())) {
-			event.getPlayer().sendMessage(plugin.convMessage("Dir fehlt die Berechtigung, um hier zu bauen."));
-			event.setCancelled(true);
-		}
+		if(!isOnGs(p, loc) && canGsBlockBeChanged(p, loc)) 
+			//if(!hasWorldPermission(p))
+			{
+				event.getPlayer().sendMessage(plugin.convMessage("Dir fehlt die Berechtigung, um hier zu bauen."));
+				event.setCancelled(true);
+			}
 			
 		
 	}
 	//Abfangen des BlockBreakEvents
 	@EventHandler
 	public void onBlockBreakEvent(BlockBreakEvent event) {
+		Player p = event.getPlayer();
+		Location loc=event.getBlock().getLocation();
 		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
-		if(!isGsBlockChangePermitted(event.getPlayer(), event.getBlock().getLocation())) {
-			event.getPlayer().sendMessage(plugin.convMessage("Dir fehlt die Berechtigung, um hier zu bauen."));
-			event.setCancelled(true);
-		}
+		if(isOnGs(p, loc) && !canGsBlockBeChanged(p, loc)) 
+		
+			//if(!hasWorldPermission(p))
+			{
+				event.getPlayer().sendMessage(plugin.convMessage("Dir fehlt die Berechtigung, um hier zu abzubauen."));
+				event.setCancelled(true);
+			}
 			
 	}
 	
 	
-	//Ob die Änderung eines Blocks - nach dem grundlegenden GS-Prinzip - gestattet ist.
-	//true, wenn der Block entweder auf keinem GS bzw. auf der Mining-Ebene liegt
-	//oder wenn der Spieler die Permission "8" (bauen) auf dem GS hat.
-	private boolean isGsBlockChangePermitted(Player p, Location loc) {
-		
-		plugin.getServer().broadcastMessage("BlockCheck läuft");
-		plugin.getServer().broadcastMessage("Chunk: " + loc.getChunk().getX() + " / " + loc.getChunk().getZ());
-		
-		//TODO : Nach debugging wieder einführen
-		//Wenn der Spieler Operator ist oder die entsprechende Permission (Admin) hat
-		
-			//if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere")) {
-			//	plugin.getServer().broadcastMessage(p.getName() + " hat das Recht zu bauen!");
-			//	return true;
-			//}
-		
-		
-		//Wenn kein GS auf dem Server gelistet ist, ist BlockChange immer erlaubt
-		if(!serverHasGs()) {
-			plugin.getServer().broadcastMessage("Server hat kein GS");
-			return true;
-		}
-		//Wenn der Block auf der Miningebene liegt
-		if(loc.getY()< plugin.getConfigInt("gs.lowestProtectedY")) {
-			plugin.getServer().broadcastMessage(p.getName() + " ist unter der Mininghöhe!");
-			return true;
-		}
+	
+	//Hat der <p> für das GS bei <loc> die Permission 8 (bauen/abbauen)?
+	private boolean canGsBlockBeChanged(Player p, Location loc) {
 		
 		GS gs = plugin.gslist.getGS(loc);
-		//Wenn in der GSlist kein GS mit dieser Location eingetragen ist, ist diese BlockChange ebenfalls erlaubt
-		if(gs==null) {
-			plugin.getServer().broadcastMessage(p.getName() + " ist auf keinem GS");
-			return true;
-		}
-		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion ebenfalls erlaubt.
+		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion erlaubt.
 		if(gs.hasPermission(p, (byte) 8)) {
 			plugin.getServer().broadcastMessage(p.getName() + " hat die Permissions");
 			return true;
 		}
-		//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt schaden.
+		//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spammen zu verhindern.
 		p.damage(2);
+		return false;
+	}
+	
+	//Liegt <loc> auf einem GS?
+	private boolean isOnGs(Player p, Location loc) {
+		//Wenn kein GS auf dem Server gelistet ist, ist BlockChange immer erlaubt
+		if(!serverHasGs()) {
+			plugin.getServer().broadcastMessage("Server hat kein GS");
+			return false;
+		}
+		//Wenn der Block auf der Miningebene liegt
+		if(loc.getY()< plugin.getConfigInt("gs.lowestProtectedY"))
+			return false;
+		
+		//Wenn in der GSlist kein GS mit dieser Location eingetragen ist, ist diese BlockChange ebenfalls erlaubt
+		if(plugin.gslist.getGS(loc)==null) {
+			plugin.getServer().broadcastMessage(p.getName() + " ist auf keinem GS");
+			return false;
+		}
+		//Location ist auf GS
+		return true;
+	}
+	//Hat der Spieler die Rechte, um global auf alle GS Zugriff zu erhalten?
+	private boolean hasWorldPermission(Player p) {
+		if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere"))
+			return true;
 		return false;
 	}
 	
