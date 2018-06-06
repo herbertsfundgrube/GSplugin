@@ -24,9 +24,12 @@ import java.util.UUID;
  * @author Leen
  */
 public class fInterface {
-	
 	GSplugin plugin;
-    public void GsLaden(GSplugin plugin){
+	
+	public fInterface(GSplugin plugin) {
+		this.plugin = plugin;
+	}
+    public void GsLaden(){
         File temp = new File("plugins/GSplugin/","GS.txt");
         if(temp.exists()){
         String rep="";
@@ -149,13 +152,13 @@ public class fInterface {
             f.close();
         }
         catch(IOException i){
-            //Fehler beim Dateizugriff
+            plugin.getServer().getLogger().info("GS.txt konnte nicht gespeichert werden.");
+            i.printStackTrace();
         }
     }
-    public void gsInteractorsLaden(GSplugin plugin){
+    public void gsInteractorsLaden(){
         File temp = new File("plugins/GSplugin/","GSinteractors.txt");
         if(temp.exists()){
-    	this.plugin=plugin;
         String rep="";
         char t1=(char)146;
         char t2=(char)145;
@@ -238,7 +241,8 @@ public class fInterface {
             f.close();
         }
         catch(IOException i){
-            //Fehler beim Dateizugriff
+            plugin.getServer().getLogger().info("GSinteractors.txt konnte nicht gespeichert werden.");
+            i.printStackTrace();
         }
     }
     

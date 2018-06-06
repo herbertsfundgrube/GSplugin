@@ -23,10 +23,10 @@ public class GSplugin extends JavaPlugin {
 	public void onEnable() {
 		registerCommandExecutors();
 		registerListeners();
-		f=new fInterface();
+		f=new fInterface(this);
 		
-        f.gsInteractorsLaden(this);
-        f.GsLaden(this);
+        f.gsInteractorsLaden();
+        f.GsLaden();
 	}
 	
         @Override
