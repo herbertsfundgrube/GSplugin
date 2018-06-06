@@ -30,7 +30,7 @@ public class Member {
     public String toString(){
         //Trennzeichen
         char c=(char)145;
-        return (""+perms+c+id.getMostSignificantBits()+c+id.getLeastSignificantBits()+c);
+        return (""+perms+c+id.getMostSignificantBits()+c+id.getLeastSignificantBits());
     }
     
 }

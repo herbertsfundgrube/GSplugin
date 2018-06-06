@@ -6,6 +6,7 @@
 package com.github.herbert.gsplugin.GS;
 
 
+import com.github.herbert.gsplugin.datenstruktur.GSCoords;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -31,6 +32,9 @@ public class Lager extends GS{
     //Konstruktor ohne Permissions
     public Lager(GSinteractor owner, Location loc) {
     	super(owner, loc);
+    }
+    public Lager(GSinteractor owner, GSCoords coords,byte publicperm) {
+    	super(owner, coords,publicperm);
     }
     
     public boolean hasPermission(Player p, byte permission) {
@@ -58,7 +62,7 @@ public class Lager extends GS{
         
         //Trennzeichen
         char c=(char)145;
-        String out="l"+c+owner.getIdent()+c+publicperm+c;
+        String out="l"+c+owner.getIdent()+c+publicperm+c+coords.toString()+c;
         return out;
     }
 }

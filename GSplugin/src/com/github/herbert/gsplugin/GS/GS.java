@@ -37,6 +37,11 @@ public class GS {
         this.owner=owner;
         coords = new GSCoords(loc);
     }
+    public GS(GSinteractor owner, GSCoords coords,byte publicperm) {
+        this.owner=owner;
+        this.coords=coords;
+        this.publicperm=publicperm;
+    }
     
     //Koordinaten des GS ausgeben
     public GSCoords getCoords() {
@@ -74,7 +79,7 @@ public class GS {
         
         //Trennzeichen
         char c=(char)145;
-        String out="g"+c+owner.getIdent()+c+publicperm+c;
+        String out="g"+c+owner.getIdent()+c+publicperm+c+coords.toString()+c;
         return out;
     }
 }

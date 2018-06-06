@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package com.github.herbert.gsplugin.fileInterface;
+import com.github.herbert.gsplugin.GS.*;
 import com.github.herbert.gsplugin.GSplugin;
+import com.github.herbert.gsplugin.datenstruktur.GSCoords;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
@@ -22,9 +25,11 @@ import java.util.UUID;
 public class fInterface {
 	
 	
-    public Gslist GsLaden(){
+    public Gslist GsLaden(GSplugin plugin){
         Gslist l=null;
         String rep="";
+        char t1=(char)146;
+        char t2=(char)145;
         try{
             //einlesen des die Gslist repräsentierenden Strings
             FileReader f=new FileReader("GS.txt");
@@ -36,7 +41,96 @@ public class fInterface {
         catch(IOException i){
             //Fehler beim Dateizugriff
         }
-        //todo: Verarbeitung des Strings
+        char[] c=rep.toCharArray();
+        int point=0;
+        while (point<c.length){
+            if(c[point]=='g'){
+                //Normales GS wird geladen
+                String ident="";
+                point++;
+                point++;
+                //ident laden
+                while(c[point]!=t2){
+                    ident=ident+c[point];
+                    point++;
+                }
+                point++;
+                //publicpermissions laden
+                String pubpermS="";
+                byte pubperm;
+                while(c[point]!=t2){
+                    pubpermS=pubpermS+c[point];
+                    point++;
+                }
+                point++;
+                pubperm=Byte.parseByte(pubpermS);
+                //coordinaten laden
+                String xS="";
+                int x=0;
+                while(c[point]!=t2){
+                    xS=xS+c[point];
+                    point++;
+                }
+                point++;
+                x=Integer.parseInt(xS);
+                String zS="";
+                int z=0;
+                while(c[point]!=t2){
+                    zS=zS+c[point];
+                    point++;
+                }
+                point++;
+                z=Integer.parseInt(zS);
+                GSCoords coord=new GSCoords(x,z);
+                GSinteractor owner=plugin.gsintlist.getByIdent(ident);
+                GS gs=new GS(owner,coord,pubperm);
+                plugin.addGS(gs);
+            }
+            else if(c[point]=='l'){
+                //Lager wird Geladen
+                String ident="";
+                point++;
+                point++;
+                //ident laden
+                while(c[point]!=t2){
+                    ident=ident+c[point];
+                    point++;
+                }
+                point++;
+                //publicpermissions laden
+                String pubpermS="";
+                byte pubperm;
+                while(c[point]!=t2){
+                    pubpermS=pubpermS+c[point];
+                    point++;
+                }
+                point++;
+                pubperm=Byte.parseByte(pubpermS);
+                //coordinaten laden
+                String xS="";
+                int x=0;
+                while(c[point]!=t2){
+                    xS=xS+c[point];
+                    point++;
+                }
+                point++;
+                x=Integer.parseInt(xS);
+                String zS="";
+                int z=0;
+                while(c[point]!=t2){
+                    zS=zS+c[point];
+                    point++;
+                }
+                point++;
+                z=Integer.parseInt(zS);
+                GSCoords coord=new GSCoords(x,z);
+                GSinteractor owner=plugin.gsintlist.getByIdent(ident);
+                Lager Lag=new Lager(owner,coord,pubperm);
+                plugin.addGS(Lag);
+                
+            }
+            point++;
+        }
         return l;
     }
     public void GsSpeichern(Gslist l){
@@ -74,6 +168,7 @@ public class fInterface {
             if(c[point]=='h'){
                 //der Gsinteractor zum Laden ist ein TempHerbertplayer
                 String ident="";
+                point++;
                 point++;
                 //ident laden
                 while(c[point]!=t2){

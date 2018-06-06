@@ -47,4 +47,9 @@ public class GSCoords {
     public int getZ() {
     	return z;
     }
+    @Override
+    public String toString(){
+        char c=(char)145;
+        return (""+x+c+z);
+    }
 }
