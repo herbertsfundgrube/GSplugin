@@ -3,6 +3,7 @@ package com.github.herbert.gsplugin.datenstruktur.GSinteractor;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 
@@ -12,20 +13,23 @@ public class TempHerbertPlayer implements GSinteractor{
 	Member[] members;
     String ident;
     int friendsPermissions;
+    UUID id;
 	public TempHerbertPlayer(UUID id,String ident) {
     	members = new Member[1];
         this.ident=ident;
+        this.id=id;
 		//Alle Rechte außer GS verwalten auf Standart-GS
         friendsPermissions=8;
         //Der TempHerbert, dem das GS gehört, hat alle Berechtigungen auf seinen GS.
         members[0]=new Member(id,(byte) (1+2+4+8+16));
         }
-        public TempHerbertPlayer(Member m,String ident) {
-        	members = new Member[1];
-            this.ident=ident;
-            //Alle Rechte außer GS verwalten auf Standart-GS
-            members[0]=m;
-        }
+    public TempHerbertPlayer(Member m,String ident) {
+    	members = new Member[1];
+        this.ident=ident;
+        this.id=m.getUUID();
+        //Alle Rechte außer GS verwalten auf Standart-GS
+        members[0]=m;
+    }
 	
 	@Override
 	public Member[] getMembers() {
@@ -37,6 +41,12 @@ public class TempHerbertPlayer implements GSinteractor{
     	return ident;
     }
     
+    public UUID getUUID() {
+    	return id;
+    }
+    public String getName() {
+    	return Bukkit.getPlayer(id).getName();
+    }
     
     //addMember und RemoveMember werden in dieser Klasse nicht verwendet werden! Später, in der endgültigen Spielerklasse, sollen aber
     //Freunde hinzugefügt und entfernt werden können.

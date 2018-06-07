@@ -156,7 +156,7 @@ public class fInterface {
         }
     }
     public void GsSpeichern(){
-    	String out=plugin.gslist.toString();
+    	String out=plugin.getGSList().toString();
     	
     	try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(plugin.gsfile));

@@ -67,7 +67,7 @@ public class BlockEventListener implements Listener {
 	
 	//Hat der <p> für das GS bei <loc> die Permission 8 (bauen/abbauen)?
 	private boolean canGsBlockBeChanged(Player p, Location loc) {
-		GS gs = plugin.gslist.getGS(loc);
+		GS gs = plugin.getGSList().getGS(loc);
 		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion erlaubt.
 		if(gs.hasPermission(p, (byte) 8)) {
 			plugin.debug(p.getName() + " hat die Permissions für das GS" + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
@@ -90,7 +90,7 @@ public class BlockEventListener implements Listener {
 			return false;
 		
 		//Wenn in der GSlist kein GS mit dieser Location eingetragen ist, ist diese BlockChange ebenfalls erlaubt
-		if(plugin.gslist.getGS(loc)==null) {
+		if(plugin.getGSList().getGS(loc)==null) {
 			plugin.debug(p.getName() + " ist auf keinem GS");
 			return false;
 		}
@@ -113,7 +113,7 @@ public class BlockEventListener implements Listener {
 	
 	//True, wenn GS auf dem Server gelistet sind
 	public boolean serverHasGs() {
-		if(plugin.gslist==null) {
+		if(plugin.getGSList()==null) {
 			return false;
 		}
 		return true;

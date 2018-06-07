@@ -3,6 +3,7 @@ package com.github.herbert.gsplugin;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.gsplugin.GS.GS;
@@ -18,7 +19,7 @@ import net.md_5.bungee.api.ChatColor;
 public class GSplugin extends JavaPlugin {
 	
 	private GSCommandExecutor ce;
-	public Gslist gslist;
+	private Gslist gslist;
     public GSinteractorList gsintlist;
     fInterface f;
     //Dateien zum Speichern
@@ -74,6 +75,19 @@ public class GSplugin extends JavaPlugin {
 		if(gslist!=null)
 			f.GsSpeichern();
 		
+	}
+	
+	public boolean isOnGs(Location loc) {
+		if(gslist==null)
+			return false;
+		if(gslist.getGS(loc)==null)
+			return false;
+		return true;
+	}
+	public Gslist getGSList() {
+		if(gslist==null)
+			gslist=new Gslist(null, null);
+		return gslist;
 	}
 	
 	public void addGS(GS gs) {
