@@ -45,7 +45,7 @@ public class TempHerbertPlayer implements GSinteractor{
     	return id;
     }
     public String getName() {
-    	return Bukkit.getPlayer(id).getName();
+    	return Bukkit.getOfflinePlayer(id).getName();
     }
     
     //addMember und RemoveMember werden in dieser Klasse nicht verwendet werden! Später, in der endgültigen Spielerklasse, sollen aber
