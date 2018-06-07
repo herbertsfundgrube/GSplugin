@@ -70,7 +70,7 @@ public class BlockEventListener implements Listener {
 		GS gs = plugin.gslist.getGS(loc);
 		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion erlaubt.
 		if(gs.hasPermission(p, (byte) 8)) {
-			plugin.getServer().broadcastMessage(p.getName() + " hat die Permissions für das GS" + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
+			plugin.debug(p.getName() + " hat die Permissions für das GS" + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
 			return true;
 		}
 		//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spammen zu verhindern.
@@ -82,7 +82,7 @@ public class BlockEventListener implements Listener {
 	private boolean isOnGs(Player p, Location loc) {
 		//Wenn kein GS auf dem Server gelistet ist, ist BlockChange immer erlaubt
 		if(!serverHasGs()) {
-			plugin.getServer().broadcastMessage("Server hat kein GS");
+			plugin.debug("Server hat kein GS");
 			return false;
 		}
 		//Wenn der Block auf der Miningebene liegt
@@ -91,7 +91,7 @@ public class BlockEventListener implements Listener {
 		
 		//Wenn in der GSlist kein GS mit dieser Location eingetragen ist, ist diese BlockChange ebenfalls erlaubt
 		if(plugin.gslist.getGS(loc)==null) {
-			plugin.getServer().broadcastMessage(p.getName() + " ist auf keinem GS");
+			plugin.debug(p.getName() + " ist auf keinem GS");
 			return false;
 		}
 		//Location ist auf GS

@@ -23,11 +23,18 @@ public class GSplugin extends JavaPlugin {
 	public Gslist gslist;
     public GSinteractorList gsintlist;
     fInterface f;
+    //Dateien zum Speichern
     public File gsfile = new File(this.getDataFolder(),"gs.txt");
     public File gsinteractorsfile = new File(this.getDataFolder(),"gsinteractors.txt");
-    //public FileConfiguration ymlGS = YamlConfiguration.loadConfiguration(gsfile);
-    //public FileConfiguration ymlgsints = YamlConfiguration.loadConfiguration(gsinteractorsfile);
+    
+    
+    
+    //Debug-modus ein- bzw aussschalten
+    private boolean debug=false;
+    
 	
+    
+    
         @Override
 	public void onEnable() {
         this.getLogger().info(this.getName()+" wird gestartet");
@@ -113,6 +120,10 @@ public class GSplugin extends JavaPlugin {
     //TODO
     public String getConfigString(String key) {
     	return null;
+    }
+    public void debug(String message) {
+    	if(debug==true)
+    		this.getServer().broadcastMessage(message);
     }
     //TODO
     public int getConfigInt(String key) {
