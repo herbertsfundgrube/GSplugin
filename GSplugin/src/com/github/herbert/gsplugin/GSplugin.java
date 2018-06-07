@@ -128,6 +128,9 @@ public class GSplugin extends JavaPlugin {
     public String convMessage(String input) {
 	   return "["+ChatColor.DARK_GRAY + this.getName()+ ChatColor.RESET + "] " + input;
     }
+    public String getHeader() {
+    	return ("---------------------"+ChatColor.GRAY+"["+ ChatColor.DARK_AQUA +"WorldBlocks" +ChatColor.GRAY + "]"+ChatColor.RESET+"---------------------");
+    }
     	
     //TODO
     public String getConfigString(String key) {
