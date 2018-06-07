@@ -8,6 +8,7 @@ import com.github.herbert.gsplugin.GS.*;
 import com.github.herbert.gsplugin.GSplugin;
 import com.github.herbert.gsplugin.datenstruktur.GSCoords;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
+import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
 
@@ -91,6 +92,16 @@ public class fInterface {
                 z=Integer.parseInt(zS);
                 GSCoords coord=new GSCoords(x,z);
                 GSinteractor owner=plugin.gsintlist.getByIdent(ident);
+                if(owner==null){
+                    plugin.getLogger().info("GSinteractor "+ident+" Existiert nicht");
+                    GSinteractorList test=plugin.gsintlist;
+                    plugin.getLogger().info("Folgende GSinteractor gibt es:");
+                    while(test!=null){
+                        plugin.getLogger().info(test.getIdent());
+                        test=test.getNext();
+                    }
+                    return;
+                }
                 GS gs=new GS(owner,coord,pubperm);
                 plugin.addGS(gs);
             }
