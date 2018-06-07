@@ -231,7 +231,7 @@ public class fInterface {
     	String out=plugin.gsintlist.toString();
     	
     	try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(plugin.gsfile));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(plugin.gsinteractorsfile));
 			writer.write(out);
 			writer.close();
 		} catch (IOException e) {
