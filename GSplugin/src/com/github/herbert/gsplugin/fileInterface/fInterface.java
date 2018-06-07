@@ -31,6 +31,10 @@ public class fInterface {
 	}
     public void GsLaden(){
     	
+    	if(plugin.gsintlist==null) {
+    		plugin.getLogger().info("GS werden nicht geladen: Kein GSinteractor gefunden.");
+    		
+    	}
         String rep=null;
         char t1=(char)146;
         char t2=(char)145;
@@ -171,7 +175,7 @@ public class fInterface {
     public void gsInteractorsLaden(){
         String rep=null;
         try {
-			BufferedReader in = new BufferedReader(new FileReader(plugin.gsfile));
+			BufferedReader in = new BufferedReader(new FileReader(plugin.gsinteractorsfile));
 			rep=in.readLine();
 			in.close();
 		} catch (IOException e) {
