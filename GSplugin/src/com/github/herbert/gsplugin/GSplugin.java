@@ -100,7 +100,12 @@ public class GSplugin extends JavaPlugin {
             
 	}
     	
-    	
+    public void removeGS(GS gs) {
+    	if(gslist.remove(gs))
+    		return;
+    	gslist=null;
+    }
+    
     public String convMessage(String input) {
 	   return "["+ChatColor.DARK_GRAY + this.getName()+ ChatColor.RESET + "] " + input;
     }

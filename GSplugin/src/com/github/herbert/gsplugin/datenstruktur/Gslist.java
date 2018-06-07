@@ -72,8 +72,12 @@ public class Gslist {
         }
         return ret;
     }
-    public void del(GSCoords c){
+    
+    //Entfernt ein GS aus der aktiven GSlist, wodurch es beim Stoppen des Servers auch aus den Dateien gelöscht wird.
+    public boolean remove(GSCoords c){
         if(g.getCoords().equals(c)){
+        	if(l==null)
+        		return false;
             g=l.g;
             l=l.l;
         }
@@ -91,7 +95,34 @@ public class Gslist {
                 }
             }
         }
+        return true;
     }
+    
+  //Entfernt ein GS aus der aktiven GSlist, wodurch es beim Stoppen des Servers auch aus den Dateien gelöscht wird.
+    public boolean remove(GS gs){
+        if(g.equals(gs)){
+        	if(l==null)
+        		return false;
+            g=l.g;
+            l=l.l;
+        }
+        else{
+            Gslist n=l;
+            Gslist p=this;
+            while(n!=null){
+                if(n.g.equals(gs)){
+                    p.l=n.l;
+                    n=null;
+                }
+                else{
+                    p=n;
+                    n=n.l;
+                }
+            }
+        }
+		return true;
+    }
+    
     @Override
     public String toString(){
         //Trennzeichen
