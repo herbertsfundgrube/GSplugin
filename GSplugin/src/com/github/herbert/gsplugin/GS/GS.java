@@ -56,7 +56,6 @@ public class GS {
     	//Member section
         for(Member m:owner.getMembers()){
             if(m.getUUID().equals(p.getUniqueId())){
-            	System.out.println("Permission für Spieler " + p.getName() + ": " + m.getPerms());
                 if((m.getPerms()&permission)==permission){
                    return true; 
                 }

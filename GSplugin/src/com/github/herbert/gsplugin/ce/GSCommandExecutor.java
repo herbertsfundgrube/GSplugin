@@ -47,6 +47,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 		if(args[0].equalsIgnoreCase("remove")) {
 			if(! (sender instanceof Player))
 				return true;
+			
 			Player p = (Player) sender;
 			GS gs = plugin.getGSList().getGS(p.getLocation());
 			if(gs == null) {
@@ -67,13 +68,15 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 		if(args[0].equalsIgnoreCase("info")) {
 			if(!(sender instanceof Player))
 				return true;
+			
 			Player p = (Player)sender;
 			if(!plugin.isOnGs(p.getLocation())) {
-				plugin.convMessage("Du stehst auf keinem Grundstück.");
+				sender.sendMessage(plugin.convMessage("Du stehst auf keinem Grundstück."));
 				return true;
 			}
 			GS gs = plugin.getGSList().getGS(p.getLocation());
-			plugin.convMessage("Dieses GS gehört " + gs.getOwner().getName());
+			sender.sendMessage(plugin.convMessage("Dieses GS gehört " + gs.getOwner().getName()));
+			return true;
 		}
 		
 		
