@@ -32,5 +32,16 @@ public class Member {
         char c=(char)145;
         return (""+perms+c+id.getMostSignificantBits()+c+id.getLeastSignificantBits());
     }
+    public void addPerm(int perm) {
+    	if((perms&perm)==perm){
+            return; 
+         }
+    	perms+=perm;
+    }
+    public void removePerm(int perm) {
+    	if((perms&perm)==perm){
+        	perms-=perm;
+         }
+    }
     
 }

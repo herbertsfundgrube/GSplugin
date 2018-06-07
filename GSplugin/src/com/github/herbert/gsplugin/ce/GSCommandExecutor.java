@@ -37,20 +37,35 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			}
 			
 			Player p = (Player) sender;
-			plugin.getServer().broadcastMessage("Spielername:" +p.getName());
 			TempHerbertPlayer tempPlayer = new TempHerbertPlayer(p.getUniqueId(),("Herbert"+p.getLocation().getBlockY()+"/"+p.getEyeLocation().getBlockX()));
                         plugin.addGSint(tempPlayer);
 			GS gs = new GS (tempPlayer, p.getLocation());
-
-			plugin.getServer().broadcastMessage("GS.toString() = " + gs.toString());
-			plugin.getServer().broadcastMessage("GS Coords: " + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
 			plugin.addGS(gs);
 			
 			return true;
 		}
+		if(args[0].equalsIgnoreCase("remove")) {
+			if(! (sender instanceof Player))
+				return true;
+			Player p = (Player) sender;
+			GS gs = plugin.gslist.getGS(p.getLocation());
+			if(gs == null) {
+				sender.sendMessage(plugin.convMessage("Du stehst auf keinem Grundstück."));
+				return true;
+			}
+			//Spieler muss auf dem aktuellen GS die Permission "GS verwalten" haben
+			if(!gs.hasPermission(p, (byte) 16)) {
+				sender.sendMessage(plugin.convMessage("Du hast nicht die notwendige Berechtigung, um dieses GS zu entfernen."));
+				return true;
+			}
+			//GS entfernen.
+			plugin.removeGS(gs);
+			return true;
+			
+		}
 		
 		
-		sender.sendMessage(plugin.convMessage("Da ist etwas schiefgelaufen.\nBitte Teil uns mit, was Du gerade getan hast."));
-		return false;
+		sender.sendMessage(plugin.convMessage("Der eingegebene Befehl ist ungültig."));
+		return true;
 	}
 }

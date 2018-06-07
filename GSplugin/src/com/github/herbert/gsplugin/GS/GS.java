@@ -35,6 +35,9 @@ public class GS {
     //Konstruktor ohne Permissions
     public GS(GSinteractor owner, Location loc) {
         this.owner=owner;
+        Member[] omembers = owner.getMembers();
+        //Owner bekommt alle Permissions
+        omembers[0].addPerm(31);
         coords = new GSCoords(loc);
     }
     public GS(GSinteractor owner, GSCoords coords,byte publicperm) {
@@ -53,6 +56,7 @@ public class GS {
     	//Member section
         for(Member m:owner.getMembers()){
             if(m.getUUID().equals(p.getUniqueId())){
+            	System.out.println("Permission für Spieler " + p.getName() + ": " + m.getPerms());
                 if((m.getPerms()&permission)==permission){
                    return true; 
                 }

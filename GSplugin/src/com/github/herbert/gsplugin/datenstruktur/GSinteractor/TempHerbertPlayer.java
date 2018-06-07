@@ -10,7 +10,7 @@ public class TempHerbertPlayer implements GSinteractor{
 	public TempHerbertPlayer(UUID id,String ident) {
             this.ident=ident;
 		//Alle Rechte außer GS verwalten auf Standart-GS
-        Members[0]=new HerbertPlayer(id,(byte) (1+2+4+8));
+        Members[0]=new HerbertPlayer(id,(byte) (1+2+4+8+16));
         }
         public TempHerbertPlayer(Member m,String ident) {
             this.ident=ident;
