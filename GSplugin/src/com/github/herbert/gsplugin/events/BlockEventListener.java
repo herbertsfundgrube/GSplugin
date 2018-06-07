@@ -41,7 +41,7 @@ public class BlockEventListener implements Listener {
 		Player p = event.getPlayer();
 		Location loc=event.getBlock().getLocation();
 		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
-		if(isOnGs(p, loc) && !canGsBlockBeChanged(p, loc)) 
+		if(!isOnGs(p, loc) && !canGsBlockBeChanged(p, loc)) 
 		
 			//if(!hasWorldPermission(p))
 			{
@@ -67,7 +67,6 @@ public class BlockEventListener implements Listener {
 	
 	//Hat der <p> für das GS bei <loc> die Permission 8 (bauen/abbauen)?
 	private boolean canGsBlockBeChanged(Player p, Location loc) {
-		
 		GS gs = plugin.gslist.getGS(loc);
 		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion erlaubt.
 		if(gs.hasPermission(p, (byte) 8)) {
