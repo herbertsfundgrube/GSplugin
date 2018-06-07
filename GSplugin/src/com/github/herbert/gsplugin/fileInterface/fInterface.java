@@ -32,7 +32,7 @@ public class fInterface {
     public void GsLaden(){
     	
     	if(plugin.gsintlist==null) {
-    		plugin.getLogger().info("GS werden nicht geladen: Kein GSinteractor gefunden.");
+    		plugin.plugin.getLogger().info("GS werden nicht geladen: Kein GSinteractor gefunden.");
     		
     	}
         String rep=null;
@@ -51,7 +51,7 @@ public class fInterface {
         
 
     	//DEBUG TODO
-    	plugin.debug("Geladene GS: "+rep);
+    	plugin.plugin.debug("Geladene GS: "+rep);
     	
     	
         char[] c=rep.toCharArray();
@@ -97,11 +97,11 @@ public class fInterface {
                 GSCoords coord=new GSCoords(x,z);
                 GSinteractor owner=plugin.gsintlist.getByIdent(ident);
                 if(owner==null){
-                    plugin.getLogger().info("GSinteractor "+ident+" Existiert nicht");
+                    plugin.plugin.getLogger().info("GSinteractor "+ident+" Existiert nicht");
                     GSinteractorList test=plugin.gsintlist;
-                    plugin.getLogger().info("Folgende GSinteractor gibt es:");
+                    plugin.plugin.getLogger().info("Folgende GSinteractor gibt es:");
                     while(test!=null){
-                        plugin.getLogger().info(test.getIdent());
+                        plugin.plugin.getLogger().info(test.getIdent());
                         test=test.getNext();
                     }
                     return;
@@ -167,7 +167,7 @@ public class fInterface {
 		}
 
     	//DEBUG TODO
-    	plugin.debug("Gespeicherte GS: "+out);
+    	plugin.plugin.debug("Gespeicherte GS: "+out);
     	
     	
 		//plugin.ymlGS.save(plugin.gsfile);
@@ -184,7 +184,7 @@ public class fInterface {
         if(rep==null)
         	return;
     	//DEBUG
-    	plugin.debug("GSI list: "+rep);
+    	plugin.plugin.debug("GSI list: "+rep);
     	
     	
         char t1=(char)146;
@@ -253,7 +253,7 @@ public class fInterface {
 			e.printStackTrace();
 		}
     	//DEBUG
-    	plugin.debug("Gespeicherte GSIlist: " + out);
+    	plugin.plugin.debug("Gespeicherte GSIlist: " + out);
     	//plugin.ymlgsints.set("derp", out);
     }
     

@@ -18,8 +18,8 @@ public class BlockEventListener implements Listener {
 	
 	GSplugin plugin;
 	
-	public BlockEventListener(GSplugin p) {
-		plugin=p;
+	public BlockEventListener(GSplugin plugin) {
+		this.plugin=plugin;
 	}
 	//Abfangen des BlockPlaceEvents
 	@EventHandler
@@ -72,7 +72,7 @@ public class BlockEventListener implements Listener {
 		GS gs = plugin.getGSList().getGS(loc);
 		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion erlaubt.
 		if(gs.hasPermission(p, (byte) 8)) {
-			plugin.debug(p.getName() + " hat die Permissions für das GS" + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
+			plugin.plugin.debug(p.getName() + " hat die Permissions für das GS" + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
 			return true;
 		}
 		//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spammen zu verhindern.
@@ -84,16 +84,16 @@ public class BlockEventListener implements Listener {
 	private boolean isOnGs(Player p, Location loc) {
 		//Wenn kein GS auf dem Server gelistet ist, ist BlockChange immer erlaubt
 		if(!serverHasGs()) {
-			plugin.debug("Server hat kein GS");
+			plugin.plugin.debug("Server hat kein GS");
 			return false;
 		}
 		//Wenn der Block auf der Miningebene liegt
-		if(loc.getY()< plugin.getConfigInt("gs.lowestProtectedY"))
+		if(loc.getY()< plugin.plugin.getConfigInt("gs.lowestProtectedY"))
 			return false;
 		
 		//Wenn in der GSlist kein GS mit dieser Location eingetragen ist, ist diese BlockChange ebenfalls erlaubt
 		if(plugin.getGSList().getGS(loc)==null) {
-			plugin.debug(p.getName() + " ist auf keinem GS");
+			plugin.plugin.debug(p.getName() + " ist auf keinem GS");
 			return false;
 		}
 		//Location ist auf GS
@@ -101,7 +101,7 @@ public class BlockEventListener implements Listener {
 	}
 	//Hat der Spieler die Rechte, um global auf alle GS Zugriff zu erhalten?
 	private boolean hasWorldPermission(Player p) {
-		if(p.isOp() || p.hasPermission("gsplugin.buildeverywhere"))
+		if(p.isOp() || p.hasPermission("gsplugin.plugin.buildeverywhere"))
 			return true;
 		return false;
 	}
