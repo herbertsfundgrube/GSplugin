@@ -3,8 +3,6 @@ package com.github.herbert.gsplugin;
 import java.io.File;
 import java.io.IOException;
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.gsplugin.GS.GS;
