@@ -51,7 +51,7 @@ public class fInterface {
         
 
     	//DEBUG TODO
-    	plugin.getLogger().info("Geladene GS: "+rep);
+    	plugin.debug("Geladene GS: "+rep);
     	
     	
         char[] c=rep.toCharArray();
@@ -167,7 +167,7 @@ public class fInterface {
 		}
 
     	//DEBUG TODO
-    	plugin.getLogger().info("Gespeicherte GS: "+out);
+    	plugin.debug("Gespeicherte GS: "+out);
     	
     	
 		//plugin.ymlGS.save(plugin.gsfile);
@@ -184,7 +184,7 @@ public class fInterface {
         if(rep==null)
         	return;
     	//DEBUG
-    	plugin.getLogger().info("GSI list: "+rep);
+    	plugin.debug("GSI list: "+rep);
     	
     	
         char t1=(char)146;
@@ -253,7 +253,7 @@ public class fInterface {
 			e.printStackTrace();
 		}
     	//DEBUG
-    	plugin.getLogger().info("Gespeicherte GSIlist: " + out);
+    	plugin.debug("Gespeicherte GSIlist: " + out);
     	//plugin.ymlgsints.set("derp", out);
     }
     
