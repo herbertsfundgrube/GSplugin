@@ -26,7 +26,7 @@ public class BlockEventListener implements Listener {
 		Player p = event.getPlayer();
 		Location loc=event.getBlock().getLocation();
 		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
-		if(!isOnGs(p, loc) && canGsBlockBeChanged(p, loc)) 
+		if(isOnGs(p, loc) && !canGsBlockBeChanged(p, loc)) 
 			//if(!hasWorldPermission(p))
 			{
 				event.getPlayer().sendMessage(plugin.convMessage("Dir fehlt die Berechtigung, um hier zu bauen."));
@@ -41,7 +41,7 @@ public class BlockEventListener implements Listener {
 		Player p = event.getPlayer();
 		Location loc=event.getBlock().getLocation();
 		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
-		if(!isOnGs(p, loc) && !canGsBlockBeChanged(p, loc)) 
+		if(isOnGs(p, loc) && !canGsBlockBeChanged(p, loc)) 
 		
 			//if(!hasWorldPermission(p))
 			{
