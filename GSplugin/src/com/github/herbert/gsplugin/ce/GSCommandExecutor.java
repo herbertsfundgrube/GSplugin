@@ -8,6 +8,8 @@ import com.github.herbert.gsplugin.GSplugin;
 import com.github.herbert.gsplugin.GS.GS;
 import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 	
 	//CommandExecutor für den Befehl /gs
@@ -44,6 +46,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			
 			return true;
 		}
+		//gs löschen
 		if(args[0].equalsIgnoreCase("remove")) {
 			if(! (sender instanceof Player))
 				return true;
@@ -55,7 +58,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 				return true;
 			}
 			//Spieler muss auf dem aktuellen GS die Permission "GS verwalten" haben
-			if(!gs.hasPermission(p, (byte) 16)) {
+			if(!gs.hasPermission(p, (byte) 16) && !p.isOp()) {
 				sender.sendMessage(plugin.convMessage("Du hast nicht die notwendige Berechtigung, um dieses GS zu entfernen."));
 				return true;
 			}
@@ -65,6 +68,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			
 		}
 		
+		//gs info
 		if(args[0].equalsIgnoreCase("info")) {
 			if(!(sender instanceof Player))
 				return true;
@@ -79,8 +83,11 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			return true;
 		}
 		
-		
-		sender.sendMessage(plugin.convMessage("Der eingegebene Befehl ist ungültig."));
+		//Hilfe anzeigen
+		sender.sendMessage(plugin.convMessage("Du kanst folgende Befehle  verwenden:"));
+		sender.sendMessage(ChatColor.AQUA+"/gs buy " + ChatColor.RESET + " - aktuellen Chunk erwerben");
+		sender.sendMessage(ChatColor.AQUA+"/gs sell " + ChatColor.RESET + " - aktuellen Chunk verkaufen");
+		sender.sendMessage(ChatColor.AQUA+"/gs info " + ChatColor.RESET + " - Informationen zum aktuellen Chunk anzeigen");
 		return true;
 	}
 }

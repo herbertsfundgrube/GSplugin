@@ -1,6 +1,7 @@
 package com.github.herbert.gsplugin.events;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -56,6 +57,7 @@ public class BlockEventListener implements Listener {
 		if(event.getAction()==Action.RIGHT_CLICK_BLOCK) {
 			Block block = event.getClickedBlock();
 			Player p = event.getPlayer();
+			if (block.getType().equals(Material.CHEST))
 			if( hasContainerPermission(p, block)) {
 				
 			}
