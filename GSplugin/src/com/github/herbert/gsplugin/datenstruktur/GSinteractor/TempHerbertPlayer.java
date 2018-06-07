@@ -8,13 +8,6 @@ import org.bukkit.entity.Player;
 
 public class TempHerbertPlayer implements GSinteractor{
 	
-	//!!
-	//!!
-	//!!
-	//TODO: Members als Liste speichern, nicht als array!
-	//!!
-	//!!
-	//!!
 	
 	Member[] members=new HerbertPlayer[1];
     String ident;
@@ -44,6 +37,16 @@ public class TempHerbertPlayer implements GSinteractor{
     public void addMember(Player p) {
     	Member temp = new Member(p.getUniqueId(), friendsPermissions);
     	members[members.length] = temp;
+    }
+    public void removeMember(Player p) {
+    	int i = 0;
+    	for(Member temp : members) {
+    		if(temp.getUUID().equals(p.getUniqueId())) {
+    			if(i>0)
+    				members[i]=null;
+    		}
+    		i++;
+    	}
     }
         
     @Override
