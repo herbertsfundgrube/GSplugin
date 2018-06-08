@@ -79,7 +79,7 @@ public class fInterface {
         int point=0;
         while (point<c.length){
             if(c[point]=='g'){
-                //Normales GS wird geladen
+                //Normales GS wirdbbb geladen
                 String ident="";
                 point++;
                 point++;

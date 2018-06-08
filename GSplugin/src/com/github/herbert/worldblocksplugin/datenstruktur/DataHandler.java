@@ -12,23 +12,11 @@ import com.github.herbert.worldblocksplugin.worldblocks.GS;
 public class DataHandler {
 	private Gslist gslist;
     private GSinteractorList gsintlist;
-    fInterface f;
     WorldBlocksPlugin wbplugin;
     
     public DataHandler(WorldBlocksPlugin plugin) {
     	wbplugin = plugin;
-    	f = new fInterface(wbplugin);
-        f.gsInteractorsLaden();
-        f.GsLaden();
     }
-    
-	public void saveData() {
-		if(gsintlist!=null)
-			f.gsInteractorsSpeichern();
-		if(gslist!=null)
-			f.GsSpeichern();
-		
-	}
 	
 	public boolean isOnGs(Location loc) {
 		if(gslist==null)
@@ -36,6 +24,15 @@ public class DataHandler {
 		if(gslist.getGS(loc)==null)
 			return false;
 		return true;
+	}
+
+	public void saveData() {
+		fInterface f = wbplugin.f;
+		if(gsintlist!=null)
+			f.gsInteractorsSpeichern();
+		if(gslist!=null)
+			f.GsSpeichern();
+		
 	}
 	public Gslist getGSList() {
 		if(gslist==null)

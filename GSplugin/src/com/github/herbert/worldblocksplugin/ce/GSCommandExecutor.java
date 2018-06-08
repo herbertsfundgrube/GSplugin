@@ -1,6 +1,7 @@
 package com.github.herbert.worldblocksplugin.ce;
 
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -10,7 +11,7 @@ import com.github.herbert.worldblocksplugin.worldblocks.GS;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
+public class GSCommandExecutor implements CommandExecutor {
 	
 	//-----------------------------------
 	//-----------------------------------
@@ -57,7 +58,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			
 			Player p = (Player) sender;
 			TempHerbertPlayer tempPlayer = new TempHerbertPlayer(p.getUniqueId(),("Herbert"+p.getLocation().getBlockY()+"/"+p.getEyeLocation().getBlockX()));
-                        plugin.data.addWorldblockInteractor(tempPlayer);
+            plugin.data.addWorldblockInteractor(tempPlayer);
 			GS gs = new GS (tempPlayer, p.getLocation());
 			plugin.data.addGS(gs);
 			

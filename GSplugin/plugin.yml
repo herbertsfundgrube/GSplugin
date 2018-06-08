@@ -5,7 +5,7 @@ main: com.github.herbert.MainPlugin
 
 commands:
    gs:
-      description: Hauptbefehl für Grundstücke
-      usage: /<command> [test / test2]
-      permission: <plugin name>.gs
+      description: Hauptbefehl für WorldBlocks
+      usage: /<command> [fehler]
+      permission: <plugin name>.worldblocks
       permission-message: Fehlende Berechtigung <permission>

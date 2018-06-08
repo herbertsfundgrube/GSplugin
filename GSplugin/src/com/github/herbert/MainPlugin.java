@@ -29,8 +29,8 @@ public class MainPlugin extends JavaPlugin {
 	public void onEnable() {
         this.getLogger().info(this.getName()+" wird gestartet");
         registerPlugins();
-		registerCommandExecutors();
 		registerListeners();
+		registerCommandExecutors();
 		
 	}
 	
@@ -87,9 +87,8 @@ public class MainPlugin extends JavaPlugin {
 	}
 	
 	private void registerCommandExecutors() {
-		//CE für den Befehl /gs
 		gsplugincommandexec = new GSCommandExecutor(worldblocksplugin);
-		getCommand("gs").setExecutor(gsplugincommandexec);
+		this.getCommand("gs").setExecutor(gsplugincommandexec);
 	}
 	
 	private void registerPlugins() {
