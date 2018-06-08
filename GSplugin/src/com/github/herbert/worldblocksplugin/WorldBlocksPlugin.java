@@ -53,30 +53,31 @@ public class WorldBlocksPlugin {
 	
 	public void addGS(GS gs) {
             
-		if(gslist==null)
+		if(gslist==null) {
 			gslist = new Gslist(gs, null);
-		else {
-                    if(gslist.getGS(gs.getCoords())==null){
-                    gslist.add(gs);
-                    }
-                    else{
-                    	Bukkit.getPlayer(gs.getOwner().getMembers()[0].getUUID()).sendMessage(convMessage("Dieser Chunk wurde schon beansprucht."));
-                    }
-                }
+			return;
+		}
+		if(gslist.getGS(gs.getCoords())==null) {
+			gslist.add(gs);
+			return;
+		}
+        Bukkit.getPlayer(gs.getOwner().getMembers()[0].getUUID()).sendMessage(convMessage("Dieser Chunk wurde schon beansprucht."));
+		
             
 	}
     public void addGSint(GSinteractor interactor) {
             
-		if(gsintlist==null)
+		if(gsintlist==null) {
 			gsintlist = new GSinteractorList(interactor, null);
-		else {
-            if(gsintlist.getByIdent(interactor.getIdent())==null){
-                    gsintlist.add(interactor);
-                    }
-                    else{
-                        Bukkit.getPlayer(interactor.getMembers()[0].getUUID()).sendMessage(convMessage("Der Gruppenname ist vergeben."));
-                    }
-            }
+			return;
+		}
+        if(gsintlist.getByIdent(interactor.getIdent())==null){
+        	gsintlist.add(interactor);
+        	return;
+        }
+        Bukkit.getPlayer(interactor.getMembers()[0].getUUID()).sendMessage(convMessage("Der Gruppenname ist vergeben."));
+            
+		
             
 	}
     	
