@@ -15,7 +15,7 @@ public class MainPlugin extends JavaPlugin {
 
 	
 	private GSCommandExecutor gsplugincommandexec;
-	WorldBlocksPlugin gsplugin;
+	public WorldBlocksPlugin worldblocksplugin;
 	
 	//--------------------------------------
 	//--------------------------------------
@@ -45,7 +45,7 @@ public class MainPlugin extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		this.getLogger().info(this.getName()+" speichert Daten für GSplugin");
-		gsplugin.saveData();
+		worldblocksplugin.data.saveData();
 		this.getLogger().info(this.getName()+" deaktiviert!");
 	}
 	
@@ -83,17 +83,17 @@ public class MainPlugin extends JavaPlugin {
   	//--------------------------------------
 	
 	private void registerListeners() {
-		getServer().getPluginManager().registerEvents(new BlockEventListener(gsplugin), this);
+		getServer().getPluginManager().registerEvents(new BlockEventListener(worldblocksplugin), this);
 	}
 	
 	private void registerCommandExecutors() {
 		//CE für den Befehl /gs
-		gsplugincommandexec = new GSCommandExecutor(gsplugin);
+		gsplugincommandexec = new GSCommandExecutor(worldblocksplugin);
 		getCommand("gs").setExecutor(gsplugincommandexec);
 	}
 	
 	private void registerPlugins() {
-		gsplugin = new WorldBlocksPlugin(this);
+		worldblocksplugin = new WorldBlocksPlugin(this);
 	}
 	
     //--------------------------------------

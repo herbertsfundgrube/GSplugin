@@ -52,7 +52,7 @@ public class fInterface {
 	}
     public void GsLaden(){
     	
-    	if(worldblocksplugin.gsintlist==null) {
+    	if(worldblocksplugin.data.hasGsInteractors()) {
     		worldblocksplugin.mainplugin.getLogger().info("GS werden nicht geladen: Kein GSinteractor gefunden.");
     		
     	}
@@ -116,10 +116,10 @@ public class fInterface {
                 point++;
                 z=Integer.parseInt(zS);
                 GSCoords coord=new GSCoords(x,z);
-                GSinteractor owner=worldblocksplugin.gsintlist.getByIdent(ident);
+                GSinteractor owner=worldblocksplugin.data.getGsInteractorsList().getByIdent(ident);
                 if(owner==null){
                     worldblocksplugin.mainplugin.getLogger().info("GSinteractor "+ident+" Existiert nicht");
-                    GSinteractorList test=worldblocksplugin.gsintlist;
+                    GSinteractorList test=worldblocksplugin.data.getGsInteractorsList();
                     worldblocksplugin.mainplugin.getLogger().info("Folgende GSinteractor gibt es:");
                     while(test!=null){
                         worldblocksplugin.mainplugin.getLogger().info(test.getIdent());
@@ -128,7 +128,7 @@ public class fInterface {
                     return;
                 }
                 GS gs=new GS(owner,coord,pubperm);
-                worldblocksplugin.addGS(gs);
+                worldblocksplugin.data.addGS(gs);
             }
             else if(c[point]=='l'){
                 //Lager wird Geladen
@@ -168,16 +168,16 @@ public class fInterface {
                 point++;
                 z=Integer.parseInt(zS);
                 GSCoords coord=new GSCoords(x,z);
-                GSinteractor owner=worldblocksplugin.gsintlist.getByIdent(ident);
+                GSinteractor owner=worldblocksplugin.data.getGsInteractorsList().getByIdent(ident);
                 Lager Lag=new Lager(owner,coord,pubperm);
-                worldblocksplugin.addGS(Lag);
+                worldblocksplugin.data.addGS(Lag);
                 
             }
             point++;
         }
     }
     public void GsSpeichern(){
-    	String out=worldblocksplugin.getGSList().toString();
+    	String out=worldblocksplugin.data.getGSList().toString();
     	
     	try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(gsfile));
@@ -255,7 +255,7 @@ public class fInterface {
                 UUID u=new UUID(idm,idl);
                 Member m=new Member(u,perms);
                 TempHerbertPlayer p=new TempHerbertPlayer(m,ident);
-                worldblocksplugin.addGSint(p);
+                worldblocksplugin.data.addWorldblockInteractor(p);
             }
             point++;
             
@@ -264,7 +264,7 @@ public class fInterface {
         
     }
     public void gsInteractorsSpeichern(){
-    	String out=worldblocksplugin.gsintlist.toString();
+    	String out=worldblocksplugin.data.getGsInteractorsList().toString();
     	
     	try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(gsinteractorsfile));

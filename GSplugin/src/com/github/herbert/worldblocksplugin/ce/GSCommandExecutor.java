@@ -57,9 +57,9 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			
 			Player p = (Player) sender;
 			TempHerbertPlayer tempPlayer = new TempHerbertPlayer(p.getUniqueId(),("Herbert"+p.getLocation().getBlockY()+"/"+p.getEyeLocation().getBlockX()));
-                        plugin.addGSint(tempPlayer);
+                        plugin.data.addWorldblockInteractor(tempPlayer);
 			GS gs = new GS (tempPlayer, p.getLocation());
-			plugin.addGS(gs);
+			plugin.data.addGS(gs);
 			
 			return true;
 		}
@@ -74,7 +74,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 				return true;
 			
 			Player p = (Player) sender;
-			GS gs = plugin.getGSList().getGS(p.getLocation());
+			GS gs = plugin.data.getGSList().getGS(p.getLocation());
 			//-----------------------------------
 			//----Spielerbefehl------------------
 			//-----------------------------------
@@ -94,7 +94,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			//----Alle Bedingungen erfüllt,------
 			//----GS kann gelöscht werden.-------
 			//-----------------------------------
-			plugin.removeGS(gs);
+			plugin.data.removeGS(gs);
 			return true;
 			
 		}
@@ -117,7 +117,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			//---steht, muss ein GS sein---------
 			//-----------------------------------
 			Player p = (Player)sender;
-			if(!plugin.isOnGs(p.getLocation())) {
+			if(!plugin.data.isOnGs(p.getLocation())) {
 				sender.sendMessage(plugin.convMessage("Du stehst auf keinem Grundstück."));
 				return true;
 			}
@@ -129,7 +129,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 			//---Die Infos sind in einem---------
 			//---Array gespeichert.--------------
 			//-----------------------------------
-			GS gs = plugin.getGSList().getGS(p.getLocation());
+			GS gs = plugin.data.getGSList().getGS(p.getLocation());
 			sender.sendMessage(plugin.getHeader());
 			for(String inf : gs.getInfo()) {
 				sender.sendMessage(inf);
