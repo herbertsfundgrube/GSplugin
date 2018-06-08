@@ -17,7 +17,7 @@ import com.github.herbert.worldblocksplugin.datenstruktur.GSCoords;
  *
  * @author john
  */
-public class Lager extends GS{
+public class Lager extends GS implements WorldBlock {
 	
 		//Jeder Bit entspricht einer Berechtigung.
 		//1 -> Redstone, 2 -> Türen, 4 -> Truhen 8-> Blöcke, 16-> GS verwalten. Falls Int extension: 

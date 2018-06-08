@@ -19,7 +19,7 @@ import net.md_5.bungee.api.ChatColor;
  *
  * @author john
  */
-public class GS {
+public class GS implements WorldBlock {
 	GSinteractor owner;
 	GSCoords coords;
 	
@@ -32,7 +32,7 @@ public class GS {
         //beispielsetzen von permissions:
         //Der Spieler soll die Permissions für Türen, Truhen und Redstone bekommen:
         //perm=1+2+4;
-    byte publicperm=0;
+    int publicperm=0;
     
     //Konstruktor ohne Permissions
     public GS(GSinteractor owner, Location loc) {
@@ -42,7 +42,7 @@ public class GS {
         omembers[0].addPerm(31);
         coords = new GSCoords(loc);
     }
-    public GS(GSinteractor owner, GSCoords coords,byte publicperm) {
+    public GS(GSinteractor owner, GSCoords coords,int publicperm) {
         this.owner=owner;
         this.coords=coords;
         this.publicperm=publicperm;
@@ -54,7 +54,7 @@ public class GS {
     	return coords;
     }
     
-    public boolean hasPermission(Player p, byte permission) {
+    public boolean hasPermission(Player p, int permission) {
     	//Member section
         for(Member m:owner.getMembers()){
             if(m.getUUID().equals(p.getUniqueId())){
