@@ -6,7 +6,6 @@
 package com.github.herbert.worldblocksplugin.worldblocks;
 
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

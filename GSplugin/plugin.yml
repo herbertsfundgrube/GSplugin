@@ -1,7 +1,7 @@
-name: GSplugin
+name: MainPlugin
 author: Projektteam Herbert
 version: 0.1
-main: com.github.herbert.gsplugin.GSplugin
+main: com.github.herbert.MainPlugin
 
 commands:
    gs:

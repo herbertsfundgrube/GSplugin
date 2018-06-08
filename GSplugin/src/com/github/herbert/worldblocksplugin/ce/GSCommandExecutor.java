@@ -24,7 +24,7 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(args.length == 0)
-			return false;
+			showHelp(sender);
 		if(args[0].equalsIgnoreCase("test")) {
 			sender.sendMessage(plugin.convMessage("Du hast den Befehl /gs test eingegeben."));
 			return true;
@@ -87,10 +87,14 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 		}
 		
 		//Hilfe anzeigen
+		showHelp(sender);
+		return true;
+	}
+	
+	private void showHelp(CommandSender sender) {
 		sender.sendMessage(plugin.getHeader());
 		sender.sendMessage(ChatColor.AQUA+"/gs buy " + ChatColor.RESET + " - aktuellen Chunk erwerben");
 		sender.sendMessage(ChatColor.AQUA+"/gs sell " + ChatColor.RESET + " - aktuellen Chunk verkaufen");
 		sender.sendMessage(ChatColor.AQUA+"/gs info " + ChatColor.RESET + " - Informationen zum aktuellen Chunk anzeigen");
-		return true;
 	}
 }
