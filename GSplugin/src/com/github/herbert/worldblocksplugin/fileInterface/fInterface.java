@@ -38,13 +38,15 @@ public class fInterface {
 		gsinteractorsfile = new File(pluginDir,"gsinteractors.txt");
 		//Speicher für GSfiles erstellen
 		try {
+			gsfile.getParentFile().mkdir();
 			gsfile.createNewFile();
 			gsinteractorsfile.createNewFile();
+			plugin.mainplugin.getLogger().info("Dateien sollten erstellt sein.");
 		} catch (IOException e) {
 			
-			plugin.mainplugin.getLogger().info("Datei konnte nicht geladen werden.");
+			plugin.mainplugin.getLogger().info("Eine Datei konnte nicht gespeichert werden.");
 			//Dateipfade vollständig ausgeben
-			plugin.mainplugin.getLogger().info("Dateipfade: " + gsfile.getAbsolutePath() + gsfile.getName() + ", " + gsinteractorsfile.getAbsolutePath() + gsinteractorsfile.getName());
+			plugin.mainplugin.getLogger().info("Dateipfade: " + gsfile.getAbsolutePath()+", " + gsinteractorsfile.getAbsolutePath());
 			e.printStackTrace();
 		}
 	}
