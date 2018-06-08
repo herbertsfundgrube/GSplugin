@@ -83,7 +83,7 @@ public class GSplugin {
 		if(gsintlist==null)
 			gsintlist = new GSinteractorList(interactor, null);
 		else {
-                    if(gsintlist.getByIdent(interactor.getIdent())==null){
+            if(gsintlist.getByIdent(interactor.getIdent())==null){
                     gsintlist.add(interactor);
                     }
                     else{
