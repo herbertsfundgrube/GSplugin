@@ -1,4 +1,4 @@
-package com.github.herbert.gsplugin;
+package com.github.herbert.worldblocksplugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,15 +6,15 @@ import java.io.IOException;
 import org.bukkit.Location;
 
 import com.github.herbert.MainPlugin;
-import com.github.herbert.gsplugin.GS.GS;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
-import com.github.herbert.gsplugin.datenstruktur.Gslist;
-import com.github.herbert.gsplugin.fileInterface.fInterface;
+import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractor;
+import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractorList;
+import com.github.herbert.worldblocksplugin.datenstruktur.Gslist;
+import com.github.herbert.worldblocksplugin.fileInterface.fInterface;
+import com.github.herbert.worldblocksplugin.worldblocks.GS;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class GSplugin {
+public class WorldBlocksPlugin {
 	
 	
 	private Gslist gslist;
@@ -28,7 +28,7 @@ public class GSplugin {
     
     
 	
-    public GSplugin(MainPlugin plugin) {
+    public WorldBlocksPlugin(MainPlugin plugin) {
     	this.plugin = plugin;
     	gsfile = new File(plugin.getDataFolder(),"gs.txt");
     	gsinteractorsfile = new File(plugin.getDataFolder(),"gsinteractors.txt");

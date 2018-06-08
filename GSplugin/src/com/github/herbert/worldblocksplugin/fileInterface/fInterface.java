@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.herbert.gsplugin.fileInterface;
-import com.github.herbert.gsplugin.GS.*;
-import com.github.herbert.gsplugin.GSplugin;
-import com.github.herbert.gsplugin.datenstruktur.GSCoords;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractorList;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
+package com.github.herbert.worldblocksplugin.fileInterface;
+import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
+import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractor;
+import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractorList;
+import com.github.herbert.worldblocksplugin.GSinteractor.Member;
+import com.github.herbert.worldblocksplugin.GSinteractor.TempHerbertPlayer;
+import com.github.herbert.worldblocksplugin.datenstruktur.GSCoords;
+import com.github.herbert.worldblocksplugin.worldblocks.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,9 +24,9 @@ import java.util.UUID;
  * @author Leen
  */
 public class fInterface {
-	GSplugin plugin;
+	WorldBlocksPlugin plugin;
 	
-	public fInterface(GSplugin plugin) {
+	public fInterface(WorldBlocksPlugin plugin) {
 		this.plugin = plugin;
 	}
     public void GsLaden(){

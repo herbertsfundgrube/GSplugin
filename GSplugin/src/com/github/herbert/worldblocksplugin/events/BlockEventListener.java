@@ -1,4 +1,4 @@
-package com.github.herbert.gsplugin.events;
+package com.github.herbert.worldblocksplugin.events;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,14 +11,14 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import com.github.herbert.gsplugin.GSplugin;
-import com.github.herbert.gsplugin.GS.GS;
+import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
+import com.github.herbert.worldblocksplugin.worldblocks.GS;
 
 public class BlockEventListener implements Listener {
 	
-	GSplugin plugin;
+	WorldBlocksPlugin plugin;
 	
-	public BlockEventListener(GSplugin plugin) {
+	public BlockEventListener(WorldBlocksPlugin plugin) {
 		this.plugin=plugin;
 	}
 	//Abfangen des BlockPlaceEvents

@@ -1,11 +1,11 @@
-package com.github.herbert.gsplugin.ce;
+package com.github.herbert.worldblocksplugin.ce;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import com.github.herbert.gsplugin.GSplugin;
+import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 
 public class SetupCornersThread extends Thread implements org.bukkit.event.Listener {
 	
@@ -13,8 +13,8 @@ public class SetupCornersThread extends Thread implements org.bukkit.event.Liste
 	Location corner1;
 	Location corner2;
 	boolean cancelled;
-	GSplugin plugin;
-	public SetupCornersThread (Player p, GSplugin plugin) {
+	WorldBlocksPlugin plugin;
+	public SetupCornersThread (Player p, WorldBlocksPlugin plugin) {
 		buyingPlayer=p;
 		this.plugin=plugin;
 	}

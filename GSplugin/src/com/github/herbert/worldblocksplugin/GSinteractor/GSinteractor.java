@@ -1,4 +1,4 @@
-package com.github.herbert.gsplugin.datenstruktur.GSinteractor;
+package com.github.herbert.worldblocksplugin.GSinteractor;
 
 public interface GSinteractor {
         @Override

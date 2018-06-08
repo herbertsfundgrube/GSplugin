@@ -1,10 +1,11 @@
-package com.github.herbert.gsplugin.datenstruktur.GSinteractor;
+package com.github.herbert.worldblocksplugin.GSinteractor;
 
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractor;
 
 
 public class TempHerbertPlayer implements GSinteractor{

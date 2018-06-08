@@ -2,9 +2,9 @@ package com.github.herbert;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.github.herbert.gsplugin.GSplugin;
-import com.github.herbert.gsplugin.ce.GSCommandExecutor;
-import com.github.herbert.gsplugin.events.BlockEventListener;
+import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
+import com.github.herbert.worldblocksplugin.ce.GSCommandExecutor;
+import com.github.herbert.worldblocksplugin.events.BlockEventListener;
 
 public class MainPlugin extends JavaPlugin {
 	
@@ -13,7 +13,7 @@ public class MainPlugin extends JavaPlugin {
 	
 	
 	private GSCommandExecutor gsplugincommandexec;
-	GSplugin gsplugin;
+	WorldBlocksPlugin gsplugin;
 	
 	//--------------------------------------
 	//--------------------------------------
@@ -90,7 +90,7 @@ public class MainPlugin extends JavaPlugin {
 	}
 	
 	private void registerPlugins() {
-		gsplugin = new GSplugin(this);
+		gsplugin = new WorldBlocksPlugin(this);
 	}
 	
     //--------------------------------------
