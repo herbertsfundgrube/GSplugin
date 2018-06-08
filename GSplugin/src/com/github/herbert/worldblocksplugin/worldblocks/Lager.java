@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.herbert.gsplugin.GS;
+package com.github.herbert.worldblocksplugin.worldblocks;
 
 
-import com.github.herbert.gsplugin.datenstruktur.GSCoords;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.Member;
+import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractor;
+import com.github.herbert.worldblocksplugin.GSinteractor.Member;
+import com.github.herbert.worldblocksplugin.datenstruktur.GSCoords;
 
 /**
  *

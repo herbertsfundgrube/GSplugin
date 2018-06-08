@@ -1,12 +1,12 @@
-package com.github.herbert.gsplugin.ce;
+package com.github.herbert.worldblocksplugin.ce;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.github.herbert.gsplugin.GSplugin;
-import com.github.herbert.gsplugin.GS.GS;
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.TempHerbertPlayer;
+import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
+import com.github.herbert.worldblocksplugin.GSinteractor.TempHerbertPlayer;
+import com.github.herbert.worldblocksplugin.worldblocks.GS;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -14,9 +14,9 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 	
 	//CommandExecutor für den Befehl /gs
 	//Variable für den Zugriff auf die Hauptklasse
-	GSplugin plugin;
+	WorldBlocksPlugin plugin;
 	
-	public GSCommandExecutor(GSplugin plugin) {
+	public GSCommandExecutor(WorldBlocksPlugin plugin) {
 		this.plugin = plugin;
 	}
 	

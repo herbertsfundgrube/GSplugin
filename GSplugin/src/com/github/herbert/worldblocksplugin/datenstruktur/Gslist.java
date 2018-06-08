@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.herbert.gsplugin.datenstruktur;
+package com.github.herbert.worldblocksplugin.datenstruktur;
 
-import com.github.herbert.gsplugin.datenstruktur.GSinteractor.GSinteractor;
+import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractor;
+import com.github.herbert.worldblocksplugin.datenstruktur.GSCoords;
+import com.github.herbert.worldblocksplugin.worldblocks.GS;
+
 import org.bukkit.Location;
-
-import com.github.herbert.gsplugin.GS.GS;
-import com.github.herbert.gsplugin.datenstruktur.GSCoords;
 /**
  *
  * @author Leen
