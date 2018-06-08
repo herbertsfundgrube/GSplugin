@@ -93,8 +93,8 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 	
 	private void showHelp(CommandSender sender) {
 		sender.sendMessage(plugin.getHeader());
-		sender.sendMessage(ChatColor.AQUA+"/gs buy " + ChatColor.RESET + " - aktuellen Chunk erwerben");
-		sender.sendMessage(ChatColor.AQUA+"/gs sell " + ChatColor.RESET + " - aktuellen Chunk verkaufen");
+		sender.sendMessage(ChatColor.AQUA+"/gs buy " + ChatColor.RESET + " - Aktuellen Chunk erwerben");
+		sender.sendMessage(ChatColor.AQUA+"/gs sell " + ChatColor.RESET + " - Aktuellen Chunk verkaufen");
 		sender.sendMessage(ChatColor.AQUA+"/gs info " + ChatColor.RESET + " - Informationen zum aktuellen Chunk anzeigen");
 	}
 }
