@@ -80,7 +80,7 @@ public class GS {
     }
     public String[] getInfo() {
     	String[] info = new String[1];
-    	info[0]=ChatColor.AQUA + "Besitzer: " + owner.getName();
+    	info[0]=ChatColor.AQUA + "Besitzer: " +ChatColor.RESET+ owner.getName();
     	return info;
     }
     

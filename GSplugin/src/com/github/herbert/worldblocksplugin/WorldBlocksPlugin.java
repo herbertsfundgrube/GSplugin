@@ -1,7 +1,5 @@
 package com.github.herbert.worldblocksplugin;
 
-import java.io.File;
-import java.io.IOException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -21,26 +19,14 @@ public class WorldBlocksPlugin {
 	private Gslist gslist;
     public GSinteractorList gsintlist;
     fInterface f;
-    public MainPlugin plugin;
-
-    public File gsfile;
-    public File gsinteractorsfile;
+    public MainPlugin mainplugin;
     
     
     
 	
     public WorldBlocksPlugin(MainPlugin plugin) {
-    	this.plugin = plugin;
-    	gsfile = new File(plugin.getDataFolder(),"gs.txt");
-    	gsinteractorsfile = new File(plugin.getDataFolder(),"gsinteractors.txt");
-		f=new fInterface(this);
-		try {
-			gsfile.createNewFile();
-			gsinteractorsfile.createNewFile();
-		} catch (IOException e) {
-			plugin.getLogger().info("Datei konnte nicht geladen werden:");
-			e.printStackTrace();
-		}
+    	this.mainplugin = plugin;
+    	f = new fInterface(this);
         f.gsInteractorsLaden();
         f.GsLaden();
     }

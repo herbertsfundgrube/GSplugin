@@ -1,5 +1,6 @@
 package com.github.herbert;
 
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
@@ -11,6 +12,7 @@ public class MainPlugin extends JavaPlugin {
 	//Debugging aktivieren?
 	boolean debug = false;
 	
+
 	
 	private GSCommandExecutor gsplugincommandexec;
 	WorldBlocksPlugin gsplugin;
@@ -29,6 +31,7 @@ public class MainPlugin extends JavaPlugin {
         registerPlugins();
 		registerCommandExecutors();
 		registerListeners();
+		
 	}
 	
 	//--------------------------------------
