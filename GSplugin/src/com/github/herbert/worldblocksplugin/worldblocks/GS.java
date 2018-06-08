@@ -6,12 +6,15 @@
 package com.github.herbert.worldblocksplugin.worldblocks;
 
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractor;
 import com.github.herbert.worldblocksplugin.GSinteractor.Member;
 import com.github.herbert.worldblocksplugin.datenstruktur.GSCoords;
+
+import net.md_5.bungee.api.ChatColor;
 
 /**
  *
@@ -75,6 +78,11 @@ public class GS {
     
     public GSinteractor getOwner() {
     	return owner;
+    }
+    public String[] getInfo() {
+    	String[] info = new String[1];
+    	info[0]=ChatColor.AQUA + "Besitzer: " + owner.getName();
+    	return info;
     }
     
         @Override

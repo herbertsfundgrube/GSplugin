@@ -79,7 +79,10 @@ public class GSCommandExecutor implements org.bukkit.command.CommandExecutor {
 				return true;
 			}
 			GS gs = plugin.getGSList().getGS(p.getLocation());
-			sender.sendMessage(plugin.convMessage("Dieses GS gehört " + gs.getOwner().getName()));
+			sender.sendMessage(plugin.getHeader());
+			for(String inf : gs.getInfo()) {
+				sender.sendMessage(inf);
+			}
 			return true;
 		}
 		

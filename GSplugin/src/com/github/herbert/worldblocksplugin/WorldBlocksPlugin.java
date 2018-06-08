@@ -3,6 +3,7 @@ package com.github.herbert.worldblocksplugin;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import com.github.herbert.MainPlugin;
@@ -73,7 +74,7 @@ public class WorldBlocksPlugin {
                     gslist.add(gs);
                     }
                     else{
-                        plugin.getServer().broadcastMessage("Auf diesen koordinaten existiert bereits ein GS");
+                    	Bukkit.getPlayer(gs.getOwner().getMembers()[0].getUUID()).sendMessage(convMessage("Dieser Chunk wurde schon beansprucht."));
                     }
                 }
             
@@ -87,7 +88,7 @@ public class WorldBlocksPlugin {
                     gsintlist.add(interactor);
                     }
                     else{
-                        plugin.getServer().broadcastMessage("Gruppe mit dem Namen existiert bereits");
+                        Bukkit.getPlayer(interactor.getMembers()[0].getUUID()).sendMessage(convMessage("Der Gruppenname ist vergeben."));
                     }
             }
             
