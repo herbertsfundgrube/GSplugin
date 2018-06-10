@@ -21,12 +21,20 @@ public class BlockEventListener implements Listener {
 	public BlockEventListener(WorldBlocksPlugin plugin) {
 		this.plugin=plugin;
 	}
-	//Abfangen des BlockPlaceEvents
+	//----------------------------------------------------------------------  
+	//---Prüfen aller platzierten Blöcke auf WorldBlocks-Faktoren-----------  
+	//---(Permissions usw.)-------------------------------------------------
+	//----------------------------------------------------------------------  
 	@EventHandler
 	public void onBlockPlaceEvent(BlockPlaceEvent event) {
 		Player p = event.getPlayer();
 		Location loc=event.getBlock().getLocation();
-		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
+		//----------------------------------------------------------------------  
+		//---Grundlegende Regeln: ----------------------------------------------  
+		//---1) Block muss auf GS sein, dann wird das Event behandelt-----------
+		//---2) Block darf vom Spieler nicht geändert werden (fehlende Perms ---  
+		//------zum Beispiel), dann wird das Event abgebrochen------------------  
+		//----------------------------------------------------------------------  
 		if(isOnGs(p, loc) && !canGsBlockBeChanged(p, loc)) 
 			//if(!hasWorldPermission(p))
 			{
@@ -36,12 +44,21 @@ public class BlockEventListener implements Listener {
 			
 		
 	}
-	//Abfangen des BlockBreakEvents
+	
+	//----------------------------------------------------------------------  
+	//---Prüfen aller platzierten Blöcke auf WorldBlocks-Faktoren-----------  
+	//---(Permissions usw.)-------------------------------------------------  
+	//----------------------------------------------------------------------  
 	@EventHandler
 	public void onBlockBreakEvent(BlockBreakEvent event) {
 		Player p = event.getPlayer();
 		Location loc=event.getBlock().getLocation();
-		//Wenn das Event den Grundlegenden Regeln des GS-Plugins nicht entspricht, wird es gecancelt.
+		//----------------------------------------------------------------------  
+		//---Grundlegende Regeln: ----------------------------------------------  
+		//---1) Block muss auf GS sein, dann wird das Event behandelt-----------
+		//---2) Block darf vom Spieler nicht geändert werden (fehlende Perms ---  
+		//------zum Beispiel), dann wird das Event abgebrochen------------------  
+		//----------------------------------------------------------------------  
 		if(isOnGs(p, loc) && !canGsBlockBeChanged(p, loc)) 
 		
 			//if(!hasWorldPermission(p))
@@ -72,7 +89,7 @@ public class BlockEventListener implements Listener {
 		GS gs = plugin.data.getGSList().getGS(loc);
 		//Wenn ein GS gefunden wurde, auf dem der Player die Permission 3 hat, dann ist die Aktion erlaubt.
 		if(gs.hasPermission(p, (byte) 8)) {
-			plugin.mainplugin.debug(p.getName() + " hat die Permissions für das GS" + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
+			plugin.getMain().debug(p.getName() + " hat die Permissions für das GS" + gs.getCoords().getX() + " / " + gs.getCoords().getZ());
 			return true;
 		}
 		//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spammen zu verhindern.
@@ -84,16 +101,16 @@ public class BlockEventListener implements Listener {
 	private boolean isOnGs(Player p, Location loc) {
 		//Wenn kein GS auf dem Server gelistet ist, ist BlockChange immer erlaubt
 		if(!serverHasGs()) {
-			plugin.mainplugin.debug("Server hat kein GS");
+			plugin.getMain().debug("Server hat kein GS");
 			return false;
 		}
 		//Wenn der Block auf der Miningebene liegt
-		if(loc.getY()< plugin.mainplugin.getConfigInt("gs.lowestProtectedY"))
+		if(loc.getY()< plugin.getMain().getConfigInt("gs.lowestProtectedY"))
 			return false;
 		
 		//Wenn in der GSlist kein GS mit dieser Location eingetragen ist, ist diese BlockChange ebenfalls erlaubt
 		if(plugin.data.getGSList().getGS(loc)==null) {
-			plugin.mainplugin.debug(p.getName() + " ist auf keinem GS");
+			plugin.getMain().debug(p.getName() + " ist auf keinem GS");
 			return false;
 		}
 		//Location ist auf GS

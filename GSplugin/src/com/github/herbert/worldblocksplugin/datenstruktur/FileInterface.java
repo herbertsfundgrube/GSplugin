@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.herbert.worldblocksplugin.fileInterface;
+package com.github.herbert.worldblocksplugin.datenstruktur;
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractor;
 import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractorList;
 import com.github.herbert.worldblocksplugin.GSinteractor.Member;
 import com.github.herbert.worldblocksplugin.GSinteractor.TempHerbertPlayer;
-import com.github.herbert.worldblocksplugin.datenstruktur.GSCoords;
 import com.github.herbert.worldblocksplugin.worldblocks.*;
 
 import java.io.BufferedReader;
@@ -24,16 +23,16 @@ import java.util.UUID;
  *
  * @author Leen
  */
-public class fInterface {
-	WorldBlocksPlugin worldblocksplugin;
+public class FileInterface {
 	
-
+	
+	WorldBlocksPlugin worldblocksplugin;
 	public File gsfile;
 	public File gsinteractorsfile;
 	
-	public fInterface(WorldBlocksPlugin plugin) {
+	public FileInterface(WorldBlocksPlugin plugin) {
 		this.worldblocksplugin = plugin;
-		String pluginDir = worldblocksplugin.mainplugin.getDataFolder().getAbsolutePath();
+		String pluginDir = worldblocksplugin.getMain().getDataFolder().getAbsolutePath();
 		gsfile = new File(pluginDir,"gs.txt");
 		gsinteractorsfile = new File(pluginDir,"gsinteractors.txt");
 		//Speicher für GSfiles erstellen
@@ -41,19 +40,19 @@ public class fInterface {
 			gsfile.getParentFile().mkdir();
 			gsfile.createNewFile();
 			gsinteractorsfile.createNewFile();
-			plugin.mainplugin.getLogger().info("Dateien sollten erstellt sein.");
+			plugin.getMain().getLogger().info("Dateien sollten erstellt sein.");
 		} catch (IOException e) {
 			
-			plugin.mainplugin.getLogger().info("Eine Datei konnte nicht gespeichert werden.");
+			plugin.getMain().getLogger().info("Eine Datei konnte nicht gespeichert werden.");
 			//Dateipfade vollständig ausgeben
-			plugin.mainplugin.getLogger().info("Dateipfade: " + gsfile.getAbsolutePath()+", " + gsinteractorsfile.getAbsolutePath());
+			plugin.getMain().getLogger().info("Dateipfade: " + gsfile.getAbsolutePath()+", " + gsinteractorsfile.getAbsolutePath());
 			e.printStackTrace();
 		}
 	}
     public void GsLaden(){
     	
     	if(worldblocksplugin.data.hasGsInteractors()) {
-    		worldblocksplugin.mainplugin.getLogger().info("GS werden nicht geladen: Kein GSinteractor gefunden.");
+    		worldblocksplugin.getMain().getLogger().info("GS werden nicht geladen: Kein GSinteractor gefunden.");
     		
     	}
         String rep=null;
@@ -72,7 +71,7 @@ public class fInterface {
         
 
     	//DEBUG TODO
-    	worldblocksplugin.mainplugin.debug("Geladene GS: "+rep);
+    	worldblocksplugin.getMain().debug("Geladene GS: "+rep);
     	
     	
         char[] c=rep.toCharArray();
@@ -118,11 +117,11 @@ public class fInterface {
                 GSCoords coord=new GSCoords(x,z);
                 GSinteractor owner=worldblocksplugin.data.getGsInteractorsList().getByIdent(ident);
                 if(owner==null){
-                    worldblocksplugin.mainplugin.getLogger().info("GSinteractor "+ident+" Existiert nicht");
+                    worldblocksplugin.getMain().getLogger().info("GSinteractor "+ident+" Existiert nicht");
                     GSinteractorList test=worldblocksplugin.data.getGsInteractorsList();
-                    worldblocksplugin.mainplugin.getLogger().info("Folgende GSinteractor gibt es:");
+                    worldblocksplugin.getMain().getLogger().info("Folgende GSinteractor gibt es:");
                     while(test!=null){
-                        worldblocksplugin.mainplugin.getLogger().info(test.getIdent());
+                        worldblocksplugin.getMain().getLogger().info(test.getIdent());
                         test=test.getNext();
                     }
                     return;
@@ -188,7 +187,7 @@ public class fInterface {
 		}
 
     	//DEBUG TODO
-    	worldblocksplugin.mainplugin.debug("Gespeicherte GS: "+out);
+    	worldblocksplugin.getMain().debug("Gespeicherte GS: "+out);
     	
     	
 		//plugin.ymlGS.save(plugin.gsfile);
@@ -205,7 +204,7 @@ public class fInterface {
         if(rep==null)
         	return;
     	//DEBUG
-    	worldblocksplugin.mainplugin.debug("GSI list: "+rep);
+    	worldblocksplugin.getMain().debug("GSI list: "+rep);
     	
     	
         char t1=(char)146;
@@ -274,8 +273,7 @@ public class fInterface {
 			e.printStackTrace();
 		}
     	//DEBUG
-    	worldblocksplugin.mainplugin.debug("Gespeicherte GSIlist: " + out);
-    	//plugin.ymlgsints.set("derp", out);
+    	worldblocksplugin.getMain().debug("Gespeicherte GSIlist: " + out);
     }
     
 }

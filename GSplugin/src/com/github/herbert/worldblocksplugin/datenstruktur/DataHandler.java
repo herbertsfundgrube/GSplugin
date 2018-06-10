@@ -6,18 +6,25 @@ import org.bukkit.Location;
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractor;
 import com.github.herbert.worldblocksplugin.GSinteractor.GSinteractorList;
-import com.github.herbert.worldblocksplugin.fileInterface.fInterface;
 import com.github.herbert.worldblocksplugin.worldblocks.GS;
 
 public class DataHandler {
 	private Gslist gslist;
     private GSinteractorList gsintlist;
     WorldBlocksPlugin wbplugin;
+    public FileInterface f;
     
     public DataHandler(WorldBlocksPlugin plugin) {
     	wbplugin = plugin;
+    	f = new FileInterface(wbplugin);
+        f.gsInteractorsLaden();
+        f.GsLaden();
     }
-	
+  //----------------------------------------------------------------------
+  //---Prüft, ob ein WorldBlock auf einer bestimmten Location liegt.------
+  //---Um NullPointerExceptions auszuschließen wird diese Methode---------
+  //---verwendet.---------------------------------------------------------
+  //----------------------------------------------------------------------  
 	public boolean isOnGs(Location loc) {
 		if(gslist==null)
 			return false;
@@ -25,9 +32,10 @@ public class DataHandler {
 			return false;
 		return true;
 	}
-
+	//----------------------------------------------------------------------
+	//----------------------------------------------------------------------
+	//----------------------------------------------------------------------
 	public void saveData() {
-		fInterface f = wbplugin.f;
 		if(gsintlist!=null)
 			f.gsInteractorsSpeichern();
 		if(gslist!=null)
