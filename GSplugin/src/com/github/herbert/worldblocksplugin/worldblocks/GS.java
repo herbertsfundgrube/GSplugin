@@ -19,7 +19,7 @@ import net.md_5.bungee.api.ChatColor;
  *
  * @author john
  */
-public class GS implements WorldBlock {
+public class GS implements Worldblock {
 	GSinteractor owner;
 	GSCoords coords;
 	
