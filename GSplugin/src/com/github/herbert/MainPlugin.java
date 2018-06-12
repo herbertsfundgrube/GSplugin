@@ -5,7 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.ce.GSCommandExecutor;
-import com.github.herbert.worldblocksplugin.events.BlockEventListener;
+import com.github.herbert.worldblocksplugin.events.listeners.BlockEventListener;
 
 public class MainPlugin extends JavaPlugin {
 	
