@@ -1,6 +1,6 @@
 package com.github.herbert.worldblocksplugin.events;
 
-import org.bukkit.block.Block;
+import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -8,32 +8,32 @@ import org.bukkit.event.HandlerList;
 
 import com.github.herbert.worldblocksplugin.worldblocks.Worldblock;
 
-public class WorldblockBlockEvent extends Event implements Cancellable {
+public class WorldblockContainerEvent extends Event implements Cancellable {
 	
 	public static HandlerList handlers = new HandlerList();
 	
-	private Worldblock worldblock;
-	private Player player;
-	private Block block;
 	private Cancellable cancel;
+	private Container cont;
+	private Player p;
+	private Worldblock wb;
 	
-	public WorldblockBlockEvent(Worldblock wb, Player p, Block b, Cancellable c) {
-		this.worldblock=wb;
-		this.player=p;
-		this.block=b;
-		cancel=c;
+	public WorldblockContainerEvent(Worldblock wb, Player p, Container cont, Cancellable cancel) {
+		this.cancel=cancel;
+		this.cont=cont;
+		this.p=p;
+		this.wb=wb;
 	}
-
-	public Worldblock getWorldblock() {
-		return worldblock;
+	
+	public Container getContainer() {
+		return cont;
 	}
 	public Player getPlayer() {
-		return player;
+		return p;
 	}
-	public Block getBlock() {
-		return block;
+	public Worldblock getWorldblock() {
+		return wb;
 	}
-
+	
 	@Override
 	public boolean isCancelled() {
 		return cancel.isCancelled();
@@ -43,7 +43,7 @@ public class WorldblockBlockEvent extends Event implements Cancellable {
 	public void setCancelled(boolean bool) {
 		cancel.setCancelled(bool);
 	}
-	
+
 	@Override
 	public HandlerList getHandlers() {
 		return handlers;
@@ -51,5 +51,5 @@ public class WorldblockBlockEvent extends Event implements Cancellable {
 	public static HandlerList getHandlerList() {
 		return handlers;
 	}
-	
+
 }

@@ -11,7 +11,7 @@ import com.github.herbert.worldblocksplugin.events.listeners.WorldblockBlockEven
 public class MainPlugin extends JavaPlugin {
 	
 	//Debugging aktivieren?
-	boolean debug = true;
+	boolean debug = false;
 	
 
 	

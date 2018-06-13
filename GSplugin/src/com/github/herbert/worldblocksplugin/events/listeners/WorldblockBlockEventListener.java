@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.events.WorldblockBlockEvent;
+import com.github.herbert.worldblocksplugin.events.WorldblockContainerEvent;
 import com.github.herbert.worldblocksplugin.worldblocks.Worldblock;
 
 import net.md_5.bungee.api.ChatColor;
@@ -26,6 +27,11 @@ public class WorldblockBlockEventListener implements Listener {
 			event.setCancelled(true);
 	}
 	
+	@EventHandler
+	public void onContainerAccess(WorldblockContainerEvent event) {
+		if(!checkContainerPermission(event.getPlayer(), event.getWorldblock()))
+			event.setCancelled(true);
+	}
 	
 	
 	//-------------------------------------------------------------------------------
@@ -41,6 +47,23 @@ public class WorldblockBlockEventListener implements Listener {
 			}
 			//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spam zu verhindern.
 			p.sendMessage(plugin.convMessage(ChatColor.RED + "Ihr dürft hier nicht bauen!"));
+			p.damage(2);
+			return false;
+		}
+		
+	//-------------------------------------------------------------------------------
+	//---Auslagerung: Hat der <p> für den <worldblock> die Permission 4 -------------
+	//---(Container öffnen)?---------------------------------------------------------
+	//-------------------------------------------------------------------------------
+		private boolean checkContainerPermission(Player p, Worldblock wb) {
+			if(hasWorldPermission(p))
+				return true;
+			if(wb.hasPermission(p, (byte) 4)) {
+				plugin.getMain().debug(p.getName() + " hat die Containerpermissions für das GS" + wb.getCoords().getX() + " / " + wb.getCoords().getZ());
+				return true;
+			}
+			//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spam zu verhindern.
+			p.sendMessage(plugin.convMessage(ChatColor.RED + "Ihr dürft das hier nicht verwenden!"));
 			p.damage(2);
 			return false;
 		}

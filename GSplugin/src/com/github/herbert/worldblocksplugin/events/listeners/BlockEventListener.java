@@ -2,16 +2,23 @@ package com.github.herbert.worldblocksplugin.events.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.material.Openable;
+import org.bukkit.material.Redstone;
 
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.events.WorldblockBlockEvent;
+import com.github.herbert.worldblocksplugin.events.WorldblockContainerEvent;
 import com.github.herbert.worldblocksplugin.worldblocks.GS;
 
 public class BlockEventListener implements Listener {
@@ -34,7 +41,6 @@ public class BlockEventListener implements Listener {
 		Location loc=event.getBlock().getLocation();
 		GS gs = getGs(p, loc);
 		if(gs != null) 
-			//if(!hasWorldPermission(p)) -> TODO Später für Permissions mitkompilieren
 			Bukkit.getServer().getPluginManager().callEvent(new WorldblockBlockEvent(gs, p, event.getBlock(), event));
 			
 	}
@@ -58,20 +64,45 @@ public class BlockEventListener implements Listener {
 			
 	}
 	//Event wird ausgelöst, wenn Truhen oder ähnliches angeklickt werden.
-	@EventHandler
+	@EventHandler(priority=EventPriority.HIGHEST)
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(!plugin.hasRegisteredWorldBlocks()) {
 			plugin.getMain().debug("Server hat kein GS");
 			return;
 		}
-		//if(event.getAction()==Action.RIGHT_CLICK_BLOCK) 
-		//{
-		//	Block block = event.getClickedBlock();
-		//	Player p = event.getPlayer();
-		//	if (block.getType().equals(Material.CHEST)) {
-		//		
-		//	}
-		//}
+		//Nur Rechtsklick-Events werden behandelt (Truhen, Redstone, Türen)
+		if(!(event.getAction()==Action.RIGHT_CLICK_BLOCK)) 
+			return;
+		
+		BlockState blockstate = event.getClickedBlock().getState();
+		
+		if(blockstate instanceof Container)  {
+			plugin.getMain().debug("Der Block ist ein Container!");
+			Container cont = (Container) blockstate;
+			GS gs = getGs(event.getPlayer(), cont.getLocation());
+			if(gs != null)  {
+				Bukkit.getServer().getPluginManager().callEvent(new WorldblockContainerEvent(gs, event.getPlayer(), cont, event));
+				return;
+			}
+		}
+		if(blockstate instanceof Redstone) {
+			plugin.getMain().debug("Der Block ist eine Redstoneinstanz!");
+			Redstone reds = (Redstone) blockstate;
+			GS gs = getGs(event.getPlayer(), blockstate.getLocation());
+			if(gs != null) {
+				//TODO: WorldblockRedstoneEvent schreiben
+				return;
+			}
+		}
+		if(blockstate instanceof Openable) {
+			plugin.getMain().debug("Der Block ist eine Openableinstanz!");
+			Openable open = (Openable) blockstate;
+			GS gs = getGs(event.getPlayer(), blockstate.getLocation());
+			if(gs != null) {
+				//TODO: WorldblockOpenableEvent schreiben
+				return;
+			}
+		}
 		
 	}
 	
