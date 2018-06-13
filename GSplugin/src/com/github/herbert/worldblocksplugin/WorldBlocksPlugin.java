@@ -27,5 +27,10 @@ public class WorldBlocksPlugin {
     	return ("---------------------"+ChatColor.GRAY+"["+ ChatColor.DARK_AQUA +"WorldBlocks" +ChatColor.GRAY + "]"+ChatColor.RESET+"---------------------");
     }
     
+    public boolean hasRegisteredWorldBlocks() {
+    	if(data.getGSList()==null)
+    		return false;
+    	return true;
+    }
     
 }

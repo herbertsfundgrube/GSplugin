@@ -2,13 +2,10 @@ package com.github.herbert.worldblocksplugin.events.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -29,6 +26,10 @@ public class BlockEventListener implements Listener {
 	//-------------------------------------------------------------------------------
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onBlockPlaceEvent(BlockPlaceEvent event) {
+		if(!plugin.hasRegisteredWorldBlocks()) {
+			plugin.getMain().debug("Server hat kein GS");
+			return;
+		}
 		Player p = event.getPlayer();
 		Location loc=event.getBlock().getLocation();
 		GS gs = getGs(p, loc);
@@ -43,6 +44,10 @@ public class BlockEventListener implements Listener {
 	//-------------------------------------------------------------------------------
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onBlockBreakEvent(BlockBreakEvent event) {
+		if(!plugin.hasRegisteredWorldBlocks()) {
+			plugin.getMain().debug("Server hat kein GS");
+			return;
+		}
 		Player p = event.getPlayer();
 		Location loc=event.getBlock().getLocation();
 		GS gs = getGs(p, loc);
@@ -55,14 +60,18 @@ public class BlockEventListener implements Listener {
 	//Event wird ausgelöst, wenn Truhen oder ähnliches angeklickt werden.
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		if(event.getAction()==Action.RIGHT_CLICK_BLOCK) 
-		{
-			Block block = event.getClickedBlock();
-			Player p = event.getPlayer();
-			if (block.getType().equals(Material.CHEST)) {
-				
-			}
+		if(!plugin.hasRegisteredWorldBlocks()) {
+			plugin.getMain().debug("Server hat kein GS");
+			return;
 		}
+		//if(event.getAction()==Action.RIGHT_CLICK_BLOCK) 
+		//{
+		//	Block block = event.getClickedBlock();
+		//	Player p = event.getPlayer();
+		//	if (block.getType().equals(Material.CHEST)) {
+		//		
+		//	}
+		//}
 		
 	}
 	
@@ -72,11 +81,6 @@ public class BlockEventListener implements Listener {
 	
 	//GS bei <loc> suchen
 	private GS getGs(Player p, Location loc) {
-		//Wenn kein GS auf dem Server gelistet ist, ist BlockChange immer erlaubt
-		if(!serverHasGs()) {
-			plugin.getMain().debug("Server hat kein GS");
-			return null;
-		}
 		//Wenn der Block auf der Miningebene liegt
 		if(loc.getY()< plugin.getMain().getConfigInt("gs.lowestProtectedY"))
 			return null;
@@ -88,14 +92,5 @@ public class BlockEventListener implements Listener {
 		}
 		//Location ist auf GS
 		return plugin.data.getGSList().getGS(loc);
-	}
-	
-	
-	//True, wenn GS auf dem Server gelistet sind
-	public boolean serverHasGs() {
-		if(plugin.data.getGSList()==null) {
-			return false;
-		}
-		return true;
 	}
 }
