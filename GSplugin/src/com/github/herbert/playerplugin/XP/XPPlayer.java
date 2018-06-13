@@ -25,9 +25,16 @@ public class XPPlayer {
     int[] XP =new int[8];
     int[] Level =new int[8];
     int[] MaxLevel =new int[8];
+    int skillp;
     UUID id;
     public XPPlayer(UUID id){
         this.id=id;
+        for(int i=0;i<XP.length;i++){
+            XP[i]=0;
+            Level[i]=1;
+            MaxLevel[i]=1;
+            skillp=1;
+        }
     }
     
     public void incXP(int feld,int menge){
@@ -37,10 +44,11 @@ public class XPPlayer {
                 //playerLevelup
                 XP[feld]=0;
                 Level[feld]++;
+                skillp++;
             }
             else if(MaxLevel[feld]==Level[feld]){
                 //Wenn maxlevel erreicht
-                XP[7]+=(XP[feld]-((Level[feld]*4000)/(Level[feld]+50)));
+                incXP(7,XP[feld]-((Level[feld]*4000)/(Level[feld]+50)));
                 XP[feld]=((Level[feld]*4000)/(Level[feld]+50));
             }
             else{
@@ -50,9 +58,22 @@ public class XPPlayer {
             }
         }
     }
-    public String getInfo(int feld){
-        return ""+(((Level[feld]*4000)/(Level[feld]+50))-XP[feld])+"/"+(Level[feld]*4000)/(Level[feld]+50)+"XP\nLevel:"+Level[feld];
+    
+    
+    public boolean incMaxLvl(int feld){
+        if(skillp>0){
+            MaxLevel[feld]++;
+            return true;
+        }
+        return false;
     }
+    
+    
+    public String getInfo(int feld){
+        return ""+(((Level[feld]*4000)/(Level[feld]+50))-XP[feld])+"/"+(Level[feld]*4000)/(Level[feld]+50)+"XP\nLevel:"+Level[feld]+"/MaximalLevel"+MaxLevel[feld];
+    }
+    
+    
     @Override
     public String toString(){
         char c=(char)145;
