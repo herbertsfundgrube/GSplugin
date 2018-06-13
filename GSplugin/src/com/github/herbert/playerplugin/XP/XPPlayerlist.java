@@ -42,6 +42,7 @@ public class XPPlayerlist {
             return "Fehler, Spieler nicht in der Datenbank";
         }
     }
+    @Override
     public String toString(){
         char c=(char)146;
         if(n==null){
