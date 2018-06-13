@@ -13,8 +13,9 @@ public class WorldBlocksPlugin {
     private MainPlugin mainplugin;
 	
     public WorldBlocksPlugin(MainPlugin plugin) {
-    	data = new DataHandler(this);
     	this.mainplugin = plugin;
+    	data = new DataHandler(this);
+    	data.loadData();
     }
     
     public MainPlugin getMain() {

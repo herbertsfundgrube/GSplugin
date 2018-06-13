@@ -6,11 +6,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.ce.GSCommandExecutor;
 import com.github.herbert.worldblocksplugin.events.listeners.BlockEventListener;
+import com.github.herbert.worldblocksplugin.events.listeners.WorldblockBlockEventListener;
 
 public class MainPlugin extends JavaPlugin {
 	
 	//Debugging aktivieren?
-	boolean debug = false;
+	boolean debug = true;
 	
 
 	
@@ -84,6 +85,7 @@ public class MainPlugin extends JavaPlugin {
 	
 	private void registerListeners() {
 		getServer().getPluginManager().registerEvents(new BlockEventListener(worldblocksplugin), this);
+		getServer().getPluginManager().registerEvents(new WorldblockBlockEventListener(worldblocksplugin), this);
 	}
 	
 	private void registerCommandExecutors() {

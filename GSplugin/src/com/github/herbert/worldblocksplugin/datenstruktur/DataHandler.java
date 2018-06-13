@@ -17,8 +17,6 @@ public class DataHandler {
     public DataHandler(WorldBlocksPlugin plugin) {
     	wbplugin = plugin;
     	f = new FileInterface(wbplugin);
-        f.gsInteractorsLaden();
-        f.GsLaden();
     }
   //----------------------------------------------------------------------
   //---Prüft, ob ein WorldBlock auf einer bestimmten Location liegt.------
@@ -83,6 +81,10 @@ public class DataHandler {
     	return gsintlist;
     }
     
+    public void loadData() {
+        f.gsInteractorsLaden();
+        f.GsLaden();
+    }
     public boolean hasGsInteractors() {
     	if(gsintlist==null)
     		return false;
