@@ -27,6 +27,7 @@ public class XPPlayerlist {
         }
         else{
             XPPlayer t=new XPPlayer(id);
+            t.incXP(feld, menge);
             n=new XPPlayerlist(t,null);
         }
     }
