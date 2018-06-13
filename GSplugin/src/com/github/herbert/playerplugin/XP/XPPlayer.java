@@ -70,7 +70,7 @@ public class XPPlayer {
     
     
     public String getInfo(int feld){
-        return ""+(((Level[feld]*4000)/(Level[feld]+50))-XP[feld])+"/"+(Level[feld]*4000)/(Level[feld]+50)+"XP\nLevel:"+Level[feld]+"/MaximalLevel"+MaxLevel[feld];
+        return ""+(((Level[feld]*4000)/(Level[feld]+50))-XP[feld])+"/"+(Level[feld]*4000)/(Level[feld]+50)+"XP\nLevel:"+Level[feld]+"/MaximalLevel:"+MaxLevel[feld];
     }
     
     
