@@ -42,4 +42,13 @@ public class XPPlayerlist {
             return "Fehler, Spieler nicht in der Datenbank";
         }
     }
+    public String toString(){
+        char c=(char)146;
+        if(n==null){
+            return (p.toString()+c);
+        }
+        else{
+            return (p.toString()+c+n.toString());
+        }
+    }
 }

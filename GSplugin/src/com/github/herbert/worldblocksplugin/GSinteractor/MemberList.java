@@ -67,7 +67,12 @@ public class MemberList {
     
     @Override
     public String toString(){
-        return (g.toString()+n.toString());
-    
+        char c=(char)146;
+        if(n==null){
+            return (g.toString()+c);
+        }
+        else{
+            return (g.toString()+c+n.toString());
+        }
     }
 }

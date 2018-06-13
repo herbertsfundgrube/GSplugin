@@ -52,7 +52,15 @@ public class XPPlayer {
     public String getInfo(int feld){
         return ""+(((Level[feld]*4000)/(Level[feld]+50))-XP[feld])+"/"+(Level[feld]*4000)/(Level[feld]+50)+"XP\nLevel:"+Level[feld];
     }
-    
+    @Override
+    public String toString(){
+        char c=(char)145;
+        String out=""+id.getMostSignificantBits()+c+id.getLeastSignificantBits()+c;
+        for(int i=0;i<XP.length;i++){
+            out=out+XP[i]+c+Level[i]+c+MaxLevel[i]+c;
+        }
+        return out;
+    }
     
     
 }
