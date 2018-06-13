@@ -19,11 +19,12 @@ public class XPPlayer {
     3:Bauen
     4:Handwerk
     5:Handel
-    6:PlayerXP
+    6:Jagd
+    7:PlayerXP
     */
-    int[] XP =new int[7];
-    int[] Level =new int[7];
-    int[] MaxLevel =new int[7];
+    int[] XP =new int[8];
+    int[] Level =new int[8];
+    int[] MaxLevel =new int[8];
     UUID id;
     public XPPlayer(UUID id){
         this.id=id;
@@ -32,14 +33,14 @@ public class XPPlayer {
     public void incXP(int feld,int menge){
         XP[feld]+=menge;
         if(XP[feld]>=((Level[feld]*4000)/(Level[feld]+50))){
-            if(feld==6){
+            if(feld==7){
                 //playerLevelup
                 XP[feld]=0;
                 Level[feld]++;
             }
             else if(MaxLevel[feld]==Level[feld]){
                 //Wenn maxlevel erreicht
-                XP[6]+=(XP[feld]-((Level[feld]*4000)/(Level[feld]+50)));
+                XP[7]+=(XP[feld]-((Level[feld]*4000)/(Level[feld]+50)));
                 XP[feld]=((Level[feld]*4000)/(Level[feld]+50));
             }
             else{
