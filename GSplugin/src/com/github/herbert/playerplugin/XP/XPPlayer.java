@@ -26,7 +26,12 @@ public class XPPlayer {
     public void incXP(int feld,int menge){
         XP[feld]+=menge;
         if(XP[feld]>=((Level[feld]*4000)/(Level[feld]+50))){
-            if(MaxLevel[feld]==Level[feld]){
+            if(feld==6){
+                //playerLevelup
+                XP[feld]=0;
+                Level[feld]++;
+            }
+            else if(MaxLevel[feld]==Level[feld]){
                 //Wenn maxlevel erreicht
                 XP[6]+=(XP[feld]-((Level[feld]*4000)/(Level[feld]+50)));
                 XP[feld]=((Level[feld]*4000)/(Level[feld]+50));
