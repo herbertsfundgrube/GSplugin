@@ -23,8 +23,7 @@ public class FileInterfaceXP {
 	
 	
 	PlayerPlugin playerplugin;
-	public File gsfile;
-	public File gsinteractorsfile;
+	public File file;
 	
 	public FileInterfaceXP(PlayerPlugin plugin) {
 		this.playerplugin = plugin;
