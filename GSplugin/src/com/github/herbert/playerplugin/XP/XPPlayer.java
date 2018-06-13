@@ -5,6 +5,8 @@
  */
 package com.github.herbert.playerplugin.XP;
 
+import java.util.UUID;
+
 /**
  *
  * @author Lumberjack
@@ -22,6 +24,10 @@ public class XPPlayer {
     int[] XP =new int[7];
     int[] Level =new int[7];
     int[] MaxLevel =new int[7];
+    UUID id;
+    public XPPlayer(UUID id){
+        this.id=id;
+    }
     
     public void incXP(int feld,int menge){
         XP[feld]+=menge;
@@ -43,6 +49,10 @@ public class XPPlayer {
             }
         }
     }
+    public String getRemainingXP(int feld){
+        return ""+(((Level[feld]*4000)/(Level[feld]+50))-XP[feld])+"/"+(Level[feld]*4000)/(Level[feld]+50);
+    }
+    
     
     
 }
