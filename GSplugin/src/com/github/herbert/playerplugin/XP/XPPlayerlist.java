@@ -5,6 +5,8 @@
  */
 package com.github.herbert.playerplugin.XP;
 
+import java.util.UUID;
+
 /**
  *
  * @author Lumberjack
@@ -15,5 +17,28 @@ public class XPPlayerlist {
     public XPPlayerlist(XPPlayer p,XPPlayerlist n){
         this.p=p;
         this.n=n;
+    }
+    public void addXP(UUID id,int feld,int menge){
+        if(p.id.equals(id)){
+            p.incXP(feld, menge);
+        }
+        else if(n!=null){
+            n.addXP(id, feld, menge);
+        }
+        else{
+            XPPlayer t=new XPPlayer(id);
+            n=new XPPlayerlist(t,null);
+        }
+    }
+    public String getInfo(UUID id, int feld){
+        if(p.id.equals(id)){
+            return p.getInfo(feld);
+        }
+        else if(n!=null){
+            return n.getInfo(id,feld);
+        }
+        else{
+            return "Fehler, Spieler nicht in der Datenbank";
+        }
     }
 }
