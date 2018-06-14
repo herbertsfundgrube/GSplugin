@@ -50,7 +50,7 @@ public class XPPlayer {
     
     public void incXP(int feld,int menge){
         XP[feld]+=menge;
-        if(XP[feld]>=((Level[feld]*4000)/(Level[feld]+50))){
+        if(XP[feld]>=((Level[feld]*5000)/(Level[feld]+30))){
             
             if(feld==7){
                 //playerLevelup
@@ -61,12 +61,12 @@ public class XPPlayer {
             else if(Level[feld]==100){
                 incXP(7,menge);
                 MXP+=menge;
-                XP[feld]=((Level[feld]*4000)/(Level[feld]+50));
+                XP[feld]=((Level[feld]*5000)/(Level[feld]+30));
             }
             else if(MaxLevel[feld]==Level[feld]){
                 //Wenn maxlevel erreicht
-                incXP(7,XP[feld]-((Level[feld]*4000)/(Level[feld]+50)));
-                XP[feld]=((Level[feld]*4000)/(Level[feld]+50));
+                incXP(7,XP[feld]-((Level[feld]*5000)/(Level[feld]+30)));
+                XP[feld]=((Level[feld]*5000)/(Level[feld]+30));
             }
             else{
                 //Level up
@@ -87,7 +87,7 @@ public class XPPlayer {
     
     
     public String getInfo(int feld){
-        return ""+(((Level[feld]*4000)/(Level[feld]+50))-XP[feld])+"/"+(Level[feld]*4000)/(Level[feld]+50)+"XP\n"
+        return ""+(((Level[feld]*5000)/(Level[feld]+30))-XP[feld])+"/"+((Level[feld]*5000)/(Level[feld]+30))+"XP\n"
                 + "Level:"+Level[feld]+"/MaximalLevel:"+MaxLevel[feld];
     }
     
