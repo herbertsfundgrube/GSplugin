@@ -32,6 +32,7 @@ public class FileInterfaceXP {
         
         String rep=null;
         //todo: Load File from String
+        if(rep!=null){
         char t1=(char)146;
         char t2=(char)145;
         char[] c=rep.toCharArray();
@@ -93,10 +94,11 @@ public class FileInterfaceXP {
                 int skillp=Integer.parseInt(sskillp);
                 //Objekterstellung
                 XPPlayer p=new XPPlayer(u,XP,Level,MaxLevel,skillp);
+                point++;
                 
                 
                 
-                
+        }
         }
         
     }
