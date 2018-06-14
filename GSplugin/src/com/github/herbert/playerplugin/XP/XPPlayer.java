@@ -29,12 +29,19 @@ public class XPPlayer {
     UUID id;
     public XPPlayer(UUID id){
         this.id=id;
+        skillp=1;
         for(int i=0;i<XP.length;i++){
             XP[i]=0;
             Level[i]=1;
             MaxLevel[i]=1;
-            skillp=1;
         }
+    }
+    public XPPlayer(UUID id,int[] XP,int[] Level,int[] MaxLevel,int skillp){
+        this.id=id;
+        skillp=1;
+        this.XP=XP;
+        this.Level=Level;
+        this.MaxLevel=MaxLevel;
     }
     
     public void incXP(int feld,int menge){
@@ -81,6 +88,7 @@ public class XPPlayer {
         for(int i=0;i<XP.length;i++){
             out=out+XP[i]+c+Level[i]+c+MaxLevel[i]+c;
         }
+        out=out+skillp+c;
         return out;
     }
     

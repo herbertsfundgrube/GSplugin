@@ -31,6 +31,14 @@ public class XPPlayerlist {
             n=new XPPlayerlist(t,null);
         }
     }
+    public void addPlayer(XPPlayer p){
+        if(n==null){
+            n=new XPPlayerlist(p,null);
+        }
+        else{
+            n.addPlayer(p);
+        }
+    }
     public String getInfo(UUID id, int feld){
         if(p.id.equals(id)){
             return p.getInfo(feld);

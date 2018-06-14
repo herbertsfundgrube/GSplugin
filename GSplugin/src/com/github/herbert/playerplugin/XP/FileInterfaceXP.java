@@ -29,10 +29,81 @@ public class FileInterfaceXP {
 		this.playerplugin = plugin;
 	}
     public void Laden(){
-        //todo
+        
+        String rep=null;
+        //todo: Load File from String
+        char t1=(char)146;
+        char t2=(char)145;
+        char[] c=rep.toCharArray();
+        int point=0;
+        while (point<c.length){
+                //UUID laden
+                String idmS="";
+                String idlS="";
+                long idm;
+                long idl;
+                while(c[point]!=t2){
+                    idmS=idmS+c[point];
+                    point++;
+                }
+                point++;
+                while(c[point]!=t2){
+                    idlS=idlS+c[point];
+                    point++;
+                }
+                point++;
+                idm=Long.parseLong(idmS);
+                idl=Long.parseLong(idlS);
+                UUID u=new UUID(idm,idl);
+                //XP werte Laden
+                int[] XP =new int[8];
+                int[] Level =new int[8];
+                int[] MaxLevel =new int[8];
+                for(int i=0;i<XP.length;i++){
+                    String sXP="";
+                    String sLevel="";
+                    String sMaxLevel="";
+                    while(c[point]!=t2){
+                        sXP=sXP+c[point];
+                        point++;
+                    }
+                    point++;
+                    while(c[point]!=t2){
+                        sLevel=sLevel+c[point];
+                        point++;
+                    }
+                    point++;
+                    while(c[point]!=t2){
+                        sMaxLevel=sMaxLevel+c[point];
+                        point++;
+                    }
+                    point++;
+                    XP[i]=Integer.parseInt(sXP);
+                    Level[i]=Integer.parseInt(sLevel);
+                    MaxLevel[i]=Integer.parseInt(sMaxLevel);
+                }
+                
+                String sskillp="";
+                //skillpoints laden
+                while(c[point]!=t2){
+                    sskillp=sskillp+c[point];
+                    point++;
+                }
+                point++;
+                int skillp=Integer.parseInt(sskillp);
+                //Objekterstellung
+                XPPlayer p=new XPPlayer(u,XP,Level,MaxLevel,skillp);
+                
+                
+                
+                
+        }
+        
     }
     public void Speichern(){
-        //todo
+        //todo: Save String into file
+        String out=playerplugin.list.toString();
+        
     }
     
 }
