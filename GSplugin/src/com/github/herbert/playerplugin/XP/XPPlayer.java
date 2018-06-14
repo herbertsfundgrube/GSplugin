@@ -25,33 +25,43 @@ public class XPPlayer {
     int[] XP =new int[8];
     int[] Level =new int[8];
     int[] MaxLevel =new int[8];
+    long MXP;
     int skillp;
     UUID id;
     public XPPlayer(UUID id){
         this.id=id;
         skillp=1;
+        MXP=0;
         for(int i=0;i<XP.length;i++){
             XP[i]=0;
             Level[i]=1;
             MaxLevel[i]=1;
         }
+        
     }
-    public XPPlayer(UUID id,int[] XP,int[] Level,int[] MaxLevel,int skillp){
+    public XPPlayer(UUID id,int[] XP,int[] Level,int[] MaxLevel,int skillp,long MXP){
         this.id=id;
         skillp=1;
         this.XP=XP;
         this.Level=Level;
         this.MaxLevel=MaxLevel;
+        this.MXP=MXP;
     }
     
     public void incXP(int feld,int menge){
         XP[feld]+=menge;
         if(XP[feld]>=((Level[feld]*4000)/(Level[feld]+50))){
+            
             if(feld==7){
                 //playerLevelup
                 XP[feld]=0;
                 Level[feld]++;
                 skillp++;
+            }
+            else if(Level[feld]==100){
+                incXP(7,menge);
+                MXP+=menge;
+                XP[feld]=((Level[feld]*4000)/(Level[feld]+50));
             }
             else if(MaxLevel[feld]==Level[feld]){
                 //Wenn maxlevel erreicht
@@ -68,7 +78,7 @@ public class XPPlayer {
     
     
     public boolean incMaxLvl(int feld){
-        if(skillp>0){
+        if(skillp>0&&MaxLevel[feld]<100){
             MaxLevel[feld]++;
             return true;
         }
@@ -77,7 +87,8 @@ public class XPPlayer {
     
     
     public String getInfo(int feld){
-        return ""+(((Level[feld]*4000)/(Level[feld]+50))-XP[feld])+"/"+(Level[feld]*4000)/(Level[feld]+50)+"XP\nLevel:"+Level[feld]+"/MaximalLevel:"+MaxLevel[feld];
+        return ""+(((Level[feld]*4000)/(Level[feld]+50))-XP[feld])+"/"+(Level[feld]*4000)/(Level[feld]+50)+"XP\n"
+                + "Level:"+Level[feld]+"/MaximalLevel:"+MaxLevel[feld];
     }
     
     
@@ -88,7 +99,7 @@ public class XPPlayer {
         for(int i=0;i<XP.length;i++){
             out=out+XP[i]+c+Level[i]+c+MaxLevel[i]+c;
         }
-        out=out+skillp+c;
+        out=out+skillp+c+MXP+c;
         return out;
     }
     
