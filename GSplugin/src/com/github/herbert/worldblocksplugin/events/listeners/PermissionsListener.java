@@ -21,11 +21,11 @@ import com.github.herbert.worldblocksplugin.events.WorldblockBlockEvent;
 import com.github.herbert.worldblocksplugin.events.WorldblockContainerEvent;
 import com.github.herbert.worldblocksplugin.worldblocks.GS;
 
-public class BlockEventListener implements Listener {
+public class PermissionsListener implements Listener {
 	
 	WorldBlocksPlugin plugin;
 	
-	public BlockEventListener(WorldBlocksPlugin plugin) {
+	public PermissionsListener(WorldBlocksPlugin plugin) {
 		this.plugin=plugin;
 	}
 	//-------------------------------------------------------------------------------
