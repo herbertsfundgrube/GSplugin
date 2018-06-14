@@ -7,5 +7,3 @@ commands:
    gs:
       description: Hauptbefehl für WorldBlocks
       usage: /<command> [fehler]
-      permission: <plugin name>.worldblocks
-      permission-message: Fehlende Berechtigung <permission>
