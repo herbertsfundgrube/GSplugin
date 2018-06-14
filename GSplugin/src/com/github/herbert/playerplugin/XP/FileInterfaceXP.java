@@ -92,8 +92,16 @@ public class FileInterfaceXP {
                 }
                 point++;
                 int skillp=Integer.parseInt(sskillp);
+                String sMXP="";
+                //skillpoints laden
+                while(c[point]!=t2){
+                    sMXP=sMXP+c[point];
+                    point++;
+                }
+                point++;
+                long MXP=Long.parseLong(sMXP);
                 //Objekterstellung
-                XPPlayer p=new XPPlayer(u,XP,Level,MaxLevel,skillp);
+                XPPlayer p=new XPPlayer(u,XP,Level,MaxLevel,skillp,MXP);
                 point++;
                 
                 
