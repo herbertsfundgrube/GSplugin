@@ -11,7 +11,7 @@ import com.github.herbert.worldblocksplugin.events.listeners.PermissionsListener
 public class MainPlugin extends JavaPlugin {
 	
 	//Debugging aktivieren?
-	boolean debug = false;
+	boolean debug = true;
 	
 
 	

@@ -2,6 +2,7 @@ package com.github.herbert.worldblocksplugin.events.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.material.MaterialData;
 import org.bukkit.material.Openable;
 import org.bukkit.material.Redstone;
 
@@ -76,7 +78,6 @@ public class BlockEventListener implements Listener {
 			return;
 		
 		BlockState blockstate = event.getClickedBlock().getState();
-		
 		if(blockstate instanceof Container)  {
 			plugin.getMain().debug("Der Block ist ein Container!");
 			Container cont = (Container) blockstate;
@@ -86,18 +87,20 @@ public class BlockEventListener implements Listener {
 				return;
 			}
 		}
-		if(blockstate instanceof Redstone) {
+		MaterialData data= event.getClickedBlock().getType().getNewData((byte) 0);
+		
+		if(data instanceof Redstone) {
 			plugin.getMain().debug("Der Block ist eine Redstoneinstanz!");
-			Redstone reds = (Redstone) blockstate;
+			Redstone reds = (Redstone) data;
 			GS gs = getGs(event.getPlayer(), blockstate.getLocation());
 			if(gs != null) {
 				Bukkit.getServer().getPluginManager().callEvent(new WorldblockRedstoneEvent(gs, event.getPlayer(), reds, event));
 				return;
 			}
 		}
-		if(blockstate instanceof Openable) {
+		if(data instanceof Openable) {
 			plugin.getMain().debug("Der Block ist eine Openableinstanz!");
-			Openable open = (Openable) blockstate;
+			Openable open = (Openable) data;
 			GS gs = getGs(event.getPlayer(), blockstate.getLocation());
 			if(gs != null) {
 				Bukkit.getServer().getPluginManager().callEvent(new WorldblockOpenableEvent(gs, event.getPlayer(), open, event));
