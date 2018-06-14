@@ -1,127 +1,124 @@
 package com.github.herbert.worldblocksplugin.events.listeners;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.material.Openable;
-import org.bukkit.material.Redstone;
 
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.events.WorldblockBlockEvent;
 import com.github.herbert.worldblocksplugin.events.WorldblockContainerEvent;
-import com.github.herbert.worldblocksplugin.worldblocks.GS;
+import com.github.herbert.worldblocksplugin.events.WorldblockOpenableEvent;
+import com.github.herbert.worldblocksplugin.events.WorldblockRedstoneEvent;
+import com.github.herbert.worldblocksplugin.worldblocks.Worldblock;
+
+import net.md_5.bungee.api.ChatColor;
 
 public class PermissionsListener implements Listener {
-	
 	WorldBlocksPlugin plugin;
-	
-	public PermissionsListener(WorldBlocksPlugin plugin) {
-		this.plugin=plugin;
+	public PermissionsListener(WorldBlocksPlugin wbplugin) {
+		plugin=wbplugin;
 	}
 	//-------------------------------------------------------------------------------
-	//---Serverweit BlockPlace prüfen -> findet es auf einem WorldBlock statt?-------
 	//-------------------------------------------------------------------------------
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onBlockPlaceEvent(BlockPlaceEvent event) {
-		if(!plugin.hasRegisteredWorldBlocks()) {
-			plugin.getMain().debug("Server hat kein GS");
-			return;
-		}
-		Player p = event.getPlayer();
-		Location loc=event.getBlock().getLocation();
-		GS gs = getGs(p, loc);
-		if(gs != null) 
-			Bukkit.getServer().getPluginManager().callEvent(new WorldblockBlockEvent(gs, p, event.getBlock(), event));
-			
+	//---Listener für Blockänderungen auf WorldBlocks--------------------------------
+	//-------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------
+	@EventHandler
+	public void onBlockChange(WorldblockBlockEvent event) {
+		if(!checkBlockPermission(event.getPlayer(), event.getWorldblock()))
+			event.setCancelled(true);
 	}
 	
-	//-------------------------------------------------------------------------------
-	//---Serverweit BlockBreak prüfen -> findet es auf einem WordlBlock statt?-------
-	//-------------------------------------------------------------------------------
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onBlockBreakEvent(BlockBreakEvent event) {
-		if(!plugin.hasRegisteredWorldBlocks()) {
-			plugin.getMain().debug("Server hat kein GS");
-			return;
-		}
-		Player p = event.getPlayer();
-		Location loc=event.getBlock().getLocation();
-		GS gs = getGs(p, loc);
-		if(gs != null)
-		{
-			Bukkit.getServer().getPluginManager().callEvent(new WorldblockBlockEvent(gs, p, event.getBlock(), event));
-		}
-			
+	@EventHandler
+	public void onContainerAccess(WorldblockContainerEvent event) {
+		if(!checkContainerPermission(event.getPlayer(), event.getWorldblock()))
+			event.setCancelled(true);
 	}
-	//Event wird ausgelöst, wenn Truhen oder ähnliches angeklickt werden.
-	@EventHandler(priority=EventPriority.HIGHEST)
-	public void onPlayerInteract(PlayerInteractEvent event) {
-		if(!plugin.hasRegisteredWorldBlocks()) {
-			plugin.getMain().debug("Server hat kein GS");
-			return;
-		}
-		//Nur Rechtsklick-Events werden behandelt (Truhen, Redstone, Türen)
-		if(!(event.getAction()==Action.RIGHT_CLICK_BLOCK)) 
-			return;
-		
-		BlockState blockstate = event.getClickedBlock().getState();
-		
-		if(blockstate instanceof Container)  {
-			plugin.getMain().debug("Der Block ist ein Container!");
-			Container cont = (Container) blockstate;
-			GS gs = getGs(event.getPlayer(), cont.getLocation());
-			if(gs != null)  {
-				Bukkit.getServer().getPluginManager().callEvent(new WorldblockContainerEvent(gs, event.getPlayer(), cont, event));
-				return;
+	@EventHandler
+	public void onOpeningDoor(WorldblockOpenableEvent event) {
+		if(!checkOpenablePermission(event.getPlayer(), event.getWorldblock()))
+			event.setCancelled(true);
+	}
+	@EventHandler
+	public void onUsingRedstone(WorldblockRedstoneEvent event) {
+		if(!checkRedstonePermission(event.getPlayer(), event.getWorldblock()))
+			event.setCancelled(true);
+	}
+	
+	
+	//-------------------------------------------------------------------------------
+	//---Auslagerung: Hat der <p> für den <worldblock> die Permission 8 -------------
+	//---(bauen/abbauen)?------------------------------------------------------------
+	//-------------------------------------------------------------------------------
+		private boolean checkBlockPermission(Player p, Worldblock wb) {
+			if(hasWorldPermission(p))
+				return true;
+			if(wb.hasPermission(p, (byte) 8)) {
+				plugin.getMain().debug(p.getName() + " hat die Permissions für das GS" + wb.getCoords().getX() + " / " + wb.getCoords().getZ());
+				return true;
 			}
-		}
-		if(blockstate instanceof Redstone) {
-			plugin.getMain().debug("Der Block ist eine Redstoneinstanz!");
-			Redstone reds = (Redstone) blockstate;
-			GS gs = getGs(event.getPlayer(), blockstate.getLocation());
-			if(gs != null) {
-				//TODO: WorldblockRedstoneEvent schreiben
-				return;
-			}
-		}
-		if(blockstate instanceof Openable) {
-			plugin.getMain().debug("Der Block ist eine Openableinstanz!");
-			Openable open = (Openable) blockstate;
-			GS gs = getGs(event.getPlayer(), blockstate.getLocation());
-			if(gs != null) {
-				//TODO: WorldblockOpenableEvent schreiben
-				return;
-			}
+			//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spam zu verhindern.
+			p.sendMessage(plugin.convMessage(ChatColor.RED + "Ihr dürft hier nicht bauen!"));
+			p.damage(2);
+			return false;
 		}
 		
-	}
-	
-	
-	
-	
-	
-	//GS bei <loc> suchen
-	private GS getGs(Player p, Location loc) {
-		//Wenn der Block auf der Miningebene liegt
-		if(loc.getY()< plugin.getMain().getConfigInt("gs.lowestProtectedY"))
-			return null;
-		
-		//Wenn in der GSlist kein GS mit dieser Location eingetragen ist, ist diese BlockChange ebenfalls erlaubt
-		if(plugin.data.getGSList().getGS(loc)==null) {
-			plugin.getMain().debug(p.getName() + " ist auf keinem GS");
-			return null;
+	//-------------------------------------------------------------------------------
+	//---Auslagerung: Hat der <p> für den <worldblock> die Permission 4 -------------
+	//---(Container öffnen)?---------------------------------------------------------
+	//-------------------------------------------------------------------------------
+		private boolean checkContainerPermission(Player p, Worldblock wb) {
+			if(hasWorldPermission(p))
+				return true;
+			if(wb.hasPermission(p, (byte) 4)) {
+				plugin.getMain().debug(p.getName() + " hat die Containerpermissions für das GS" + wb.getCoords().getX() + " / " + wb.getCoords().getZ());
+				return true;
+			}
+			//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spam zu verhindern.
+			p.sendMessage(plugin.convMessage(ChatColor.RED + "Ihr dürft das hier nicht verwenden!"));
+			p.damage(2);
+			return false;
 		}
-		//Location ist auf GS
-		return plugin.data.getGSList().getGS(loc);
-	}
+		
+	//-------------------------------------------------------------------------------
+	//---Auslagerung: Hat der <p> für den <worldblock> die Permission 2 -------------
+	//---(Türen und Tore öffnen)?----------------------------------------------------
+	//-------------------------------------------------------------------------------
+		private boolean checkOpenablePermission(Player p, Worldblock wb) {
+			if(hasWorldPermission(p))
+				return true;
+			if(wb.hasPermission(p, (byte) 2)) {
+				plugin.getMain().debug(p.getName() + " hat die Containerpermissions für das GS" + wb.getCoords().getX() + " / " + wb.getCoords().getZ());
+				return true;
+			}
+			//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spam zu verhindern.
+			p.sendMessage(plugin.convMessage(ChatColor.RED + "Ihr dürft das hier nicht verwenden!"));
+			p.damage(2);
+			return false;
+		}
+	//-------------------------------------------------------------------------------
+	//---Auslagerung: Hat der <p> für den <worldblock> die Permission 1 -------------
+	//---(Redstoneinstanzen verwenden)?----------------------------------------------
+	//-------------------------------------------------------------------------------
+			private boolean checkRedstonePermission(Player p, Worldblock wb) {
+				if(hasWorldPermission(p))
+					return true;
+				if(wb.hasPermission(p, (byte) 1)) {
+					plugin.getMain().debug(p.getName() + " hat die Containerpermissions für das GS" + wb.getCoords().getX() + " / " + wb.getCoords().getZ());
+					return true;
+				}
+				//In allen übrigen Fällen ist die Änderung nicht erlaubt. Der Spieler nimmt Schaden, um spam zu verhindern.
+				p.sendMessage(plugin.convMessage(ChatColor.RED + "Ihr dürft das hier nicht verwenden!"));
+				p.damage(2);
+				return false;
+			}
+				
+	//-------------------------------------------------------------------------------
+	//---Auslagerung: Überprüfen von Mod- und Operatorpermissions--------------------
+	//-------------------------------------------------------------------------------
+		private boolean hasWorldPermission(Player p) {
+			if(p.isOp() || p.hasPermission("gsplugin.plugin.buildeverywhere"))
+				return true;
+			return false;
+		}
 }
