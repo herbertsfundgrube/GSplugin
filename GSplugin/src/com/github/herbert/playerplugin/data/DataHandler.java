@@ -41,6 +41,7 @@ public class DataHandler {
 	//Neuen HerbertPlayer in der HerbertPlayerList registrieren
 	public void registerPlayer(HerbertPlayer hp) {
 		plugin.main.debug("Registriere den Spieler " + hp.getPlayer().getName());
+		plugin.main.getServer().getPluginManager().registerEvents(hp, plugin.main);
 		if(hplist == null) {
 			hplist = new HerbertPlayerList(plugin, hp, null);
 			return;

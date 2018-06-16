@@ -90,6 +90,7 @@ public class MainPlugin extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new BlockEventListener(worldblocksplugin), this);
 		getServer().getPluginManager().registerEvents(new PermissionsListener(worldblocksplugin), this);
 		getServer().getPluginManager().registerEvents(new LoginLogoutListener(playerplugin), this);
+	
 	}
 	
 	private void registerCommandExecutors() {
