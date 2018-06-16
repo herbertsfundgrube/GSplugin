@@ -1,15 +1,16 @@
 package com.github.herbert.playerplugin.skills.passive;
 
 import com.github.herbert.playerplugin.skills.PassiveSkill;
+import com.github.herbert.playerplugin.skills.SkillType;
 
-public class Speech implements PassiveSkill {
-	private int lvl;
-	private int xp;
-	public Speech(int lvl, int xp) {
-		this.lvl=lvl;
-		this.xp=xp;
+public class Speech extends PassiveSkill {
+	
+	public Speech(int lvl, double xp) {
+		super(lvl, xp);
 	}
-	public void addXP(int xp) {
-		
+
+	@Override
+	public SkillType getType() {
+		return SkillType.Speech;
 	}
 }

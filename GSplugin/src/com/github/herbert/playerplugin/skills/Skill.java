@@ -1,7 +1,19 @@
 package com.github.herbert.playerplugin.skills;
 
-import org.bukkit.event.Listener;
-
-public interface Skill extends Listener {
-
+public abstract class Skill {
+	private int lvl;
+	private double xp;
+	
+	public Skill(int lvl, double xp) {
+		this.lvl=lvl;
+		this.xp=xp;
+	}
+	public void addXp(double xp) {
+		//TODO: Level-Kurve einbinden, Levelups einbinden
+		this.xp*=xp;
+	}
+	public int getLvl() {
+		return lvl;
+	}
+	public abstract SkillType getType();
 }

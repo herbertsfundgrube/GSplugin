@@ -1,5 +1,9 @@
 package com.github.herbert.playerplugin.skills;
 
-public interface CraftSkill extends Skill {
+public abstract class CraftSkill extends Skill {
+
+	public CraftSkill(int lvl, double xp) {
+		super(lvl, xp);
+	}
 
 }

@@ -1,5 +1,9 @@
 package com.github.herbert.playerplugin.skills;
 
-public interface PassiveSkill extends Skill {
+public abstract class PassiveSkill extends Skill {
+
+	public PassiveSkill(int lvl, double xp) {
+		super(lvl, xp);
+	}
 
 }

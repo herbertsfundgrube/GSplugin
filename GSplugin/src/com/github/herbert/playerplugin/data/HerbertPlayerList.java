@@ -1,14 +1,19 @@
-package com.github.herbert.playerplugin.playerdata;
+package com.github.herbert.playerplugin.data;
 
 import org.bukkit.entity.Player;
 
-public class HerbertPlayerList {
+import com.github.herbert.playerplugin.PlayerPlugin;
+import com.github.herbert.playerplugin.playerdata.HerbertPlayer;
+
+class HerbertPlayerList {
 	private HerbertPlayerList hplist;
 	private HerbertPlayer hp;
+	PlayerPlugin plugin;
 	
-	public HerbertPlayerList(HerbertPlayer hp, HerbertPlayerList hpl) {
+	public HerbertPlayerList(PlayerPlugin plugin, HerbertPlayer hp, HerbertPlayerList hpl) {
 		this.hp=hp;
 		this.hplist=hpl;
+		this.plugin=plugin;
 	}
 	
 	public HerbertPlayer getHerbertPlayer(Player p) {
@@ -28,13 +33,15 @@ public class HerbertPlayerList {
 		while(hplisttemp.hplist!=null) {
 			hplisttemp=hplisttemp.hplist;
 		}
-		hplisttemp.hplist=new HerbertPlayerList(hp, null);
+		hplisttemp.hplist=new HerbertPlayerList(plugin, hp, null);
 	}
 	
+	//Entfernt den Spieler aus der Liste der geladenen PluginPlayers und speichert dessen Werte ab. Üblicherweise beim Logout.
 	public void removeAndSave(Player p) {
 		HerbertPlayerList hplisttemp=this;
 		do {
 			if(hplisttemp.hplist.hp.getPlayer()==p) {
+				plugin.data.savePlayerToDisk(hplisttemp.hplist.hp);
 				hplisttemp.hplist=hplisttemp.hplist.hplist;
 			}
 			hplisttemp=hplisttemp.hplist;
