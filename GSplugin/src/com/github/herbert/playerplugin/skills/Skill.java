@@ -1,5 +1,7 @@
 package com.github.herbert.playerplugin.skills;
 
-public interface Skill {
+import org.bukkit.event.Listener;
+
+public interface Skill extends Listener {
 
 }
