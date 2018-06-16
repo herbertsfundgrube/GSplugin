@@ -15,5 +15,8 @@ public abstract class Skill {
 	public int getLvl() {
 		return lvl;
 	}
+	public double getXP() {
+		return xp;
+	}
 	public abstract SkillType getType();
 }

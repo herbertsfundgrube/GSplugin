@@ -6,8 +6,8 @@ import com.github.herbert.playerplugin.PlayerPlugin;
 import com.github.herbert.playerplugin.playerdata.HerbertPlayer;
 
 class HerbertPlayerList {
-	private HerbertPlayerList hplist;
-	private HerbertPlayer hp;
+	public HerbertPlayerList hplist;
+	public HerbertPlayer hp;
 	PlayerPlugin plugin;
 	
 	public HerbertPlayerList(PlayerPlugin plugin, HerbertPlayer hp, HerbertPlayerList hpl) {
@@ -37,11 +37,23 @@ class HerbertPlayerList {
 	}
 	
 	//Entfernt den Spieler aus der Liste der geladenen PluginPlayers und speichert dessen Werte ab. Üblicherweise beim Logout.
-	public void removeAndSave(Player p) {
+	public void remove(Player p) {
 		HerbertPlayerList hplisttemp=this;
 		do {
 			if(hplisttemp.hplist.hp.getPlayer()==p) {
-				plugin.data.savePlayerToDisk(hplisttemp.hplist.hp);
+				hplisttemp.hplist=hplisttemp.hplist.hplist;
+			}
+			hplisttemp=hplisttemp.hplist;
+		} while(hplisttemp!=null);
+	}
+	
+	public void remove(HerbertPlayer hp) {
+		HerbertPlayerList hplisttemp=this;
+		if(hplist==null)
+			return;
+				
+		do {
+			if(hplisttemp.hplist.hp==hp) {
 				hplisttemp.hplist=hplisttemp.hplist.hplist;
 			}
 			hplisttemp=hplisttemp.hplist;

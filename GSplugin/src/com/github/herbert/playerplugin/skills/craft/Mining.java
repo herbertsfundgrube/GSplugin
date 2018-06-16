@@ -11,7 +11,7 @@ public class Mining extends CraftSkill {
 
 	@Override
 	public SkillType getType() {
-		return SkillType.Mining;
+		return SkillType.MINING;
 	}
 
 }

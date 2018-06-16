@@ -11,7 +11,7 @@ public class SwordFighting extends CombatSkill {
 
 	@Override
 	public SkillType getType() {
-		return SkillType.SwordFighting;
+		return SkillType.SWORD_FIGHTING;
 	}
 
 }

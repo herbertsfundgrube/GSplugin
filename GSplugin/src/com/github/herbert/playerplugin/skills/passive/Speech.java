@@ -11,6 +11,6 @@ public class Speech extends PassiveSkill {
 
 	@Override
 	public SkillType getType() {
-		return SkillType.Speech;
+		return SkillType.SPEECH;
 	}
 }

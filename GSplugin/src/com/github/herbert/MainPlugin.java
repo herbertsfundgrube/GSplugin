@@ -3,6 +3,8 @@ package com.github.herbert;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.github.herbert.playerplugin.PlayerPlugin;
+import com.github.herbert.playerplugin.playerdata.dataeventhandlers.LoginLogoutListener;
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.ce.GSCommandExecutor;
 import com.github.herbert.worldblocksplugin.events.listeners.BlockEventListener;
@@ -17,6 +19,7 @@ public class MainPlugin extends JavaPlugin {
 	
 	private GSCommandExecutor gsplugincommandexec;
 	public WorldBlocksPlugin worldblocksplugin;
+	public PlayerPlugin playerplugin;
 	
 	//--------------------------------------
 	//--------------------------------------
@@ -86,6 +89,7 @@ public class MainPlugin extends JavaPlugin {
 	private void registerListeners() {
 		getServer().getPluginManager().registerEvents(new BlockEventListener(worldblocksplugin), this);
 		getServer().getPluginManager().registerEvents(new PermissionsListener(worldblocksplugin), this);
+		getServer().getPluginManager().registerEvents(new LoginLogoutListener(playerplugin), this);
 	}
 	
 	private void registerCommandExecutors() {
@@ -95,6 +99,7 @@ public class MainPlugin extends JavaPlugin {
 	
 	private void registerPlugins() {
 		worldblocksplugin = new WorldBlocksPlugin(this);
+		playerplugin = new PlayerPlugin(this);
 	}
 	
     //--------------------------------------
