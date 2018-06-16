@@ -9,6 +9,7 @@ public class HerbertPlayer implements GSinteractor {
 
 	Player p;
 	
+	
 	public HerbertPlayer(Player player) {
 		p=player;
 	}
