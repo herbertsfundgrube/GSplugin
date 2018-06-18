@@ -1,9 +1,12 @@
 package com.github.herbert.playerplugin;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.github.herbert.playerplugin.playerdata.HerbertPlayer;
 
 public class PlayerPluginCommandExecutor implements CommandExecutor {
 	
@@ -21,7 +24,16 @@ public class PlayerPluginCommandExecutor implements CommandExecutor {
 		}
 		
 		if(args[0].equalsIgnoreCase("stats")) {
-			plugin.data.getPlayer((Player)sender);
+			HerbertPlayer hp = plugin.data.getPlayer((Player)sender);
+			if(args.length == 1) {
+				sender.sendMessage(hp.getPlayerInfo());
+				return true;
+			}
+			if(args.length>1) {
+				sender.sendMessage(hp.getSkillInfo(args[1]));
+				return true;
+			}
+			
 		}
 		
 		
@@ -29,17 +41,15 @@ public class PlayerPluginCommandExecutor implements CommandExecutor {
 			sender.sendMessage(showHelp());
 			return true;
 		}
-		return false;
+		sender.sendMessage(showHelp());
+		return true;
 	}
 	
 	public String showHelp() {
-		return "Hilfetext";
-	}
-	
-	public String formatStats(String stat) {
-		String form = "";
-		
-		return form;
+		String help = PlayerPlugin.getHeader();
+		help+="\n"+ChatColor.AQUA+"/player stats "+ChatColor.RESET +"- zeigt Spielerstatistiken";
+		help+="\n"+ChatColor.AQUA+"/player stats [Fähigkeit] "+ChatColor.RESET +"- zeigt Fähigkeitsstatistiken";
+		return help;
 	}
 
 }

@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.github.herbert.playerplugin.PlayerPlugin;
 import com.github.herbert.playerplugin.PlayerPluginCommandExecutor;
 import com.github.herbert.playerplugin.playerdata.dataeventhandlers.LoginLogoutListener;
+import com.github.herbert.playerplugin.skillevents.listeners.BlockBreakExperienceListener;
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.ce.GSCommandExecutor;
 import com.github.herbert.worldblocksplugin.events.listeners.BlockEventListener;
@@ -51,6 +52,7 @@ public class MainPlugin extends JavaPlugin {
 	public void onDisable() {
 		this.getLogger().info(this.getName()+" speichert Daten für GSplugin");
 		worldblocksplugin.data.saveData();
+		playerplugin.data.SaveFile();
 		this.getLogger().info(this.getName()+" deaktiviert!");
 	}
     
@@ -67,6 +69,7 @@ public class MainPlugin extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new BlockEventListener(worldblocksplugin), this);
 		getServer().getPluginManager().registerEvents(new PermissionsListener(worldblocksplugin), this);
 		getServer().getPluginManager().registerEvents(new LoginLogoutListener(playerplugin), this);
+		getServer().getPluginManager().registerEvents(new BlockBreakExperienceListener(playerplugin), this);
 	
 	}
 	
@@ -74,7 +77,7 @@ public class MainPlugin extends JavaPlugin {
 		gsplugincommandexec = new GSCommandExecutor(worldblocksplugin);
 		playerplugincommandexec = new PlayerPluginCommandExecutor(playerplugin);
 		this.getCommand("gs").setExecutor(gsplugincommandexec);
-		this.getCommand("ich").setExecutor(playerplugincommandexec);
+		this.getCommand("player").setExecutor(playerplugincommandexec);
 	}
 	
 	private void registerPlugins() {

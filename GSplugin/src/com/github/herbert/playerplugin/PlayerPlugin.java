@@ -20,11 +20,14 @@ public class PlayerPlugin {
     	loglistener = new LoginLogoutListener(this);
     }
     
-    public String convMessage(String input) {
+    public static String convMessage(String input) {
  	   return "["+ChatColor.DARK_GRAY + "Spielerplugin"+ ChatColor.RESET + "] " + input;
     }
-    public String getHeader() {
+    public static String getHeader() {
     	return ("---------------------"+ChatColor.GRAY+"["+ ChatColor.DARK_AQUA +"Spielerplugin" +ChatColor.GRAY + "]"+ChatColor.RESET+"---------------------");
+    }
+    public static String getHeader(String s) {
+    	return ("---------------------"+ChatColor.GRAY+"["+ ChatColor.YELLOW+ s +ChatColor.GRAY + "]"+ChatColor.RESET+"---------------------");
     }
     
     public void addPlayer(XPPlayer p) {

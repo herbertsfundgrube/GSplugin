@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -73,20 +74,33 @@ public class DataHandler {
 			loadedplayer = new HerbertPlayer(Bukkit.getPlayer(id));
 		//Sonst: Die Skills werden aus der Datei ausgelesen und ins Plugin eingespeist.
 		} else {
+			plugin.main.debug("Daten für den Spieler " + id + " werden geladen...");
+			int playerlevel=1;
+			double playerxp=0;
+			double masteryxp=0;
+			if(playerFile.contains(id.toString() + ".playerxp"))
+				playerlevel=playerFile.getInt(id.toString() + ".playerxp");
+			if(playerFile.contains(id.toString() + ".playerlevel"))
+				playerlevel=playerFile.getInt(id.toString() + ".playerlevel");
+			if(playerFile.contains(id.toString() + ".playermasteryxp"))
+				playerlevel=playerFile.getInt(id.toString() + ".playermasteryxp");
+			
 			//Im Array werden die eingelesenen Skills zwischengespeichert. <i> ist dabei der Index.
 			Skill[] skills = new Skill[playerFile.getConfigurationSection(id.toString()+".skills").getKeys(false).size()];
 			int i = 0;
 			//Schleife, die durch jeden Skill iteriert
-			for(String skillSection : playerFile.getConfigurationSection(id.toString()+".skills").getKeys(false)) {
-				int lvl = playerFile.getInt(skillSection + ".lvl");
-				double xp = playerFile.getDouble(skillSection + ".xp");
+			ConfigurationSection sec = playerFile.getConfigurationSection(id.toString()+".skills");
+			for(String skillSection : sec.getKeys(false)) {
+				int lvl = playerFile.getInt(sec.getCurrentPath()+"."+skillSection + ".lvl");
+				double xp = playerFile.getDouble(sec.getCurrentPath()+"."+skillSection + ".xp");
+				double freexp = playerFile.getDouble(sec.getCurrentPath()+"."+skillSection + ".freexp");
 				//String in SkillType umwandeln (substring, um die ConfigurationSection abzuschneiden)
-				SkillType type = SkillType.valueOf(skillSection.substring(skillSection.lastIndexOf(".") + 1 ));
+				SkillType type = SkillType.valueOf(skillSection);
 				//Geladenen Skill im Array zwischenspeichern
-				skills[i]=SkillType.newSkill(type, lvl, xp);
+				skills[i]=SkillType.newSkill(type, lvl, xp, freexp);
 				i++;
 			}
-			loadedplayer = new HerbertPlayer(Bukkit.getPlayer(id), skills);
+			loadedplayer = new HerbertPlayer(Bukkit.getPlayer(id), skills, playerlevel, playerxp, masteryxp);
 		}
 		
 		registerPlayer(loadedplayer);
@@ -102,19 +116,33 @@ public class DataHandler {
 	public void saveAndUnregisterPlayer(HerbertPlayer hp) {
 		UUID id = hp.getPlayer().getUniqueId();
 		plugin.main.debug("Speichert Daten für " + hp.getPlayer().getName());
+		int playerlevel=hp.getPlayerLvl();
+		double playerxp=hp.getPlayerXP();
+		double masteryxp=hp.getMasteryXP();
+		playerFile.set(id.toString() +".playerxp", playerxp);
+		playerFile.set(id.toString() +".playerlevel", playerlevel);
+		playerFile.set(id.toString() +".playermasteryxp", masteryxp);
 		//Schleife, um Skills abzuspeichern. Loopt durch Einträge in der HashMap für Skills.
 		for(Map.Entry<SkillType, Skill> me : hp.getSkillsMap().entrySet()) {
 			int lvl = me.getValue().getLvl();
 			double xp = me.getValue().getXP();
-			plugin.main.debug(id.toString() + ".skills."+me.getKey().name()+"<lvl/xp> wird gespeichert als <"+lvl+"/"+xp+">");
+			double freexp = me.getValue().getFreeXP();
 			playerFile.set(id.toString() + ".skills."+me.getKey().name()+".lvl", lvl);
 			playerFile.set(id.toString() + ".skills."+me.getKey().name()+".xp", xp);
+			playerFile.set(id.toString() + ".skills."+me.getKey().name()+".freexp", freexp);
 		}
 		if(hplist.hplist==null) {
 			hplist=null;
 		} else
 			hplist.remove(hp);
 
+		try {
+			playerFile.save(playerdiskfile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void SaveFile() {
 		try {
 			playerFile.save(playerdiskfile);
 		} catch (IOException e) {

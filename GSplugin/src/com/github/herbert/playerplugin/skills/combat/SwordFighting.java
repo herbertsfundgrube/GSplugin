@@ -5,8 +5,8 @@ import com.github.herbert.playerplugin.skills.SkillType;
 
 public class SwordFighting extends CombatSkill {
 
-	public SwordFighting(int lvl, double xp) {
-		super(lvl, xp);
+	public SwordFighting(int lvl, double xp, double freexp) {
+		super(lvl, xp, freexp);
 	}
 
 	@Override

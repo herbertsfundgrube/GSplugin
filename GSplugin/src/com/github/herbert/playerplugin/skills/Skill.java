@@ -1,9 +1,13 @@
 package com.github.herbert.playerplugin.skills;
 
+
 import org.bukkit.Bukkit;
 
 import com.github.herbert.PluginConfiguration;
+import com.github.herbert.playerplugin.PlayerPlugin;
 import com.github.herbert.playerplugin.skillevents.MasteryXPEvent;
+
+import net.md_5.bungee.api.ChatColor;
 
 public abstract class Skill {
 	private int lvl;
@@ -13,9 +17,10 @@ public abstract class Skill {
 	private double freexp;
 	public int maxlvl;
 	
-	public Skill(int lvl, double xp) {
+	public Skill(int lvl, double xp, double freexp) {
 		this.lvl=lvl;
 		this.xp=xp;
+		this.freexp=freexp;
 		nextxp=levelCurve(lvl);
 		maxlvl = PluginConfiguration.getInt("players.maximumSkillLvl");
 	}
@@ -38,10 +43,17 @@ public abstract class Skill {
 		//Wenn nach dem Hinzufügen der tempXP die levelup-Grenze für dieses Level überschritten wird
 		if(xp+tempxp>=levelCurve(lvl)) {
 			handleXPBorder(tempxp);
+			xp = xp * 10;
+			xp = Math.round(xp);
+			xp = xp/ 10;
 			return;
 		}
 		//XP werden hinzugefügt, wenn keine der Bedingungen abgefangen wurde
 		xp+=tempxp;
+		//Auf zwei Nachkommastellen
+		xp = xp * 10;
+		xp = Math.round(xp);
+		xp = xp/ 10;
 	}
 	/* 
 	 * Methode wird aufgerufen, wenn die neuen XP den
@@ -55,10 +67,24 @@ public abstract class Skill {
 		}
 		//XP werden zu den TempXP hinzugefügt
 		freexp+=tempxp;
+		//Auf zwei Nachkommastellen runden.
+		freexp = freexp * 10;
+		freexp = Math.round(freexp);
+		freexp = freexp/ 10;
+	}
+
+	public String getInfo() {
+		String info = PlayerPlugin.getHeader(getType().displayName());
+		info += "\n"+"Fähigkeitslevel: " + ChatColor.DARK_GREEN + getLvl()+ ChatColor.RESET+" / " + ChatColor.GRAY + maxlvl;
+		info += "\n"+"Fähigkeitserfahrung: " + ChatColor.DARK_GREEN + getXP() + ChatColor.RESET+" / " + ChatColor.GRAY + nextxp;
+		if(freexp > 0)
+			info += "\n"+"Freie Fähigkeitserfahrung: " + ChatColor.GOLD+getFreeXP();
+		return info;
 	}
 	public void levelUp() {
 		xp=0;
 		lvl+=1;
+		nextxp=levelCurve(lvl);
 	}
 	public int getLvl() {
 		return lvl;

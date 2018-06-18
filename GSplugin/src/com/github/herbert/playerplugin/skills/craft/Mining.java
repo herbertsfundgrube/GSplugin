@@ -5,8 +5,8 @@ import com.github.herbert.playerplugin.skills.SkillType;
 
 public class Mining extends CraftSkill {
 
-	public Mining(int lvl, double xp) {
-		super(lvl, xp);
+	public Mining(int lvl, double xp, double freexp) {
+		super(lvl, xp, freexp);
 	}
 
 	@Override
