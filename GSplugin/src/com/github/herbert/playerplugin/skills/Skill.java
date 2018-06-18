@@ -11,23 +11,23 @@ public abstract class Skill {
 	private int skillpoints = 0;
 	private double nextxp;
 	private double freexp;
+	public int maxlvl;
 	
 	public Skill(int lvl, double xp) {
 		this.lvl=lvl;
 		this.xp=xp;
 		nextxp=levelCurve(lvl);
+		maxlvl = PluginConfiguration.getInt("players.maximumSkillLvl");
 	}
 	public void addXp(double tempxp) {
 		//Wenn der Skill über das maximale Level hinaus gelevelt ist, dann wird das Level angepasst und XP zurückerstattet.
-		if(lvl>PluginConfiguration.getInt("players.maximumSkillLvl")) {
-			int maxlvl = PluginConfiguration.getInt("players.maximumSkillLvl");
+		if(lvl > maxlvl) {
 			double extraxp = 0;
 			while(lvl > maxlvl) {
 				lvl-=1;
 				extraxp+=levelCurve(lvl);
 			}
-			freexp += extraxp;
-			Bukkit.getServer().getPluginManager().callEvent(new MasteryXPEvent(this, tempxp));
+			Bukkit.getServer().getPluginManager().callEvent(new MasteryXPEvent(this, extraxp));
 		}
 		//Wenn der Skill das maximale Skilllevel hat, dann werden stattdessen Mastery-XP hinzugefügt.
 		if(lvl==PluginConfiguration.getInt("players.maximumSkillLvl")) {
