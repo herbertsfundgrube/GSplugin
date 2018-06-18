@@ -2,39 +2,81 @@ package com.github.herbert.playerplugin.skills;
 
 import org.bukkit.Bukkit;
 
+import com.github.herbert.PluginConfiguration;
 import com.github.herbert.playerplugin.skillevents.MasteryXPEvent;
-import com.github.herbert.playerplugin.skillevents.SkillLevelUpEvent;
 
 public abstract class Skill {
 	private int lvl;
 	private double xp;
+	private int skillpoints = 0;
+	private double nextxp;
+	private double freexp;
 	
 	public Skill(int lvl, double xp) {
 		this.lvl=lvl;
 		this.xp=xp;
+		nextxp=levelCurve(lvl);
 	}
-	public void addXp(double xp) {
-		if(lvl>=100) {
-			Bukkit.getServer().getPluginManager().callEvent(new MasteryXPEvent(this, xp));
+	public void addXp(double tempxp) {
+		//Wenn der Skill über das maximale Level hinaus gelevelt ist, dann wird das Level angepasst und XP zurückerstattet.
+		if(lvl>PluginConfiguration.getInt("players.maximumSkillLvl")) {
+			int maxlvl = PluginConfiguration.getInt("players.maximumSkillLvl");
+			double extraxp = 0;
+			while(lvl > maxlvl) {
+				lvl-=1;
+				extraxp+=levelCurve(lvl);
+			}
+			freexp += extraxp;
+			Bukkit.getServer().getPluginManager().callEvent(new MasteryXPEvent(this, tempxp));
+		}
+		//Wenn der Skill das maximale Skilllevel hat, dann werden stattdessen Mastery-XP hinzugefügt.
+		if(lvl==PluginConfiguration.getInt("players.maximumSkillLvl")) {
+			xp=0;
+			Bukkit.getServer().getPluginManager().callEvent(new MasteryXPEvent(this, tempxp));
 			return;
 		}
-		//TODO: Level-Kurve einbinden, Levelups einbinden
-		this.xp+=xp;
-		//Zu Testzwecken werden 100 XP benötigt.
-		if(this.xp>=100) {
-			this.xp-=100;
-			lvl+=1;
-			//Auf lvl 100 werden keine Skill-XP mehr gesammelt. Daher werden sie auf 0 gesetzt.
-			if(lvl==100)
-				this.xp=0;
-			Bukkit.getServer().getPluginManager().callEvent(new SkillLevelUpEvent(this));
+		//Wenn nach dem Hinzufügen der tempXP die levelup-Grenze für dieses Level überschritten wird
+		if(xp+tempxp>=levelCurve(lvl)) {
+			handleXPBorder(tempxp);
+			return;
 		}
+		//XP werden hinzugefügt, wenn keine der Bedingungen abgefangen wurde
+		xp+=tempxp;
+	}
+	/* 
+	 * Methode wird aufgerufen, wenn die neuen XP den
+	 * Grenzwert zum nächsten Level übersteigen.
+	 */
+	private void handleXPBorder(double tempxp) {
+		//Falls noch XP fehlen, werden diese aufgefüllt
+		if(xp<nextxp) {
+			tempxp -= nextxp-xp;
+			xp=nextxp;
+		}
+		//XP werden zu den TempXP hinzugefügt
+		freexp+=tempxp;
+	}
+	public void levelUp() {
+		xp=0;
+		lvl+=1;
 	}
 	public int getLvl() {
 		return lvl;
 	}
 	public double getXP() {
 		return xp;
+	}
+	public double getFreeXP() {
+		return freexp;
+	}
+	public int getSkillpoints() {
+		return skillpoints;
+	}
+	public double getRequiredXP() {
+		return levelCurve(lvl) - xp;
+	}
+	public double levelCurve(int lvl) {
+		return lvl*5040/(lvl+30);
 	}
 	public abstract SkillType getType();
 }

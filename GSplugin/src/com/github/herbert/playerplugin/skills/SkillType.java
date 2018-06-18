@@ -3,6 +3,10 @@ import com.github.herbert.playerplugin.skills.passive.*;
 import com.github.herbert.playerplugin.skills.craft.*;
 import com.github.herbert.playerplugin.skills.combat.*;
 
+import java.util.HashMap;
+
+import org.bukkit.Material;
+
 public enum SkillType {
 	SWORD_FIGHTING, MINING, SPEECH;
 	
@@ -23,5 +27,11 @@ public enum SkillType {
 		if(type.equals(SkillType.SWORD_FIGHTING))
 			return new SwordFighting(lvl, xp);
 		return null;
+		
+	}
+	
+	public static HashMap<Material, Double> getBlockXP(SkillType type) {
+		HashMap<Material, Double> friedhelm = new HashMap<Material, Double>();
+		return friedhelm;
 	}
 }

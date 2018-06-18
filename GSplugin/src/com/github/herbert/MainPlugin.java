@@ -4,6 +4,7 @@ package com.github.herbert;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.herbert.playerplugin.PlayerPlugin;
+import com.github.herbert.playerplugin.PlayerPluginCommandExecutor;
 import com.github.herbert.playerplugin.playerdata.dataeventhandlers.LoginLogoutListener;
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.ce.GSCommandExecutor;
@@ -15,9 +16,8 @@ public class MainPlugin extends JavaPlugin {
 	//Debugging aktivieren?
 	boolean debug = true;
 	
-
-	
 	private GSCommandExecutor gsplugincommandexec;
+	private PlayerPluginCommandExecutor playerplugincommandexec;
 	public WorldBlocksPlugin worldblocksplugin;
 	public PlayerPlugin playerplugin;
 	
@@ -32,6 +32,7 @@ public class MainPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
         this.getLogger().info(this.getName()+" wird gestartet");
+		PluginConfiguration.createConfigFile(this.getDataFolder());
         registerPlugins();
 		registerListeners();
 		registerCommandExecutors();
@@ -52,30 +53,6 @@ public class MainPlugin extends JavaPlugin {
 		worldblocksplugin.data.saveData();
 		this.getLogger().info(this.getName()+" deaktiviert!");
 	}
-	
-	//--------------------------------------
-	//--------------------------------------
-	//--------------------------------------
-	//----------Config Section--------------
-	//--------------------------------------
-	//--------------------------------------
-	//--------------------------------------
-	
-    //TODO
-    public String getConfigString(String key) {
-    	return null;
-    }
-    //TODO
-    public int getConfigInt(String key) {
-    	
-    	//Bis die Config eingebunden ist werden die Werte hardcoded.
-    	if(key.equals("gs.lowestProtectedY"))
-    		return 10;
-    	
-    	
-    	//Ende Hardcode
-    	return 0;
-    }
     
     
     //--------------------------------------
@@ -95,7 +72,9 @@ public class MainPlugin extends JavaPlugin {
 	
 	private void registerCommandExecutors() {
 		gsplugincommandexec = new GSCommandExecutor(worldblocksplugin);
+		playerplugincommandexec = new PlayerPluginCommandExecutor(playerplugin);
 		this.getCommand("gs").setExecutor(gsplugincommandexec);
+		this.getCommand("ich").setExecutor(playerplugincommandexec);
 	}
 	
 	private void registerPlugins() {

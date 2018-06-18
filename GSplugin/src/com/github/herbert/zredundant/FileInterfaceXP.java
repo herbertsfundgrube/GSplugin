@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.herbert.playerplugin.XP;
+package com.github.herbert.zredundant;
 import com.github.herbert.playerplugin.*;
-
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

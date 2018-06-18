@@ -2,7 +2,6 @@ package com.github.herbert.worldblocksplugin.events.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
@@ -17,6 +16,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.material.Openable;
 import org.bukkit.material.Redstone;
 
+import com.github.herbert.PluginConfiguration;
 import com.github.herbert.worldblocksplugin.WorldBlocksPlugin;
 import com.github.herbert.worldblocksplugin.events.WorldblockBlockEvent;
 import com.github.herbert.worldblocksplugin.events.WorldblockContainerEvent;
@@ -87,6 +87,7 @@ public class BlockEventListener implements Listener {
 				return;
 			}
 		}
+		@SuppressWarnings("deprecation")
 		MaterialData data= event.getClickedBlock().getType().getNewData((byte) 0);
 		
 		if(data instanceof Redstone) {
@@ -117,8 +118,10 @@ public class BlockEventListener implements Listener {
 	//GS bei <loc> suchen
 	private GS getGs(Player p, Location loc) {
 		//Wenn der Block auf der Miningebene liegt
-		if(loc.getY()< plugin.getMain().getConfigInt("gs.lowestProtectedY"))
+		if(loc.getY()< PluginConfiguration.getInt("gs.lowestProtectedY")) {
+			plugin.getMain().debug("Kein WorldBlock gefunden: " + p.getName() + " ist auf der Miningebene.");
 			return null;
+		}
 		
 		//Wenn in der GSlist kein GS mit dieser Location eingetragen ist, ist diese BlockChange ebenfalls erlaubt
 		if(plugin.data.getGSList().getGS(loc)==null) {

@@ -7,3 +7,6 @@ commands:
    gs:
       description: Hauptbefehl für WorldBlocks
       usage: /<command> [fehler]
+   ich:
+      description: Befehl für Spieleraktionen
+      usage: /<command> [fehler]
