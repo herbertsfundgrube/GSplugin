@@ -40,7 +40,7 @@ public class PluginConfiguration {
 	 */
 	private static void setConfigDefaults() {
 		//Adminplugin
-		
+		putDefault("admin.debug", false);
 		//Craftingplugin
 		
 		//Groupplugin
@@ -68,6 +68,9 @@ public class PluginConfiguration {
 	}
 	public static double getDouble(String path) {
 		return config.getDouble(path);
+	}
+	public static boolean getBoolean(String path) {
+		return config.getBoolean(path);
 	}
 	private static void putDefaultBlockBreakXP(Material mat, SkillType skilltype, double xp) {
 		if(config.contains("players.skills.xpvalues.blockbreak."+mat.name()+"."+skilltype.displayName()))

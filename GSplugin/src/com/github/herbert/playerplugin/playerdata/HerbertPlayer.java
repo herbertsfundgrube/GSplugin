@@ -38,13 +38,11 @@ public class HerbertPlayer  implements Listener {
 	public HerbertPlayer(Player player, Skill[] skills, int level, double xp, double masteryxp) {
 		p=player;
 		for(Skill skill : skills) {
-			System.out.println("es wird geputtet: "+skill.getType()+" für den Skilltyp, "+skill.getXP()+" für die XP im Skill.");
 			playerSkills.put(skill.getType(), skill);
 		}
 		for(SkillType skilltype : SkillType.values()) {
 			if(!playerSkills.containsKey(skilltype)) {
 				playerSkills.put(skilltype, SkillType.newSkill(skilltype));
-				System.out.println("es wird geputtet: "+skilltype+" für den Skilltyp und ein neuer Skill dazu.");
 			}
 		}
 		members[0]=new Member(player.getUniqueId(), 31);

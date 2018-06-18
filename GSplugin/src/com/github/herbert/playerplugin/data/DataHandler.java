@@ -78,12 +78,12 @@ public class DataHandler {
 			int playerlevel=1;
 			double playerxp=0;
 			double masteryxp=0;
-			if(playerFile.contains(id.toString() + ".playerxp"))
-				playerlevel=playerFile.getInt(id.toString() + ".playerxp");
 			if(playerFile.contains(id.toString() + ".playerlevel"))
 				playerlevel=playerFile.getInt(id.toString() + ".playerlevel");
+			if(playerFile.contains(id.toString() + ".playerxp"))
+				playerxp=playerFile.getDouble(id.toString() + ".playerxp");
 			if(playerFile.contains(id.toString() + ".playermasteryxp"))
-				playerlevel=playerFile.getInt(id.toString() + ".playermasteryxp");
+				masteryxp=playerFile.getInt(id.toString() + ".playermasteryxp");
 			
 			//Im Array werden die eingelesenen Skills zwischengespeichert. <i> ist dabei der Index.
 			Skill[] skills = new Skill[playerFile.getConfigurationSection(id.toString()+".skills").getKeys(false).size()];
@@ -136,13 +136,9 @@ public class DataHandler {
 		} else
 			hplist.remove(hp);
 
-		try {
-			playerFile.save(playerdiskfile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		saveFile();
 	}
-	public void SaveFile() {
+	public void saveFile() {
 		try {
 			playerFile.save(playerdiskfile);
 		} catch (IOException e) {

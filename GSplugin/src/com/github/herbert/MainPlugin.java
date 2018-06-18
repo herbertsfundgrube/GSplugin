@@ -15,7 +15,7 @@ import com.github.herbert.worldblocksplugin.events.listeners.PermissionsListener
 public class MainPlugin extends JavaPlugin {
 	
 	//Debugging aktivieren?
-	boolean debug = true;
+	boolean debug = false;
 	
 	private GSCommandExecutor gsplugincommandexec;
 	private PlayerPluginCommandExecutor playerplugincommandexec;
@@ -37,6 +37,7 @@ public class MainPlugin extends JavaPlugin {
         registerPlugins();
 		registerListeners();
 		registerCommandExecutors();
+        debug = PluginConfiguration.getBoolean("admin.debug");
 		
 	}
 	
@@ -52,7 +53,7 @@ public class MainPlugin extends JavaPlugin {
 	public void onDisable() {
 		this.getLogger().info(this.getName()+" speichert Daten für GSplugin");
 		worldblocksplugin.data.saveData();
-		playerplugin.data.SaveFile();
+		playerplugin.data.saveFile();
 		this.getLogger().info(this.getName()+" deaktiviert!");
 	}
     

@@ -49,12 +49,15 @@ class HerbertPlayerList {
 	
 	public void remove(HerbertPlayer hp) {
 		HerbertPlayerList hplisttemp=this;
-		if(hplist==null)
-			return;
 				
 		do {
+			if(hplisttemp.hplist==null)
+				return;
 			if(hplisttemp.hplist.hp==hp) {
-				hplisttemp.hplist=hplisttemp.hplist.hplist;
+				if(hplisttemp.hplist.hplist!=null) {
+					hplisttemp.hplist=hplisttemp.hplist.hplist;
+				} else
+					hplisttemp.hplist=null;
 			}
 			hplisttemp=hplisttemp.hplist;
 		} while(hplisttemp!=null);
