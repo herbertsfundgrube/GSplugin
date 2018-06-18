@@ -55,7 +55,7 @@ public class PluginConfiguration {
 			//XP-Werte für CraftSkills - BlockBreakEvents
 			putDefaultBlockBreakXP(Material.STONE,SkillType.MINING,  0.7);
 		//UserInterfacePlugin
-		
+		putDefault("ui.gui.fillingobjectmaterial", "STAINED_GLASS");
 		//WorldBlocksPlugin
 		putDefault("gs.lowestProtectedY", 10);
 	}
